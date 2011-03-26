@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+All locations are located from Content folder
+-->
+<CharacterSprites>
+	<character>
+		<path>Images\MaleHeroKnight1_49x49</path>
+		<rowcount>5</rowcount>
+		<colcount>8</colcount>
+    <width>49</width>
+    <height>49</height>
+	</character>
+	<character>
+		<location>Images\MaleHeroKnight2_49x49</location>
+		<rowcount>5</rowcount>
+    <colcount>8</colcount>
+    <width>49</width>
+    <height>49</height>
+	</character>
+</CharacterSprites>
