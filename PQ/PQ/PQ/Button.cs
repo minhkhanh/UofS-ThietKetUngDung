@@ -7,5 +7,9 @@ namespace PQ
 {
     public class Button : Control
     {
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,5 +7,9 @@ namespace PQ
 {
     public class Menu : Dialog
     {
+        public override GameObject Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
