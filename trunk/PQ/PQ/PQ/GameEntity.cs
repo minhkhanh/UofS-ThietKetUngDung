@@ -9,7 +9,7 @@ namespace PQ
     {
         public override GameObject Clone()
         {
-            return base.Clone();
+            return null;
         }
     }
 }
