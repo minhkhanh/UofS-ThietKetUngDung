@@ -12,24 +12,36 @@ namespace PQ
     {
         public Rectangle Bound
         {
-            get { return new Rectangle(_x, _y, _frameWidth, _frameHeight); }
-        }        
+            get { return new Rectangle((int)_x, (int)_y, (int)_frameWidth, (int)_frameHeight); }
+        }
 
-        protected int _frameWidth = 0;
-        protected int _frameHeight = 0;
+        protected float _frameWidth = 0;
+        protected float _frameHeight = 0;
 
         int _beginFrame = 0;
-
         public int BeginFrame
         {
             get { return _beginFrame; }
+            set
+            {
+                if (value < 0)
+                    _beginFrame = 0;
+                else
+                    _beginFrame = value % FrameCount;
+            }
         }
 
         int _endFrame = 0;
-
         public int EndFrame
         {
             get { return _endFrame; }
+            set
+            {
+                if (value < 0)
+                    _endFrame = FrameCount - 1;
+                else
+                    _endFrame = value % FrameCount;
+            }
         }
 
         bool _running = false;
@@ -48,18 +60,16 @@ namespace PQ
             get { return _frames.Count; }
         }
 
-        private int currFrame = 0;
+        private int _currFrame = 0;
         protected int CurrentFrame
         {
-            get { return currFrame; }
+            get { return _currFrame; }
             set 
             {
                 if (value < 0)
-                    currFrame = 0;
-                else if (value > _endFrame)
-                    currFrame = _endFrame;
+                    _currFrame = 0;
                 else
-                    currFrame = value;
+                    _currFrame = value % FrameCount;
             }
         }
 
@@ -70,35 +80,40 @@ namespace PQ
             set { _frames = value; }
         }
 
-        int _x;
-        public int X
+        float _x;
+        public float X
         {
             get { return _x; }
             set { _x = value; }
         }
 
-        int _y;
-        public int Y
+        float _y;
+        public float Y
         {
             get { return _y; }
             set { _y = value; }
         }
 
-        //protected bool _visible = true;
+        public Sprite2D(Sprite2D sprite)
+        {
+            _frames = sprite._frames;
+
+            _x = sprite._x;
+            _y = sprite._y;
+
+            _frameWidth = sprite._frameWidth;
+            _frameHeight = sprite._frameHeight;
+        }
 
         public Sprite2D(Sprite2D sprite, int x, int y)
         {
             _frames = sprite._frames;
 
-            if (x < 0)
-                _x = sprite._x;
-            else
-                _x = x;
+            _x = x;
+            _y = y;
 
-            if (y < 0)
-                _y = sprite._y;
-            else
-                _y = y;
+            _frameWidth = sprite._frameWidth;
+            _frameHeight = sprite._frameHeight;
         }
 
         public Sprite2D(Texture2D largeTxture, int x, int y, ImageSplittingDetails details)
@@ -106,10 +121,10 @@ namespace PQ
             _frameWidth = details.FrameWidth;
             _frameHeight = details.FrameHeight;
 
-            int limHeight = Math.Min(largeTxture.Height, details.InitMarginY + (details.RowCount + details.RowIndex) * (_frameHeight + details.SpaceY));
-            int limWidth = Math.Min(largeTxture.Width, details.InitMarginX + (details.ColumnCount + details.ColumnIndex) * (_frameWidth + details.SpaceX));
+            float limHeight = Math.Min(largeTxture.Height, details.InitMarginY + (details.RowCount + details.RowIndex) * (_frameHeight + details.SpaceY));
+            float limWidth = Math.Min(largeTxture.Width, details.InitMarginX + (details.ColumnCount + details.ColumnIndex) * (_frameWidth + details.SpaceX));
 
-            int initI = 0, initJ = 0, incrI = 0, incrJ = 0, limI = 0, limJ = 0;
+            float initI = 0, initJ = 0, incrI = 0, incrJ = 0, limI = 0, limJ = 0;
 
             // khoi tao thong so ban dau danh cho vong lap for:
             if (details.SplittingDirection == SplittingDirection.Vertically)    // cat anh theo chieu doc
@@ -131,13 +146,13 @@ namespace PQ
                 incrJ = _frameWidth + details.SpaceX; 
             }
 
-            for (int i = initI; i < limI; i += incrI)
-                for (int j = initJ; j < limJ; j += incrJ)
+            for (float i = initI; i < limI; i += incrI)
+                for (float j = initJ; j < limJ; j += incrJ)
                 {
-                    Color[] singleFrame = new Color[(_frameWidth * _frameHeight)];
-                    largeTxture.GetData<Color>(0, new Rectangle(i, j, _frameWidth, _frameHeight), singleFrame, 0, (_frameWidth * _frameHeight));
+                    Color[] singleFrame = new Color[(int)_frameWidth * (int)_frameHeight];
+                    largeTxture.GetData<Color>(0, new Rectangle((int)i, (int)j, (int)_frameWidth, (int)_frameHeight), singleFrame, 0, (int)_frameWidth * (int)_frameHeight);
 
-                    Texture2D newTxture = new Texture2D(largeTxture.GraphicsDevice, _frameWidth, _frameHeight);
+                    Texture2D newTxture = new Texture2D(largeTxture.GraphicsDevice, (int)_frameWidth, (int)_frameHeight);
                     newTxture.SetData<Color>(singleFrame);
                     _frames.Add(newTxture);
                 }
@@ -148,43 +163,47 @@ namespace PQ
             CurrentFrame = FrameCount - 1;
         }
 
-        public void SetFrameRange(int begin, int end)
-        {
-            // sap xep sao cho: begin < end
-            if (begin > end)
-            {
-                int tmp = begin;
-                begin = end;
-                end = tmp;
-            }
+        //public void SetAnimationRange(int begin, int end)
+        //{
+        //    // sap xep sao cho: begin < end
+        //    //if (begin > end)
+        //    //{
+        //    //    int tmp = begin;
+        //    //    begin = end;
+        //    //    end = tmp;
+        //    //}
 
-            // chuan hoa:
-            if (begin < 0)
-                begin = 0;
-            if (end < 0)
-                end = FrameCount - 1;
+        //    // chuan hoa:
+        //    if (begin < 0)
+        //        begin = 0;
+        //    if (end < 0)
+        //        end = FrameCount - 1;
 
-            _beginFrame = begin;
-            _endFrame = end;
-        }
+        //    _beginFrame = begin;
+        //    _endFrame = end;
+        //}
 
-        public bool Collide(Sprite2D sprite)
-        {
-            Rectangle thisRect = new Rectangle(_x, _y, _frameWidth, _frameHeight);
-            Rectangle spriteRect = new Rectangle(sprite._x, sprite._y, sprite._frameWidth, sprite._frameHeight);
+        //public bool Collide(Sprite2D sprite)
+        //{
+        //    Rectangle thisRect = new Rectangle(_x, _y, _frameWidth, _frameHeight);
+        //    Rectangle spriteRect = new Rectangle(sprite._x, sprite._y, sprite._frameWidth, sprite._frameHeight);
 
-            return thisRect.Intersects(spriteRect);
-        }
+        //    return thisRect.Intersects(spriteRect);
+        //}
 
         public virtual void Update(GameTime gameTime)
         {
             if (_running && ++_tickCount >= _frameTicks)
             {
                 _tickCount = 0;
-                CurrentFrame = (CurrentFrame + 1) % (_endFrame - _beginFrame + 1) + _beginFrame;
+                //CurrentFrame = (CurrentFrame + 1) % (_endFrame - _beginFrame + 1) + _beginFrame;
+                if (_currFrame == _endFrame)
+                    _currFrame = _beginFrame;
+                else
+                    _currFrame = (_currFrame + 1) % FrameCount;
             }
         }
-
+        //0 1 2 3 0 1 2 3
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_frames.Count != 0)
@@ -200,8 +219,9 @@ namespace PQ
         {
             _frameTicks = frameTicks;
 
-            SetFrameRange(begin, end);
-            CurrentFrame = 0;
+            BeginFrame = begin;
+            EndFrame = end;
+            CurrentFrame = BeginFrame;
 
             _running = true;
         }

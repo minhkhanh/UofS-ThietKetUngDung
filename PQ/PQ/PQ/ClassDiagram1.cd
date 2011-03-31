@@ -1,116 +1,221 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="PQ.Game1" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+  <Class Name="PQ.Character" Collapsed="true">
+    <Position X="7.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAYBEEAAAAAAAwAAAAAAAAAAAAAAAAgAAAAAAAACAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.CharacterManager" Collapsed="true">
+    <Position X="11" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.Game1" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAYBEkAAAFAAAwDAQAAEAAAAAAAAAUgIAAAAAAACAAQ=</HashCode>
       <FileName>Game1.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="PQ.GameButton" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAIAkIAAgAAAAAAAAICgICACAAAKAIAACACABA=</HashCode>
+      <FileName>GameButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameButtonDownState" Collapsed="true">
+    <Position X="2.75" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameButtonDownState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameButtonHoverState" Collapsed="true">
+    <Position X="5" Y="10.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameButtonHoverState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameButtonManager" Collapsed="true">
+    <Position X="6.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameButtonManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameButtonState" Collapsed="true">
+    <Position X="2.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>GameButtonState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameButtonUpState" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameButtonUpState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameControl" Collapsed="true">
+    <Position X="0.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameDialog" Collapsed="true">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQCIAAAAIgAAAAAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameEntity" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>GameEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameMenu" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameMessageBox" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameMessageBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameMouseEventArgs" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>GameMouseEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameObject" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYgAQAIgAAAAkAABgAAAARAgAAAGQAAIIBiAAgCYhQ=</HashCode>
+      <FileName>GameObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameObjectManager" Collapsed="true">
+    <Position X="8.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAgAIAAAAAAAAAAA=</HashCode>
+      <FileName>GameObjectManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameWindow" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.HorizontalPlaneMotionModule" Collapsed="true">
+    <Position X="8.25" Y="10.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HorizontalPlaneMotionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.ImageSplittingDetails" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>IQAAAnAAMAACAAQAAAAAIABAQCAIAIAEgAAAAAgAAwA=</HashCode>
+      <FileName>ImageSplittingDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.MainMenu" Collapsed="true">
+    <Position X="2.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.Map" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Map.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.MapManager" Collapsed="true">
+    <Position X="8.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>MapManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.MyRectangleF" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIBAQAAAAAAAAQAEAAAAAAAAAAAACQCQAAYAA=</HashCode>
+      <FileName>MyRectangleF.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.PlaneMotionModule" Collapsed="true">
+    <Position X="9.5" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAACAAAAAAAAAAIAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>PlaneMotionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Class Name="PQ.Program" Collapsed="true">
-    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Position X="15.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.Sprite2D" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="17" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AASgEAAJAAQAAogQAAAEIAQFQAAIIAAAgAAAAAAAYwE=</HashCode>
+      <HashCode>AASgEAAJAAQAAogAAAAEIAQFAAEIIAAAAAAAAAAAYwE=</HashCode>
       <FileName>Sprite2D.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PQ.GameObject">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+  <Class Name="PQ.SpriteFontManager" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAIAAQAAgAAAEAAAAQAEAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAACAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteFontManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.VerticalPlaneMotionModule" Collapsed="true">
+    <Position X="10.5" Y="10.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAQAEAAAAAAAIAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>VerticalPlaneMotionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="PQ.MyOnMouseState" Collapsed="true">
+    <Position X="13.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAI=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Dialog" Collapsed="true">
-    <Position X="8" Y="4.25" Width="1.25" />
+  </Enum>
+  <Enum Name="PQ.SplittingDirection" Collapsed="true">
+    <Position X="15.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Dialog.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ImageSplittingDetails.cs</FileName>
     </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Map" Collapsed="true">
-    <Position X="1.5" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Map.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Character" Collapsed="true">
-    <Position X="3.5" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
-      <FileName>Character.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Menu" Collapsed="true">
-    <Position X="6.75" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Menu.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.MessageBox" Collapsed="true">
-    <Position X="9" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MessageBox.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Window" Collapsed="true">
-    <Position X="6.75" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Window.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Control" Collapsed="true">
-    <Position X="5.75" Y="4.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MenuItem.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.EntityManager" Collapsed="true">
-    <Position X="11.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAgAIAAAAAAAAAAA=</HashCode>
-      <FileName>EntityManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.MapManager" Collapsed="true">
-    <Position X="12.75" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>MapManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.CharacterManager" Collapsed="true">
-    <Position X="10" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>CharacterManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.GameEntity" Collapsed="true">
-    <Position X="2.5" Y="2.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
-      <FileName>GameEntity.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="PQ.Button" Collapsed="true">
-    <Position X="4.5" Y="5.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Button.cs</FileName>
-    </TypeIdentifier>
-  </Class>
+  </Enum>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

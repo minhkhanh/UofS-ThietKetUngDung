@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PQ
 {
-    public class MapManager : EntityManager
+    public class MapManager : GameObjectManager
     {
     }
 }

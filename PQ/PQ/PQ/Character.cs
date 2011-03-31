@@ -13,15 +13,15 @@ namespace PQ
     {
         public override GameObject Clone()
         {
-            Character entity = new Character();
+            Character character = new Character();
 
-            for (int i = 0; i < _mainSprites.Count; ++i)
-                entity._mainSprites.Add(new Sprite2D(_mainSprites[i], -1, -1));
+            for (int i = 0; i < _sprites.Count; ++i)
+                character._sprites.Add(new Sprite2D(_sprites[i]));
             
-            entity._x = this._x;
-            entity._y = this._y;
+            character.X = this.X;
+            character.Y = this.Y;
 
-            return entity;
+            return character;
         }
     }
 }
