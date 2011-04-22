@@ -15,13 +15,12 @@ namespace PQ
             _prototypes = new List<GameObject>();
 
             GameButton tmpBtn = new GameButton();
-            ImageSplittingDetails details = new ImageSplittingDetails();
+            ImageSplittingDetails details = new ImageSplittingDetails(0, 0);
 
             details.SpaceX = 0;
             details.SpaceY = 1;
             details.ColumnCount = 1;
             details.RowCount = 1;
-            details.ColumnIndex = details.RowIndex = 0;
             details.FrameWidth = 300;
             details.FrameHeight = 50;
 

@@ -13,11 +13,10 @@ namespace PQ
         {
             _prototypes = new List<GameObject>();
 
-            ImageSplittingDetails details = new ImageSplittingDetails();
+            ImageSplittingDetails details = new ImageSplittingDetails(0, 0);
 
             details.RowCount = 4;
             details.ColumnCount = 8;
-            details.RowIndex = details.ColumnIndex = 0;
             details.FrameWidth = details.FrameHeight = 49;
 
             GameEntity character = new Character();

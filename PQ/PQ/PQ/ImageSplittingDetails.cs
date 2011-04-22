@@ -91,9 +91,10 @@ namespace PQ
             set { _yMargin = value; }
         }
 
-        public ImageSplittingDetails()
+        public ImageSplittingDetails(int rowIdx, int colIdx)
         {
-
+            _rowIdx = rowIdx;
+            _colIdx = colIdx;
         }
     }
 }

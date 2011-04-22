@@ -109,8 +109,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameButtonManager.cs" />
+    <Compile Include="GameFactory.cs" />
+    <Compile Include="GameKeyEventArgs.cs" />
     <Compile Include="HorizontalPlaneMotionModule.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="PlaneMotionModule.cs" />
     <Compile Include="GameButton.cs" />
     <Compile Include="Character.cs" />
@@ -122,7 +125,7 @@
     <Compile Include="GameDialog.cs" />
     <Compile Include="GameObjectManager.cs" />
     <Compile Include="ImageSplittingDetails.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="GlobalMap.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="GameMenu.cs" />
     <Compile Include="GameControl.cs" />
@@ -137,11 +140,17 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWindow.cs" />
     <Compile Include="SpriteFontManager.cs" />
+    <Compile Include="TerrainManager.cs" />
+    <Compile Include="Texture2DManager.cs" />
+    <Compile Include="TiledMap.cs" />
     <Compile Include="VerticalPlaneMotionModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <Content Include="SampleTiledMap.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Xml\CharacterSprites.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +185,6 @@
       <ProductName>Microsoft XNA Framework Redistributable 4.0</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />

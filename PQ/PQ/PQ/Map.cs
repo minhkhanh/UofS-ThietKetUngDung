@@ -4,17 +4,41 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
-    public class Map : GameEntity
+    public class Map: GameEntity
     {
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public override void OnKeyDown(object o, GameKeyEventArgs e)
         {
-            foreach (Sprite2D i in _sprites)
-                if (i.Bound.Intersects(spriteBatch.GraphicsDevice.PresentationParameters.Bounds))
-                    i.Draw(gameTime, spriteBatch);
+            Game mainGame = o as Game;
+            if (mainGame == null)
+                return;
+
+            Rectangle gameBound = mainGame.GraphicsDevice.PresentationParameters.Bounds;
+            Rectangle mapBound = Bound;
+            if (e.KeyboardState.IsKeyDown(Keys.Down))
+            {
+                if (mapBound.Bottom - 10 >= gameBound.Bottom)
+                    Y -= 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Up))
+            {
+                if (mapBound.Top + 10 <= gameBound.Top)
+                    Y += 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Left))
+            {
+                if (mapBound.Left + 10 <= gameBound.Left)
+                    X += 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Right))
+            {
+                if (mapBound.Right - 10 >= gameBound.Right)
+                    X -= 10;
+            }
+
+            RaiseKeyDownEvent(o, e);
         }
     }
 }

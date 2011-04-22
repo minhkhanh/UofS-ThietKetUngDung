@@ -20,14 +20,19 @@ namespace PQ
         SpriteBatch spriteBatch;
 
         CharacterManager _characterManager = new CharacterManager();
-        List<Character> _characters = new List<Character>();
+        Character _character;// = new List<Character>();
 
         MainMenu _mainMenu = new MainMenu();
         GameButtonManager _btnManager = new GameButtonManager();
+        //SpriteFontManager _fontManager = new SpriteFontManager();
+        MapManager _mapManager = new MapManager();
+        //TerrainManager _terrainManager = new TerrainManager();
 
-        SpriteFontManager _fontManager = new SpriteFontManager();
+        TiledMap _tiledMap = new TiledMap();
 
-        Texture2D _bkgr;
+        //Texture2D _bkgr;
+
+        GlobalMap _largeMap;// = new Map();
 
         #region events
 
@@ -38,9 +43,18 @@ namespace PQ
         public event EventHandler<GameMouseEventArgs> GameMouseHover;
         public event EventHandler<GameMouseEventArgs> GameMouseLeave;
 
+        public event EventHandler<GameKeyEventArgs> GameKeyDown;
+
         void RaiseGameMouseEvent(EventHandler<GameMouseEventArgs> GameMouseEvent, object o, GameMouseEventArgs e)
         {
             EventHandler<GameMouseEventArgs> handler = GameMouseEvent;
+            if (handler != null)
+                handler(o, e);
+        }
+
+        void RaiseGameKeyEvent(EventHandler<GameKeyEventArgs> GameMouseEvent, object o, GameKeyEventArgs e)
+        {
+            EventHandler<GameKeyEventArgs> handler = GameKeyDown;
             if (handler != null)
                 handler(o, e);
         }
@@ -64,27 +78,37 @@ namespace PQ
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _bkgr = Content.Load<Texture2D>(@"Images\Skin_Splash");
+            //_bkgr = Content.Load<Texture2D>(@"Images\Skin_Splash");
 
-            GameMouseDown += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseDown);
-            GameMouseUp += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseUp);
-            GameMouseHover += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseHover);
-            GameMouseLeave += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseLeave);
+            LoadSampleCharacters();
 
-            
+            GameMouseDown += new EventHandler<GameMouseEventArgs>(OnGameMouseDown);
+            //GameMouseUp += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseUp);
+            //GameMouseHover += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseHover);
+            //GameMouseLeave += new EventHandler<GameMouseEventArgs>(_mainMenu.OnMouseLeave);
 
-            _fontManager.InitPrototypes(Content);
-            _btnManager.InitPrototypes(Content);
+            //_terrainManager.InitPrototypes(Content);
 
-            _mainMenu.Init(_btnManager, _fontManager);
+            _mapManager.InitPrototypes(Content);
+
+            _largeMap = _mapManager.CreateObject(0) as GlobalMap;
+            //_tiledMap = _mapManager.CreateObject(1) as TiledMap;
+
+            GameKeyDown += new EventHandler<GameKeyEventArgs>(_largeMap.OnKeyDown);
+            //GameKeyDown += new EventHandler<GameKeyEventArgs>(_character.OnKeyDown);
+        }
+
+        private void OnGameMouseDown(object o, GameMouseEventArgs e)
+        {
+            _character.Center = new Point(e.MouseState.X, e.MouseState.Y);
         }
 
         private void LoadSampleCharacters()
         {
-            _characterManager.InitPrototypes(this.Content);
+            _characterManager.InitPrototypes(Content);
 
-            _characters.Add((Character)_characterManager.CreateObject(0));
-            _characters[0].Animate(10);
+            _character = (Character)_characterManager.CreateObject(0);
+            _character.Animate(10);
         }
 
         private void LoadSampleButtons()
@@ -118,11 +142,17 @@ namespace PQ
             RaiseGameMouseEvent(GameMouseHover, this, new GameMouseEventArgs(msState));
             RaiseGameMouseEvent(GameMouseLeave, this, new GameMouseEventArgs(msState));
 
-            int i = 0;
-            for (i = 0; i < _characters.Count; ++i)
-                _characters[i].Update(gameTime);
+            KeyboardState kbState = Keyboard.GetState();
+            //kbState.GetPressedKeys()
+            RaiseGameKeyEvent(GameKeyDown, this, new GameKeyEventArgs(kbState));
 
-            _mainMenu.Update(gameTime);
+            _largeMap.Update(gameTime);
+
+            _character.Update(gameTime);
+
+            //_mainMenu.Update(gameTime);
+            
+            //_tiledMap.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -133,12 +163,15 @@ namespace PQ
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(_bkgr, GraphicsDevice.PresentationParameters.Bounds, Color.White);
+            //spriteBatch.Draw(_bkgr, GraphicsDevice.PresentationParameters.Bounds, Color.White);
 
-            for (int i = 0; i < _characters.Count; ++i)           
-                _characters[i].Draw(gameTime, spriteBatch);
+            _largeMap.Draw(gameTime, spriteBatch);
 
-            _mainMenu.Draw(gameTime, spriteBatch);
+            _character.Draw(gameTime, spriteBatch);
+
+            //_mainMenu.Draw(gameTime, spriteBatch);
+            
+            //_tiledMap.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
 

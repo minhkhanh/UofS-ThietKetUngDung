@@ -46,7 +46,7 @@ namespace PQ
             set 
             {
                 float dx = value - x;
-                MoveSprites(dx, 0);
+                MoveAllSprites(dx, 0);
                 x = value;
             }
         }
@@ -58,8 +58,21 @@ namespace PQ
             set 
             {
                 float dy = value - y;
-                MoveSprites(0, dy);
+                MoveAllSprites(0, dy);
                 y = value;
+            }
+        }
+
+        public Point Center
+        {
+            get
+            {
+                return new Point((int)X / 2, (int)Y / 2);
+            }
+            set 
+            {
+                X = value.X - Bound.Width / 2;
+                Y = value.Y - Bound.Height / 2;
             }
         }
 
@@ -68,7 +81,7 @@ namespace PQ
 
         }
 
-        protected virtual void MoveSprites(float dx, float dy)
+        protected virtual void MoveAllSprites(float dx, float dy)
         {
             if (dx != 0)
                 for (int i = 0; i < _sprites.Count; ++i)
@@ -158,6 +171,16 @@ namespace PQ
         public event EventHandler<GameMouseEventArgs> MouseHover;
         public event EventHandler<GameMouseEventArgs> MouseLeave;
 
+        public event EventHandler<GameKeyEventArgs> KeyDown;
+        public event EventHandler<GameKeyEventArgs> KeyUp;
+
+        protected void RaiseKeyDownEvent(object o, GameKeyEventArgs e)
+        {
+            EventHandler<GameKeyEventArgs> handler = KeyDown;
+            if (handler != null)
+                handler(o, e);
+        }
+
         protected void RaiseMouseUpEvent(object o, GameMouseEventArgs e)
         {
             EventHandler<GameMouseEventArgs> handler = MouseUp;
@@ -184,6 +207,11 @@ namespace PQ
             EventHandler<GameMouseEventArgs> handler = MouseDown;
             if (handler != null)
                 handler(o, e);
+        }
+
+        public virtual void OnKeyDown(object o, GameKeyEventArgs e)
+        {
+
         }
 
         public virtual void OnMouseDown(object o, GameMouseEventArgs e)
