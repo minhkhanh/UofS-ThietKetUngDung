@@ -79,7 +79,7 @@ namespace PQ
             return btn;
         }
 
-        protected override void MoveSprites(float dx, float dy)
+        protected override void MoveAllSprites(float dx, float dy)
         {
             if (dx != 0)
             {
