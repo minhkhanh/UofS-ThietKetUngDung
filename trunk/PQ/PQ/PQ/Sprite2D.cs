@@ -18,6 +18,17 @@ namespace PQ
         protected float _frameWidth = 0;
         protected float _frameHeight = 0;
 
+        protected Vector2 _scale = new Vector2(1, 1);
+        public Vector2 Scale
+        {
+            get { return _scale; }
+            set { _scale = value; }
+        }
+        
+        protected float _rotation = 0;
+        protected SpriteEffects _fliping = SpriteEffects.None;
+        Nullable<Rectangle> _srcRect = null;
+
         int _beginFrame = 0;
         public int BeginFrame
         {
@@ -94,6 +105,19 @@ namespace PQ
             set { _y = value; }
         }
 
+        public Vector2 Position
+        {
+            get
+            {
+                return new Vector2(_x, _y);
+            }
+            set
+            {
+                _x = value.X;
+                _y = value.Y;
+            }
+        }
+
         public Sprite2D(Sprite2D sprite)
         {
             _frames = sprite._frames;
@@ -105,16 +129,16 @@ namespace PQ
             _frameHeight = sprite._frameHeight;
         }
 
-        public Sprite2D(Sprite2D sprite, int x, int y)
-        {
-            _frames = sprite._frames;
+        //public Sprite2D(Sprite2D sprite, int x, int y)
+        //{
+        //    _frames = sprite._frames;
 
-            _x = x;
-            _y = y;
+        //    _x = x;
+        //    _y = y;
 
-            _frameWidth = sprite._frameWidth;
-            _frameHeight = sprite._frameHeight;
-        }
+        //    _frameWidth = sprite._frameWidth;
+        //    _frameHeight = sprite._frameHeight;
+        //}
 
         public Sprite2D(Texture2D largeTxture, int x, int y, ImageSplittingDetails details)
         {
@@ -162,35 +186,7 @@ namespace PQ
 
             CurrentFrame = FrameCount - 1;
         }
-
-        //public void SetAnimationRange(int begin, int end)
-        //{
-        //    // sap xep sao cho: begin < end
-        //    //if (begin > end)
-        //    //{
-        //    //    int tmp = begin;
-        //    //    begin = end;
-        //    //    end = tmp;
-        //    //}
-
-        //    // chuan hoa:
-        //    if (begin < 0)
-        //        begin = 0;
-        //    if (end < 0)
-        //        end = FrameCount - 1;
-
-        //    _beginFrame = begin;
-        //    _endFrame = end;
-        //}
-
-        //public bool Collide(Sprite2D sprite)
-        //{
-        //    Rectangle thisRect = new Rectangle(_x, _y, _frameWidth, _frameHeight);
-        //    Rectangle spriteRect = new Rectangle(sprite._x, sprite._y, sprite._frameWidth, sprite._frameHeight);
-
-        //    return thisRect.Intersects(spriteRect);
-        //}
-
+        
         public virtual void Update(GameTime gameTime)
         {
             if (_running && ++_tickCount >= _frameTicks)
@@ -203,11 +199,11 @@ namespace PQ
                     _currFrame = (_currFrame + 1) % FrameCount;
             }
         }
-        //0 1 2 3 0 1 2 3
+
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_frames.Count != 0)
-                spriteBatch.Draw(_frames[CurrentFrame], new Vector2(_x, _y), Color.White);
+                spriteBatch.Draw(_frames[CurrentFrame], Position, _srcRect, Color.White, _rotation, Vector2.Zero, _scale, _fliping, 0);
         }
 
         public void Pause()

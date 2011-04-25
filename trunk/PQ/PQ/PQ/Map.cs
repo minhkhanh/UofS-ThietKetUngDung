@@ -16,7 +16,7 @@ namespace PQ
                 return;
 
             Rectangle gameBound = mainGame.GraphicsDevice.PresentationParameters.Bounds;
-            Rectangle mapBound = Bound;
+            Rectangle mapBound = Bounds;
             if (e.KeyboardState.IsKeyDown(Keys.Down))
             {
                 if (mapBound.Bottom - 10 >= gameBound.Bottom)

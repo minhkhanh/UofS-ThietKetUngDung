@@ -16,8 +16,8 @@ namespace PQ
             get { return _downSprites; }
             set { _downSprites = value; }
         }
-        List<Sprite2D> _upSprites = new List<Sprite2D>();
 
+        List<Sprite2D> _upSprites = new List<Sprite2D>();
         public List<Sprite2D> UpSprites
         {
             get { return _upSprites; }
@@ -25,7 +25,6 @@ namespace PQ
         }
 
         List<Sprite2D> _hoverSprites = new List<Sprite2D>();
-
         public List<Sprite2D> HoverSprites
         {
             get { return _hoverSprites; }
@@ -49,15 +48,34 @@ namespace PQ
             get { return _caption; }
             set { _caption = value; }
         }
+
+        public GameButton()
+        {
+        }
+
+        public GameButton(Sprite2D[] sprites, Sprite2D[] downSprites, Sprite2D[] upSprites, Sprite2D[] hoverSprites)
+        {
+            _sprites.AddRange(sprites);
+            _downSprites.AddRange(downSprites);
+            _upSprites.AddRange(upSprites);
+            _hoverSprites.AddRange(hoverSprites);
+        }
         
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
+            _buttonState.OnDraw(this, gameTime, spriteBatch);
 
-            Rectangle bound = Bound;
+            Rectangle bound = Bounds;
 
             Vector2 textVect = _font.MeasureString(_caption);
-            spriteBatch.DrawString(_font, _caption, new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y), Color.White);//, 0, Vector2.Zero, 0, SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, _caption, new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y+3), Color.White);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            _buttonState.OnUpdate(this, gameTime);
+            base.Update(gameTime);
         }
 
         public override GameObject Clone()
@@ -79,56 +97,21 @@ namespace PQ
             return btn;
         }
 
-        protected override void MoveAllSprites(float dx, float dy)
+        protected override List<Sprite2D> GetAllSprites()
         {
-            if (dx != 0)
-            {
-                for (int i = 0; i < _sprites.Count; ++i)
-                    _sprites[i].X += dx;
-                for (int i = 0; i < _downSprites.Count; ++i)
-                    _downSprites[i].X += dx;
-                for (int i = 0; i < _upSprites.Count; ++i)
-                    _upSprites[i].X += dx;
-                for (int i = 0; i < _hoverSprites.Count; ++i)
-                    _hoverSprites[i].X += dx;
-            }
+            List<Sprite2D> allSprites = new List<Sprite2D>();
+            allSprites.AddRange(_sprites);
+            allSprites.AddRange(_downSprites);
+            allSprites.AddRange(_upSprites);
+            allSprites.AddRange(_hoverSprites);
 
-            if (dy != 0)
-            {
-                for (int i = 0; i < _sprites.Count; ++i)
-                    _sprites[i].Y += dy;
-                for (int i = 0; i < _downSprites.Count; ++i)
-                    _downSprites[i].Y += dy;
-                for (int i = 0; i < _upSprites.Count; ++i)
-                    _upSprites[i].Y += dy;
-                for (int i = 0; i < _hoverSprites.Count; ++i)
-                    _hoverSprites[i].Y += dy;
-            }
-        }
-
-        public override List<Rectangle> Regions
-        {
-            get
-            {
-                List<Rectangle> regs = new List<Rectangle>();
-
-                for (int i = 0; i < _sprites.Count; ++i)
-                    regs.Add(_sprites[i].Bound);
-                for (int i = 0; i < _downSprites.Count; ++i)
-                    regs.Add(_downSprites[i].Bound);
-                for (int i = 0; i < _upSprites.Count; ++i)
-                    regs.Add(_upSprites[i].Bound);
-                for (int i = 0; i < _hoverSprites.Count; ++i)
-                    regs.Add(_hoverSprites[i].Bound);
-
-                return regs;
-            }
+            return allSprites;
         }
 
         public override void OnMouseDown(object o, GameMouseEventArgs e)
         {
             if (_clickState != GameOnMouseState.Down
-                && ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Down;
@@ -158,7 +141,7 @@ namespace PQ
         public override void OnMouseHover(object o, GameMouseEventArgs e)
         {
             if (_clickState == GameOnMouseState.Up
-                && ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Hover;
@@ -174,7 +157,7 @@ namespace PQ
         public override void OnMouseLeave(object o, GameMouseEventArgs e)
         {
             if (_clickState == GameOnMouseState.Hover
-                && !ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && !Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Up;

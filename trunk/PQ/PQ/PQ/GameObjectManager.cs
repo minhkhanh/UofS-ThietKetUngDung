@@ -18,7 +18,7 @@ namespace PQ
             return null;
         }
 
-        public virtual void InitPrototypes(ContentManager content)
+        public virtual void LoadPrototypes(ContentManager content)
         {
             //_prototypeCount = 0;
         }

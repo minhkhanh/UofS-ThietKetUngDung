@@ -10,33 +10,37 @@ namespace PQ
 {
     public class GameButtonManager : GameObjectManager
     {
-        public override void InitPrototypes(ContentManager content)
+        public override void LoadPrototypes(ContentManager content)
         {
             _prototypes = new List<GameObject>();
 
-            GameButton tmpBtn = new GameButton();
-            ImageSplittingDetails details = new ImageSplittingDetails(0, 0);
+            ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 5, 0, 300, 50, 0, 1, 0, 0);
+            //details.SpaceX = 0;
+            //details.SpaceY = 1;
+            //details.ColumnCount = 1;
+            //details.RowCount = 1;
+            //details.FrameWidth = 300;
+            //details.FrameHeight = 50;
+            //details.RowIndex = 5;
+            //details.ColumnIndex = 0;
 
-            details.SpaceX = 0;
-            details.SpaceY = 1;
-            details.ColumnCount = 1;
-            details.RowCount = 1;
-            details.FrameWidth = 300;
-            details.FrameHeight = 50;
-
-            Texture2D txtureBtn = content.Load<Texture2D>(@"Images\pqpc_buttons");
-            tmpBtn.DownSprites.Add(new Sprite2D(txtureBtn, 0, 0, details));
+            Texture2D txtureBtn = content.Load<Texture2D>(@"Images\Skin_Buttons_Main");
+            Sprite2D downSprite = new Sprite2D(txtureBtn, 0, 0, details);
 
             details.ColumnIndex = 0;
-            details.RowIndex = 6;
-            tmpBtn.UpSprites.Add(new Sprite2D(txtureBtn, 0, 0, details));
-            tmpBtn.Sprites = tmpBtn.UpSprites;
+            details.RowIndex = 0;
+            Sprite2D upSprite = new Sprite2D(txtureBtn, 0, 0, details);
 
             details.RowCount = 4;
             details.RowIndex = 1;
-            tmpBtn.HoverSprites.Add(new Sprite2D(txtureBtn, 0, 0, details));
+            Sprite2D hoverSprite = new Sprite2D(txtureBtn, 0, 0, details);
 
-            //tmpBtn.p
+            GameButton tmpBtn = new GameButton( 
+                new Sprite2D[0],
+                new Sprite2D[] { downSprite },
+                new Sprite2D[] { upSprite },
+                new Sprite2D[] { hoverSprite }
+                );
 
             _prototypes.Add(tmpBtn);
         }

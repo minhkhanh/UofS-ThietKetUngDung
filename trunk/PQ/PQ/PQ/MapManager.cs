@@ -10,14 +10,14 @@ namespace PQ
 {
     public class MapManager : GameObjectManager
     {
-        public override void InitPrototypes(ContentManager content)
+        public override void LoadPrototypes(ContentManager content)
         {
             GlobalMap globalMap = new GlobalMap();
 
             Texture2D mapPiece;
-            ImageSplittingDetails details = new ImageSplittingDetails(0, 0);
-            details.ColumnCount = details.RowCount = 1;
-            details.FrameWidth = details.FrameHeight = 512;
+            ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 0, 0, 512, 512, 0, 0, 0, 0);
+            //details.ColumnCount = details.RowCount = 1;
+            //details.FrameWidth = details.FrameHeight = 512;
 
             for (int r = 0; r < 4; ++r)
                 for (int c = 0; c < 4; ++c)
