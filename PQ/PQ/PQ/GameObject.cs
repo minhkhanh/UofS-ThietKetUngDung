@@ -13,6 +13,7 @@ namespace PQ
     {
         Up,
         Down,
+        Click,
         Hover,
     }
 
@@ -20,7 +21,7 @@ namespace PQ
     {
         #region motion
 
-        PlaneMotionModule _motionModule = new PlaneMotionModule();
+        protected PlaneMotionModule _motionModule = new PlaneMotionModule();
 
         public PlaneMotionModule MotionModule
         {
@@ -46,7 +47,11 @@ namespace PQ
             set 
             {
                 float dx = value - x;
-                MoveAllSprites(dx, 0);
+
+                List<Sprite2D> allSprites = GetAllSprites();
+                foreach (Sprite2D i in allSprites)
+                    i.X += dx;
+
                 x = value;
             }
         }
@@ -58,38 +63,31 @@ namespace PQ
             set 
             {
                 float dy = value - y;
-                MoveAllSprites(0, dy);
+
+                List<Sprite2D> allSprites = GetAllSprites();
+                foreach (Sprite2D i in allSprites)
+                    i.Y += dy;
+
                 y = value;
             }
         }
 
-        public Point Center
+        public Vector2 Center
         {
             get
             {
-                return new Point((int)X / 2, (int)Y / 2);
+                return new Vector2(X / 2, Y / 2);
             }
             set 
             {
-                X = value.X - Bound.Width / 2;
-                Y = value.Y - Bound.Height / 2;
+                X = value.X - Bounds.Width / 2;
+                Y = value.Y - Bounds.Height / 2;
             }
         }
 
         public virtual void Init()
         {
 
-        }
-
-        protected virtual void MoveAllSprites(float dx, float dy)
-        {
-            if (dx != 0)
-                for (int i = 0; i < _sprites.Count; ++i)
-                    _sprites[i].X += dx;
-
-            if (dy != 0)
-                for (int i = 0; i < _sprites.Count; ++i)
-                    _sprites[i].Y += dy;
         }
 
         public virtual GameObject Clone()
@@ -99,14 +97,23 @@ namespace PQ
 
         public void Animate(int frameTicks)
         {
-            foreach (Sprite2D i in _sprites)
+            List<Sprite2D> allSprites = GetAllSprites();
+
+            foreach (Sprite2D i in allSprites)
                 i.Animate(frameTicks, -1, -1);
         }
 
         public void Pause()
         {
-            for (int i = 0; i < _sprites.Count; ++i)
-                _sprites[i].Pause();
+            List<Sprite2D> allSprites = GetAllSprites();
+
+            foreach (Sprite2D i in allSprites)
+                i.Pause();
+        }
+
+        protected virtual List<Sprite2D> GetAllSprites()
+        {
+            return _sprites;
         }
 
         public virtual List<Rectangle> Regions
@@ -115,22 +122,26 @@ namespace PQ
             {
                 List<Rectangle> reg = new List<Rectangle>();
 
-                for (int i = 0; i < _sprites.Count; ++i)
-                    reg.Add(_sprites[i].Bound);
+                List<Sprite2D> allSprites = GetAllSprites();
+                foreach (Sprite2D i in allSprites)
+                    reg.Add(i.Bound);
 
                 return reg;
             }
         }
 
-        public virtual Rectangle Bound
+        public virtual Rectangle Bounds
         {
             get
             {
                 Rectangle bound = new Rectangle();
-                if (_sprites.Count > 0)
-                    bound = _sprites[0].Bound;
-                for (int i = 1; i < _sprites.Count; ++i)
-                    bound = Rectangle.Union(bound, _sprites[i].Bound);
+                List<Sprite2D> allSprites = GetAllSprites();
+
+                if (allSprites.Count > 0)
+                    bound = allSprites[0].Bound;
+
+                foreach (Sprite2D i in allSprites)
+                    bound = Rectangle.Union(bound, i.Bound);
 
                 return bound;
             }
@@ -155,12 +166,12 @@ namespace PQ
 
         protected GameOnMouseState _clickState = GameOnMouseState.Up;
 
-        protected bool ContainMouse(int mouseX, int mouseY)
+        protected bool Contains(int px, int py)
         {
             List<Rectangle> regs = Regions;
 
             for (int i = 0; i < regs.Count; ++i)
-                if (regs[i].Contains(mouseX, mouseY))
+                if (regs[i].Contains(px, py))
                     return true;
 
             return false;
@@ -170,6 +181,7 @@ namespace PQ
         public event EventHandler<GameMouseEventArgs> MouseUp;
         public event EventHandler<GameMouseEventArgs> MouseHover;
         public event EventHandler<GameMouseEventArgs> MouseLeave;
+        public event EventHandler<GameMouseEventArgs> MouseClick;
 
         public event EventHandler<GameKeyEventArgs> KeyDown;
         public event EventHandler<GameKeyEventArgs> KeyUp;
@@ -181,11 +193,21 @@ namespace PQ
                 handler(o, e);
         }
 
+        protected void RaiseMouseClickEvent(object o, GameMouseEventArgs e)
+        {
+            EventHandler<GameMouseEventArgs> handler = MouseClick;
+            if (handler != null)
+                handler(o, e);
+        }
+
         protected void RaiseMouseUpEvent(object o, GameMouseEventArgs e)
         {
             EventHandler<GameMouseEventArgs> handler = MouseUp;
             if (handler != null)
                 handler(o, e);
+
+            if (Contains(e.MouseState.X, e.MouseState.Y))
+                RaiseMouseClickEvent(o, e);
         }
 
         protected void RaiseMouseHoverEvent(object o, GameMouseEventArgs e)
@@ -217,7 +239,7 @@ namespace PQ
         public virtual void OnMouseDown(object o, GameMouseEventArgs e)
         {
             if (_clickState != GameOnMouseState.Down
-                && ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Down;
@@ -231,13 +253,15 @@ namespace PQ
             {
                 _clickState = GameOnMouseState.Up;
                 RaiseMouseUpEvent(o, e);
+                //if (Contains(e.MouseState.X, e.MouseState.Y))
+                //    RaiseMouseClickEvent(o, e);
             }
         }
 
         public virtual void OnMouseHover(object o, GameMouseEventArgs e)
         {
             if (_clickState == GameOnMouseState.Up
-                && ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Hover;
@@ -248,7 +272,7 @@ namespace PQ
         public virtual void OnMouseLeave(object o, GameMouseEventArgs e)
         {
             if (_clickState == GameOnMouseState.Hover
-                && !ContainMouse(e.MouseState.X, e.MouseState.Y)
+                && !Contains(e.MouseState.X, e.MouseState.Y)
                 )
             {
                 _clickState = GameOnMouseState.Up;

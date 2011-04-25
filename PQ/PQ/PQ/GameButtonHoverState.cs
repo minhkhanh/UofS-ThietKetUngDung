@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
@@ -26,6 +28,18 @@ namespace PQ
             base.OnExitState(button);
 
             button.Pause();
+        }
+
+        public override void OnDraw(GameButton button, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (Sprite2D i in button.HoverSprites)
+                i.Draw(gameTime, spriteBatch);
+        }
+
+        public override void OnUpdate(GameButton button, GameTime gameTime)
+        {
+            foreach (Sprite2D i in button.HoverSprites)
+                i.Update(gameTime);
         }
     }
 }

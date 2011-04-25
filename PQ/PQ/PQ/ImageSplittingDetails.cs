@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace PQ
 {
@@ -91,10 +92,26 @@ namespace PQ
             set { _yMargin = value; }
         }
 
-        public ImageSplittingDetails(int rowIdx, int colIdx)
+        public ImageSplittingDetails(int rowCount, int colCount,
+            int rowIdx, int colIdx,
+            int frmWidth, int frmHeight,
+            int xSpace, int ySpace,
+            int xMargin, int yMargin)
         {
             _rowIdx = rowIdx;
             _colIdx = colIdx;
+
+            _rowCount = rowCount;
+            _colCount = colCount;
+
+            _frameWidth = frmWidth;
+            _frameHeight = frmHeight;
+
+            _xSpace = xSpace;
+            _ySpace = ySpace;
+
+            _xMargin = xMargin;
+            _yMargin = yMargin;
         }
     }
 }

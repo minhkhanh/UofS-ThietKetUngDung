@@ -11,7 +11,7 @@ namespace PQ
     {
         List<SpriteFont> _fonts = new List<SpriteFont>();
 
-        public void InitPrototypes(ContentManager content)
+        public void LoadPrototypes(ContentManager content)
         {
             _fonts.Add(content.Load<SpriteFont>(@"Fonts\Algerian"));
         }

@@ -2,27 +2,56 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
     public class MainMenu: GameMenu
     {
+        GameButton _okBtn;
+
+        public GameButton OKButton
+        {
+            get { return _okBtn; }
+            set { _okBtn = value; }
+        }
+        GameButton _exitBtn;
+
+        public MainMenu(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }        
+
         public void Init(GameButtonManager btnManager, SpriteFontManager fontManager)
         {
-            GameButton btn = btnManager.CreateObject(0) as GameButton;
-            btn.X = btn.Y = 100;
-            btn.Caption = "Button 01";
-            btn.Font = fontManager.CreateObject(0);
+            _okBtn = btnManager.CreateObject(0) as GameButton;
+            _okBtn.X = X;
+            _okBtn.Y = Y;
+            _okBtn.Caption = "ENTER";
+            _okBtn.Font = fontManager.CreateObject(0);
 
-            this.ManageControls((GameControl)btn);
+            this.ManageObjects((GameControl)_okBtn);
 
-            GameButton btn02 = btnManager.CreateObject(0) as GameButton;
-            btn02.X = 100;
-            btn02.Y = btn.Bound.Bottom;
-            btn02.Caption = "Button 02";
-            btn02.Font = fontManager.CreateObject(0);
+            _exitBtn = btnManager.CreateObject(0) as GameButton;
+            _exitBtn.X = X;
+            _exitBtn.Y = _okBtn.Bounds.Bottom + 5;
+            _exitBtn.Caption = "EXIT";
+            _exitBtn.Font = fontManager.CreateObject(0);
 
-            this.ManageControls((GameControl)btn02);
+            this.ManageObjects((GameControl)_exitBtn);
+
+            _motionModule = new VerticalPlaneMotionModule(-0.05f, 0, -1f, 0);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (X <= 600)
+                _motionModule.Stop();
         }
     }
 }

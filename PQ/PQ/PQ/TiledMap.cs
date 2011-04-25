@@ -21,7 +21,7 @@ namespace PQ
             set { _terrainManager = value; }
         }
 
-        public override Rectangle Bound
+        public override Rectangle Bounds
         {
             get
             {

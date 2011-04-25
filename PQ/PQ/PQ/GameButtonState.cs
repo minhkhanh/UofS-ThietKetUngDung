@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
@@ -14,12 +16,22 @@ namespace PQ
 
         public virtual void OnEnterState(GameButton button)
         {
-            OnChangeState(button);
+            //OnChangeState(button);
         }
 
         public virtual void OnExitState(GameButton button)
         {
-            OnChangeState(button);
+            //OnChangeState(button);
+        }
+
+        public virtual void OnDraw(GameButton button, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+
+        }
+
+        public virtual void OnUpdate(GameButton button, GameTime gameTime)
+        {
+
         }
     }
 }

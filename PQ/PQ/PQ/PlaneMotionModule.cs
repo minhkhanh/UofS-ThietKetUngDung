@@ -22,7 +22,21 @@ namespace PQ
             set { _vy = value; }
         }
 
-        //double _lastTime = 0;
+        public PlaneMotionModule()
+        {
+            _vx = _vy = 0;
+        }
+
+        public PlaneMotionModule(float vx, float vy)
+        {
+            _vx = vx;
+            _vy = vy;
+        }
+
+        public virtual void Stop()
+        {
+
+        }
 
         public virtual void OnMotion(GameObject gameObj, GameTime gameTime)
         {

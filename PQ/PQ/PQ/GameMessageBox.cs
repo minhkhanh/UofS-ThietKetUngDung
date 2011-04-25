@@ -7,9 +7,6 @@ namespace PQ
 {
     public class GameMessageBox : GameDialog
     {
-        public override GameObject Clone()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

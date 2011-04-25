@@ -9,15 +9,15 @@ namespace PQ
 {
     public class CharacterManager : GameObjectManager
     {
-        public override void InitPrototypes(ContentManager content)
+        public override void LoadPrototypes(ContentManager content)
         {
             _prototypes = new List<GameObject>();
 
-            ImageSplittingDetails details = new ImageSplittingDetails(0, 0);
+            ImageSplittingDetails details = new ImageSplittingDetails(4, 8, 0, 0, 49, 49, 0, 0, 0, 0);
 
-            details.RowCount = 4;
-            details.ColumnCount = 8;
-            details.FrameWidth = details.FrameHeight = 49;
+            //details.RowCount = 4;
+            //details.ColumnCount = 8;
+            //details.FrameWidth = details.FrameHeight = 49;
 
             GameEntity character = new Character();
             Texture2D tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
