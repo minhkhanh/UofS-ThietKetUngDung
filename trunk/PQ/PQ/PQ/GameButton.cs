@@ -10,7 +10,6 @@ namespace PQ
     public class GameButton : GameControl
     {
         List<Sprite2D> _downSprites = new List<Sprite2D>();
-
         public List<Sprite2D> DownSprites
         {
             get { return _downSprites; }
@@ -51,6 +50,32 @@ namespace PQ
 
         public GameButton()
         {
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            //for (int i = 0; i < _downSprites.Count; ++i)
+            //{
+            //    _downSprites[i].Dispose();
+            //}
+
+            _downSprites.Clear();
+
+            //for (int i = 0; i < _upSprites.Count; ++i)
+            //{
+            //    _upSprites[i].Dispose();
+            //}
+
+            _upSprites.Clear();
+
+            //for (int i = 0; i < _hoverSprites.Count; ++i)
+            //{
+            //    _hoverSprites[i].Dispose();
+            //}
+
+            _hoverSprites.Clear();
         }
 
         public GameButton(Sprite2D[] sprites, Sprite2D[] downSprites, Sprite2D[] upSprites, Sprite2D[] hoverSprites)

@@ -17,13 +17,20 @@ namespace PQ
             get { return _okBtn; }
             set { _okBtn = value; }
         }
+
         GameButton _exitBtn;
+
+        public GameButton ExitButton
+        {
+            get { return _exitBtn; }
+            set { _exitBtn = value; }
+        }
 
         public MainMenu(float x, float y)
         {
             X = x;
             Y = y;
-        }        
+        }
 
         public void Init(GameButtonManager btnManager, SpriteFontManager fontManager)
         {
@@ -33,7 +40,8 @@ namespace PQ
             _okBtn.Caption = "ENTER";
             _okBtn.Font = fontManager.CreateObject(0);
 
-            this.ManageObjects((GameControl)_okBtn);
+            this.ManageObjects(_okBtn);
+            this.Items.Add(_okBtn);
 
             _exitBtn = btnManager.CreateObject(0) as GameButton;
             _exitBtn.X = X;
@@ -41,7 +49,8 @@ namespace PQ
             _exitBtn.Caption = "EXIT";
             _exitBtn.Font = fontManager.CreateObject(0);
 
-            this.ManageObjects((GameControl)_exitBtn);
+            this.ManageObjects(_exitBtn);
+            this.Items.Add(_exitBtn);
 
             _motionModule = new VerticalPlaneMotionModule(-0.05f, 0, -1f, 0);
         }
@@ -52,6 +61,14 @@ namespace PQ
 
             if (X <= 600)
                 _motionModule.Stop();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            _okBtn.Dispose();
+            _exitBtn.Dispose();
         }
     }
 }

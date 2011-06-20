@@ -129,16 +129,19 @@ namespace PQ
             _frameHeight = sprite._frameHeight;
         }
 
-        //public Sprite2D(Sprite2D sprite, int x, int y)
-        //{
-        //    _frames = sprite._frames;
+        public Sprite2D(Texture2D[] frames, int x, int y)
+        {
+            _x = x;
+            _y = y;
 
-        //    _x = x;
-        //    _y = y;
+            if (frames.Count() == 0)
+                return;
 
-        //    _frameWidth = sprite._frameWidth;
-        //    _frameHeight = sprite._frameHeight;
-        //}
+            _frames.AddRange(frames);
+
+            _frameWidth = frames[0].Width;
+            _frameHeight = frames[0].Height;
+        }
 
         public Sprite2D(Texture2D largeTxture, int x, int y, ImageSplittingDetails details)
         {
@@ -167,7 +170,7 @@ namespace PQ
                 limI = limHeight;
                 limJ = limWidth;
                 incrI = _frameHeight + details.SpaceY;
-                incrJ = _frameWidth + details.SpaceX; 
+                incrJ = _frameWidth + details.SpaceX;
             }
 
             for (float i = initI; i < limI; i += incrI)
@@ -221,5 +224,15 @@ namespace PQ
 
             _running = true;
         }
+
+        //public virtual void Dispose()
+        //{
+        //    for (int i = 0; i < _frames.Count; ++i )
+        //    {
+        //        _frames[i].Dispose();
+        //    }
+
+        //    _frames.Clear();
+        //}
     }
 }

@@ -11,14 +11,13 @@ namespace PQ
     public class TerrainManager: Texture2DManager
     {
         int _terrainWidth = 0;
-
         public int TerrainWidth
         {
             get { return _terrainWidth; }
             set { _terrainWidth = value; }
         }
-        int _terrainHeight = 0;
 
+        int _terrainHeight = 0;
         public int TerrainHeight
         {
             get { return _terrainHeight; }
