@@ -41,7 +41,7 @@ namespace PQ
 
         public void SwitchState(GameStateId nextState)
         {
-            CurrentGameState.ExitState();
+            CurrentGameState.EndState();
             _currGameStateId = nextState;
             CurrentGameState.StartState();
             //CurrentGameState.EnterState();

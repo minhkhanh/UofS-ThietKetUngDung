@@ -17,7 +17,7 @@ namespace PQ
         Hover,
     }
 
-    public abstract class GameObject
+    public abstract class GameObject: IDisposable
     {
         #region motion
 
@@ -85,14 +85,19 @@ namespace PQ
             }
         }
 
-        public virtual void Init()
-        {
-
-        }
-
         public virtual GameObject Clone()
         {
             return null;
+        }
+
+        public virtual void Dispose()
+        {
+            //for (int i = 0; i < _sprites.Count; ++i )
+            //{
+            //    _sprites[i].Dispose();
+            //}
+
+            _sprites.Clear();
         }
 
         public void Animate(int frameTicks)

@@ -60,6 +60,7 @@ namespace PQ
 
         public virtual void UnloadContent()
         {
+            //_bkgr.Dispose();
         }
 
         public void StartState()
@@ -88,6 +89,7 @@ namespace PQ
 
         public void EndState()
         {
+            ExitState();
             UnloadContent();
         }
 

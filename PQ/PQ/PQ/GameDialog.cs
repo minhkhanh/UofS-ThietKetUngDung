@@ -9,7 +9,12 @@ namespace PQ
 {
     public abstract class GameDialog : GameWindow
     {
-        protected List<GameObject> _gameObjects = new List<GameObject>();
+        private List<GameObject> _gameObjects = new List<GameObject>();
+        protected List<GameObject> Items
+        {
+            get { return _gameObjects; }
+            set { _gameObjects = value; }
+        }
 
         public override float X
         {
@@ -62,12 +67,23 @@ namespace PQ
 
         public void ManageObjects(params GameObject[] gameObjs)
         {
-            _gameObjects.AddRange(gameObjs);
+            //_gameObjects.AddRange(gameObjs);
 
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
+                //_gameObjects.Add(gameObjs[i]);
+
                 this.MouseDown += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
+            }
+        }
+
+        public void UnmanageObjects(params GameObject[] gameObjs)
+        {
+            for (int i = 0; i < gameObjs.Count(); ++i)
+            {
+                this.MouseDown -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
+                this.MouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);                
             }
         }
 
@@ -101,6 +117,19 @@ namespace PQ
 
             for (int i = 0; i < _gameObjects.Count; ++i)
                 _gameObjects[i].OnMouseLeave(o, e);
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            for (int i = 0; i < _gameObjects.Count; ++i)
+            {
+                UnmanageObjects(_gameObjects[i]);
+                _gameObjects[i].Dispose();
+            }
+
+            _gameObjects.Clear();
         }
     }
 }
