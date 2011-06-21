@@ -84,10 +84,10 @@ namespace PQ
             {
                 List<Rectangle> regs = base.Regions;
 
-                List<GameObject> allChildren = GetAllObjs();
+                List<GameObject> allObjs = GetAllObjs();
 
-                for (int i = 0; i < allChildren.Count; ++i)
-                    regs.AddRange(allChildren[i].Regions);
+                for (int i = 0; i < allObjs.Count; ++i)
+                    regs.AddRange(allObjs[i].Regions);
 
                 return regs;
             }
@@ -124,44 +124,49 @@ namespace PQ
         {
             base.Update(gameTime);
 
-            CheckCollision();
+            List<GameObject> allObjs = GetAllObjs();
+            for (int i = 0; i < allObjs.Count; ++i)
+                allObjs[i].Update(gameTime);
 
-            for (int i = 0; i < _gameObjects.Count; ++i)
-                _gameObjects[i].Update(gameTime);
+            CheckCollision();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
 
-            for (int i = 0; i < _gameObjects.Count; ++i)
-                _gameObjects[i].Draw(gameTime, spriteBatch);
+            List<GameObject> allObjs = GetAllObjs();
+            for (int i = 0; i < allObjs.Count; ++i)
+                allObjs[i].Draw(gameTime, spriteBatch);
         }
 
         public override void OnMouseHover(object o, GameMouseEventArgs e)
         {
             base.OnMouseHover(o, e);
 
-            for (int i = 0; i < _gameObjects.Count; ++i)
-                _gameObjects[i].OnMouseHover(o, e);
+            List<GameObject> allObjs = GetAllObjs();
+            for (int i = 0; i < allObjs.Count; ++i)
+                allObjs[i].OnMouseHover(o, e);
         }
 
         public override void OnMouseLeave(object o, GameMouseEventArgs e)
         {
             base.OnMouseLeave(o, e);
 
-            for (int i = 0; i < _gameObjects.Count; ++i)
-                _gameObjects[i].OnMouseLeave(o, e);
+            List<GameObject> allObjs = GetAllObjs();
+            for (int i = 0; i < allObjs.Count; ++i)
+                allObjs[i].OnMouseLeave(o, e);
         }
 
         public override void Dispose()
         {
             base.Dispose();
 
-            for (int i = 0; i < _gameObjects.Count; ++i)
+            List<GameObject> allObjs = GetAllObjs();
+            for (int i = 0; i < allObjs.Count; ++i)
             {
-                UnmanageObjects(_gameObjects[i]);
-                _gameObjects[i].Dispose();
+                UnmanageObjects(allObjs[i]);
+                allObjs[i].Dispose();
             }
 
             _gameObjects.Clear();

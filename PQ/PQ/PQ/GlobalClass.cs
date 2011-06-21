@@ -22,7 +22,7 @@ namespace PQ
             float initI = 0, initJ = 0, incrI = 0, incrJ = 0, limI = 0, limJ = 0;
 
             // khoi tao thong so ban dau danh cho vong lap for:
-            if (details.SplittingDirection == SplittingDirection.Vertically)    // cat anh theo chieu doc
+            if (details.SplittingDirection == Direction.Vertically)    // cat anh theo chieu doc
             {
                 initI = details.InitMarginX + details.ColumnIndex * (details.FrameWidth + details.SpaceX);
                 initJ = details.InitMarginY + details.RowIndex * (details.FrameHeight + details.SpaceY);
@@ -31,7 +31,7 @@ namespace PQ
                 incrI = details.FrameWidth + details.SpaceX;
                 incrJ = details.FrameHeight + details.SpaceY;
             }
-            else if (details.SplittingDirection == SplittingDirection.Horizontally) // cat anh theo chieu ngang
+            else if (details.SplittingDirection == Direction.Horizontally) // cat anh theo chieu ngang
             {
                 initI = details.InitMarginY + details.RowIndex * (details.FrameHeight + details.SpaceY);
                 initJ = details.InitMarginX + details.ColumnIndex * (details.FrameWidth + details.SpaceX);

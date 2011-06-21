@@ -72,6 +72,16 @@ namespace PQ
             }
         }
 
+        public Vector2 Position
+        {
+            get { return new Vector2(X, Y); }
+            set
+            {
+                X = value.X;
+                Y = value.Y;
+            }
+        }
+
         public Vector2 Center
         {
             get
@@ -138,6 +148,16 @@ namespace PQ
             }
         }
 
+        public virtual int Width
+        {
+            get { return Bounds.Width; }
+        }
+
+        public virtual int Height
+        {
+            get { return Bounds.Height; }
+        }
+
         public virtual Rectangle Bounds
         {
             get
@@ -157,13 +177,15 @@ namespace PQ
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (Sprite2D i in _sprites)
+            List<Sprite2D> allSprites = GetAllSprites();
+            foreach (Sprite2D i in allSprites)
                 i.Draw(gameTime, spriteBatch);
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            foreach (Sprite2D i in _sprites)
+            List<Sprite2D> allSprites = GetAllSprites();
+            foreach (Sprite2D i in allSprites)
                 i.Update(gameTime);
 
             _motionModule.OnMotion(this, gameTime);
@@ -240,9 +262,19 @@ namespace PQ
                 handler(o, e);
         }
 
+        public virtual void OnMouseMove(object o, GameMouseEventArgs e)
+        {
+            if (_clickState == GameOnMouseState.Down
+                && Contains(e.MouseState.X, e.MouseState.Y)
+                )
+            {
+                // not yet
+            }
+        }
+
         public virtual void OnKeyDown(object o, GameKeyEventArgs e)
         {
-
+            // not yet
         }
 
         public virtual void OnMouseDown(object o, GameMouseEventArgs e)
@@ -296,7 +328,7 @@ namespace PQ
             return Bounds.Intersects(obj.Bounds);
         }
 
-        public bool Collide(GameObject obj)
+        public bool IsCollided(GameObject obj)
         {
             return BounRectCollide(obj);
         }

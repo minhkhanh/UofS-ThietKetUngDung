@@ -6,17 +6,26 @@ using Microsoft.Xna.Framework;
 
 namespace PQ
 {
-    public enum SplittingDirection
+    public enum Direction
     {
+        None,
         Vertically,
-        Horizontally
+        Horizontally,
+        Left,
+        Right,
+        Above,
+        Below,
+        Rightward,
+        Leftward,
+        Upward,
+        Downward
     }
 
     public class SplittingDetails
     {
-        SplittingDirection _splittingDirection = SplittingDirection.Vertically;    // vertical or horizon
+        Direction _splittingDirection = Direction.Vertically;    // vertical or horizon
 
-        public SplittingDirection SplittingDirection
+        public Direction SplittingDirection
         {
             get { return _splittingDirection; }
             set { _splittingDirection = value; }
