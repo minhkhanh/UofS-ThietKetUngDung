@@ -75,10 +75,10 @@ namespace PQ
         {
             _upGem = o as Gem;
 
-            if (IsNext4(_upGem, _downGem))
-            {
+            //if (IsNext4(_upGem, _downGem))
+            //{
 
-            }
+            //}
         }
 
         void gem_MouseDown(object o, GameMouseEventArgs e)
