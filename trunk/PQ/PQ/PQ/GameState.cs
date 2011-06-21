@@ -12,6 +12,7 @@ namespace PQ
     {
         State,
         StateMainMenu,
+        StateExplorer,
         StateMiniGame
     }
 

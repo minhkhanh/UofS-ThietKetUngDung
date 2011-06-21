@@ -35,6 +35,12 @@ namespace PQ
             set { _fontManager = value; }
         }
 
+        MapManager _mapManager = new MapManager();
+        public PQ.MapManager MapManager
+        {
+            get { return _mapManager; }
+            set { _mapManager = value; }
+        }
         //GameStateManager _gameStateManager;
 
         GemManager _gemManager = new GemManager();
@@ -149,7 +155,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            _currState = new GameStateMiniGame(this);
+            //_currState = new GameStateMiniGame(this);
+            _currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -159,6 +166,7 @@ namespace PQ
             _buttonManager.LoadPrototypes(Content);
             _fontManager.LoadPrototypes(Content);
             _gemManager.LoadPrototypes(Content);
+            _mapManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()

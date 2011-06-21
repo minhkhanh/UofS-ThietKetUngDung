@@ -190,6 +190,7 @@ namespace PQ
         public event EventHandler<GameMouseEventArgs> MouseHover;
         public event EventHandler<GameMouseEventArgs> MouseLeave;
         public event EventHandler<GameMouseEventArgs> MouseClick;
+        public event EventHandler<GameMouseEventArgs> MouseMove;
 
         public event EventHandler<GameKeyEventArgs> KeyDown;
         public event EventHandler<GameKeyEventArgs> KeyUp;
