@@ -12,6 +12,7 @@ namespace PQ
         #region components
 
         GameButton _backBtn;
+        PuzzleBoard _board;
 
         #endregion
 
@@ -32,8 +33,6 @@ namespace PQ
         public override void LoadContent()
         {
             Texture2D bkgrImg = _game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Battle");
-            //ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 0, 0, bkgrImg.Width, bkgrImg.Height, 0, 0, 0, 0);
-            //_bkgr = new Sprite2D(bkgrImg, 0, 0, details);
             _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
 
             _bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
@@ -47,6 +46,14 @@ namespace PQ
             _backBtn.X = _backBtn.Y = 10;
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);
+
+            SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 2, 6, 1, 3);
+            _board = new PuzzleBoard(details, _game.GemManager);
+            _board.X = 216;
+            _board.Y = 129;
+            _board.Reset();
+            this.ManageObjects(_board);
+            _gameObjects.Add(_board);
         }
 
         public override void InitEvents()

@@ -12,7 +12,7 @@ namespace PQ
         Horizontally
     }
 
-    public class ImageSplittingDetails
+    public class SplittingDetails
     {
         SplittingDirection _splittingDirection = SplittingDirection.Vertically;    // vertical or horizon
 
@@ -92,7 +92,7 @@ namespace PQ
             set { _yMargin = value; }
         }
 
-        public ImageSplittingDetails(int rowCount, int colCount,
+        public SplittingDetails(int rowCount, int colCount,
             int rowIdx, int colIdx,
             int frmWidth, int frmHeight,
             int xSpace, int ySpace,

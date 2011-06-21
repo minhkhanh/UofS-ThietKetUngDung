@@ -8,7 +8,7 @@ namespace PQ
 {
     public class VerticalPlaneMotionModule: PlaneMotionModule
     {
-        const float G = 0.1f;      // acceleration of gravity: pixel / game tick ^ 2
+        public const float G = 0.1f;      // acceleration of gravity: pixel / game tick ^ 2
 
         float _ax;
         public float Ax

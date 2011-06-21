@@ -14,7 +14,7 @@ namespace PQ
         {
             _prototypes = new List<GameObject>();
 
-            ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 5, 0, 300, 50, 0, 1, 0, 0);
+            SplittingDetails details = new SplittingDetails(1, 1, 5, 0, 300, 50, 0, 1, 0, 0);
             //details.SpaceX = 0;
             //details.SpaceY = 1;
             //details.ColumnCount = 1;

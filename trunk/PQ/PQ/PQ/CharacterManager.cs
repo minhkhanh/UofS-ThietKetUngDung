@@ -13,7 +13,7 @@ namespace PQ
         {
             _prototypes = new List<GameObject>();
 
-            ImageSplittingDetails details = new ImageSplittingDetails(4, 8, 0, 0, 49, 49, 0, 0, 0, 0);
+            SplittingDetails details = new SplittingDetails(4, 8, 0, 0, 49, 49, 0, 0, 0, 0);
 
             //details.RowCount = 4;
             //details.ColumnCount = 8;

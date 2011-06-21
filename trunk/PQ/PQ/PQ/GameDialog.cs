@@ -50,16 +50,44 @@ namespace PQ
             }
         }
 
+        /// <summary>
+        /// Get all child objects that being held by this object
+        /// </summary>
+        /// <returns></returns>
+        public virtual List<GameObject> GetAllObjs()
+        {
+            return _gameObjects;
+        }
+
+        public override Rectangle Bounds
+        {
+            get
+            {
+                Rectangle bound = base.Bounds;
+
+                List<GameObject> allObjs = GetAllObjs();
+                if (bound.IsEmpty && allObjs.Count > 0)
+                    bound = allObjs[0].Bounds;
+
+                foreach (GameObject i in allObjs)
+                {
+                    bound = Rectangle.Union(bound, i.Bounds);
+                }
+
+                return bound;
+            }
+        }
+
         public override List<Rectangle> Regions
         {
             get
             {
-                List<Rectangle> regs = new List<Rectangle>();
+                List<Rectangle> regs = base.Regions;
 
-                for (int i = 0; i < _sprites.Count; ++i)
-                    regs.Add(_sprites[i].Bounds);
-                for (int i = 0; i < _gameObjects.Count; ++i)
-                    regs.AddRange(_gameObjects[i].Regions);
+                List<GameObject> allChildren = GetAllObjs();
+
+                for (int i = 0; i < allChildren.Count; ++i)
+                    regs.AddRange(allChildren[i].Regions);
 
                 return regs;
             }
@@ -107,7 +135,7 @@ namespace PQ
             base.Draw(gameTime, spriteBatch);
 
             for (int i = 0; i < _gameObjects.Count; ++i)
-                _gameObjects[i].Draw(gameTime, spriteBatch);            
+                _gameObjects[i].Draw(gameTime, spriteBatch);
         }
 
         public override void OnMouseHover(object o, GameMouseEventArgs e)
