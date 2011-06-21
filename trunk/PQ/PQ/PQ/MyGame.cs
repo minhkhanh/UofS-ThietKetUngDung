@@ -35,7 +35,7 @@ namespace PQ
             set { _fontManager = value; }
         }
 
-        GameStateManager _gameStateManager;
+        //GameStateManager _gameStateManager;
 
         #endregion
 
@@ -88,6 +88,19 @@ namespace PQ
 
         #endregion        
 
+        #region game states
+
+        GameState _currState;
+
+        public void SwitchState(GameState nextState)
+        {
+            _currState.EndState();
+            _currState = nextState;
+            _currState.StartState();
+        }
+
+        #endregion
+
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -105,6 +118,17 @@ namespace PQ
             }
         }
 
+        public void UnmanageObjects(params GameObject[] gameObjs)
+        {
+            for (int i = 0; i < gameObjs.Count(); ++i)
+            {
+                this.GameMouseDown -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
+                this.GameMouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
+                this.GameMouseHover -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseHover);
+                this.GameMouseLeave -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseLeave);
+            }
+        }
+
         protected override void Initialize()
         {
             IsMouseVisible = true;
@@ -114,7 +138,8 @@ namespace PQ
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
-            _gameStateManager = new GameStateManager(this);
+            //_gameStateManager = new GameStateManager(this);
+            _currState = new GameStateMainMenu(this);
 
             base.Initialize();
         }
@@ -132,7 +157,8 @@ namespace PQ
             LoadManagers();
 
             //_gameStateManager.EnterCurrentState();
-            _gameStateManager.CurrentGameState.StartState();
+            //_gameStateManager.CurrentGameState.StartState();
+            _currState.StartState();
         }
 
         protected override void UnloadContent()
@@ -151,7 +177,8 @@ namespace PQ
             KeyboardState kbState = Keyboard.GetState();
             RaiseGameKeyEvents(kbState);
 
-            _gameStateManager.CurrentGameState.Update(gameTime);
+            //_gameStateManager.CurrentGameState.Update(gameTime);
+            _currState.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -162,7 +189,7 @@ namespace PQ
 
             spriteBatch.Begin();
 
-            _gameStateManager.CurrentGameState.Draw(gameTime, spriteBatch);
+            _currState.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
 

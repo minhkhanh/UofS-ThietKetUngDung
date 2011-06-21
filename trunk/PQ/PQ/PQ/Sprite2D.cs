@@ -10,13 +10,35 @@ namespace PQ
 {
     public class Sprite2D
     {
-        public Rectangle Bound
+        public Rectangle Bounds
         {
-            get { return new Rectangle((int)_x, (int)_y, (int)_frameWidth, (int)_frameHeight); }
+            get 
+            {
+                Rectangle bound;
+
+                if (_frames.Count > 0)
+                {
+                    bound = _frames[0].Bounds;
+                    //bound.X = (int)_x;
+                    //bound.Y = (int)_y;
+                }
+                else
+                    return Rectangle.Empty;
+
+                foreach (Texture2D i in _frames)
+                    bound = Rectangle.Union(bound, i.Bounds);
+
+                bound.X = (int)_x;
+                bound.Y = (int)_y;
+
+                return bound;
+
+                //return new Rectangle((int)_x, (int)_y, (int)_frameWidth, (int)_frameHeight); 
+            }
         }
 
-        protected float _frameWidth = 0;
-        protected float _frameHeight = 0;
+        //protected float _frameWidth = 0;
+        //protected float _frameHeight = 0;
 
         protected Vector2 _scale = new Vector2(1, 1);
         public Vector2 Scale
@@ -125,11 +147,11 @@ namespace PQ
             _x = sprite._x;
             _y = sprite._y;
 
-            _frameWidth = sprite._frameWidth;
-            _frameHeight = sprite._frameHeight;
+            //_frameWidth = sprite._frameWidth;
+            //_frameHeight = sprite._frameHeight;
         }
 
-        public Sprite2D(Texture2D[] frames, int x, int y)
+        public Sprite2D(List<Texture2D> frames, int x, int y)
         {
             _x = x;
             _y = y;
@@ -137,52 +159,15 @@ namespace PQ
             if (frames.Count() == 0)
                 return;
 
-            _frames.AddRange(frames);
+            _frames = frames;
 
-            _frameWidth = frames[0].Width;
-            _frameHeight = frames[0].Height;
+            //_frameWidth = frames[0].Width;
+            //_frameHeight = frames[0].Height;
         }
 
         public Sprite2D(Texture2D largeTxture, int x, int y, ImageSplittingDetails details)
         {
-            _frameWidth = details.FrameWidth;
-            _frameHeight = details.FrameHeight;
-
-            float limHeight = Math.Min(largeTxture.Height, details.InitMarginY + (details.RowCount + details.RowIndex) * (_frameHeight + details.SpaceY));
-            float limWidth = Math.Min(largeTxture.Width, details.InitMarginX + (details.ColumnCount + details.ColumnIndex) * (_frameWidth + details.SpaceX));
-
-            float initI = 0, initJ = 0, incrI = 0, incrJ = 0, limI = 0, limJ = 0;
-
-            // khoi tao thong so ban dau danh cho vong lap for:
-            if (details.SplittingDirection == SplittingDirection.Vertically)    // cat anh theo chieu doc
-            {
-                initI = details.InitMarginX + details.ColumnIndex * (_frameWidth + details.SpaceX);
-                initJ = details.InitMarginY + details.RowIndex * (_frameHeight + details.SpaceY);
-                limI = limWidth;
-                limJ = limHeight;
-                incrI = _frameWidth + details.SpaceX;
-                incrJ = _frameHeight + details.SpaceY;                
-            }
-            else if (details.SplittingDirection == SplittingDirection.Horizontally) // cat anh theo chieu ngang
-            {
-                initI = details.InitMarginY + details.RowIndex * (_frameHeight + details.SpaceY);
-                initJ = details.InitMarginX + details.ColumnIndex * (_frameWidth + details.SpaceX);
-                limI = limHeight;
-                limJ = limWidth;
-                incrI = _frameHeight + details.SpaceY;
-                incrJ = _frameWidth + details.SpaceX;
-            }
-
-            for (float i = initI; i < limI; i += incrI)
-                for (float j = initJ; j < limJ; j += incrJ)
-                {
-                    Color[] singleFrame = new Color[(int)_frameWidth * (int)_frameHeight];
-                    largeTxture.GetData<Color>(0, new Rectangle((int)i, (int)j, (int)_frameWidth, (int)_frameHeight), singleFrame, 0, (int)_frameWidth * (int)_frameHeight);
-
-                    Texture2D newTxture = new Texture2D(largeTxture.GraphicsDevice, (int)_frameWidth, (int)_frameHeight);
-                    newTxture.SetData<Color>(singleFrame);
-                    _frames.Add(newTxture);
-                }
+            _frames = GlobalClass.SplitImage(largeTxture, details);
 
             _x = x;
             _y = y;

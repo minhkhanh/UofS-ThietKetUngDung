@@ -10,7 +10,7 @@ namespace PQ
 {
     public enum GameStateId
     {
-        None,
+        State,
         StateMainMenu,
         StateMiniGame
     }
@@ -26,20 +26,23 @@ namespace PQ
 
     public abstract class GameState: GameDialog
     {
-        protected GameStateManager _manager;
+        //protected GameStateManager _manager;
+        protected MyGame _game;
 
-        protected GameStateId _stateId;
-        public GameStateId StateId
+        //protected GameStateId _stateId;
+        public virtual GameStateId StateId
         {
-            get { return _stateId; }
+            get { return GameStateId.State; }
         }
 
         protected Sprite2D _bkgr;
 
-        public GameState(GameStateManager manager)
+        public GameState(MyGame game)
         {
-            _manager = manager;
-            _stateId = GameStateId.None;
+            //_manager = manager;
+            //_stateId = GameStateId.None;
+
+            _game = game;
         }
 
         public virtual void LoadContent()
@@ -80,11 +83,15 @@ namespace PQ
         public void EnterState()
         {            
             PlaySongs();
+
+            _game.ManageObjects(this);
         }
 
         public void ExitState()
         {
             StopSongs();
+
+            _game.UnmanageObjects(this);
         }
 
         public void EndState()

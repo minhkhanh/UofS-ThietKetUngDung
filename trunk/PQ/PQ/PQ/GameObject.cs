@@ -96,7 +96,6 @@ namespace PQ
             //{
             //    _sprites[i].Dispose();
             //}
-
             _sprites.Clear();
         }
 
@@ -129,7 +128,7 @@ namespace PQ
 
                 List<Sprite2D> allSprites = GetAllSprites();
                 foreach (Sprite2D i in allSprites)
-                    reg.Add(i.Bound);
+                    reg.Add(i.Bounds);
 
                 return reg;
             }
@@ -143,10 +142,10 @@ namespace PQ
                 List<Sprite2D> allSprites = GetAllSprites();
 
                 if (allSprites.Count > 0)
-                    bound = allSprites[0].Bound;
+                    bound = allSprites[0].Bounds;
 
                 foreach (Sprite2D i in allSprites)
-                    bound = Rectangle.Union(bound, i.Bound);
+                    bound = Rectangle.Union(bound, i.Bounds);
 
                 return bound;
             }
@@ -286,6 +285,16 @@ namespace PQ
         }
 
         #endregion
+
+        public bool BounRectCollide(GameObject obj)
+        {
+            return Bounds.Intersects(obj.Bounds);
+        }
+
+        public bool Collide(GameObject obj)
+        {
+            return BounRectCollide(obj);
+        }
 
     }
 }

@@ -115,6 +115,10 @@
     <Compile Include="GameStateMainMenu.cs" />
     <Compile Include="GameStateManager.cs" />
     <Compile Include="GameStateMiniGame.cs" />
+    <Compile Include="Gem.cs" />
+    <Compile Include="GemManager.cs" />
+    <Compile Include="GlobalClass.cs" />
+    <Compile Include="GreenGem.cs" />
     <Compile Include="HorizontalPlaneMotionModule.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
@@ -139,6 +143,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="MyGame.cs" />
+    <Compile Include="PuzzleBoard.cs" />
+    <Compile Include="RedGem.cs" />
     <Compile Include="Sprite2D.cs" />
     <Compile Include="GameEntity.cs" />
     <Compile Include="GameObject.cs" />
