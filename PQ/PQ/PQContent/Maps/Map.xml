@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Map rows="4" columns="4" width="512" height="512">
+
+   <Segment  row="0" column="0" texture="Assets\Graphics\Map00.jpg"/>
+   <Segment  row="0" column="1" texture="Assets\Graphics\Map01.jpg"/>
+   <Segment  row="0" column="2" texture="Assets\Graphics\Map02.jpg"/>
+   <Segment  row="0" column="3" texture="Assets\Graphics\Map03.jpg"/>
+
+   <Segment  row="1" column="0" texture="Assets\Graphics\Map10.jpg"/>
+   <Segment  row="1" column="1" texture="Assets\Graphics\Map11.jpg"/>
+   <Segment  row="1" column="2" texture="Assets\Graphics\Map12.jpg"/>
+   <Segment  row="1" column="3" texture="Assets\Graphics\Map13.jpg"/>
+
+   <Segment  row="2" column="0" texture="Assets\Graphics\Map20.jpg"/>
+   <Segment  row="2" column="1" texture="Assets\Graphics\Map21.jpg"/>
+   <Segment  row="2" column="2" texture="Assets\Graphics\Map22.jpg"/>
+   <Segment  row="2" column="3" texture="Assets\Graphics\Map23.jpg"/>
+
+   <Segment  row="3" column="0" texture="Assets\Graphics\Map30.jpg"/>
+   <Segment  row="3" column="1" texture="Assets\Graphics\Map31.jpg"/>
+   <Segment  row="3" column="2" texture="Assets\Graphics\Map32.jpg"/>
+   <Segment  row="3" column="3" texture="Assets\Graphics\Map33.jpg"/>
+
+</Map>
