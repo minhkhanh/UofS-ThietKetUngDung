@@ -165,7 +165,7 @@ namespace PQ
             //_frameHeight = frames[0].Height;
         }
 
-        public Sprite2D(Texture2D largeTxture, int x, int y, ImageSplittingDetails details)
+        public Sprite2D(Texture2D largeTxture, int x, int y, SplittingDetails details)
         {
             _frames = GlobalClass.SplitImage(largeTxture, details);
 

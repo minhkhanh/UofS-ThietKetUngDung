@@ -37,6 +37,14 @@ namespace PQ
 
         //GameStateManager _gameStateManager;
 
+        GemManager _gemManager = new GemManager();
+
+        public GemManager GemManager
+        {
+            get { return _gemManager; }
+            set { _gemManager = value; }
+        }
+
         #endregion
 
         #region events
@@ -79,6 +87,8 @@ namespace PQ
 
             RaiseMouseEvent(GameMouseHover, this, new GameMouseEventArgs(msState));
             RaiseMouseEvent(GameMouseLeave, this, new GameMouseEventArgs(msState));
+
+            //msState.
         }
 
         void RaiseGameKeyEvents(KeyboardState kbState)
@@ -148,6 +158,7 @@ namespace PQ
         {
             _buttonManager.LoadPrototypes(Content);
             _fontManager.LoadPrototypes(Content);
+            _gemManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()

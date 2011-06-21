@@ -12,7 +12,6 @@ namespace PQ
     {
         //public Map(float mapWidth, float mapHeight)
         //{
-
         //}
 
         public override GameObject Clone()
@@ -32,6 +31,6 @@ namespace PQ
             foreach (Sprite2D i in _sprites)
                 if (i.Bounds.Intersects(spriteBatch.GraphicsDevice.PresentationParameters.Bounds))
                     i.Draw(gameTime, spriteBatch);
-        }        
+        }
     }
 }

@@ -132,7 +132,7 @@
     <Compile Include="GameButtonUpState.cs" />
     <Compile Include="GameDialog.cs" />
     <Compile Include="GameObjectManager.cs" />
-    <Compile Include="ImageSplittingDetails.cs" />
+    <Compile Include="SplittingDetails.cs" />
     <Compile Include="GlobalMap.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="GameMenu.cs" />

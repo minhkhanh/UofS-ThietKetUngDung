@@ -9,7 +9,7 @@ namespace PQ
 {
     public static class GlobalClass
     {
-        public static List<Texture2D> SplitImage(Texture2D largeTxture, ImageSplittingDetails details)
+        public static List<Texture2D> SplitImage(Texture2D largeTxture, SplittingDetails details)
         {
             List<Texture2D> frames = new List<Texture2D>();
 

@@ -15,7 +15,7 @@ namespace PQ
             GlobalMap globalMap = new GlobalMap();
 
             Texture2D mapPiece;
-            ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 0, 0, 512, 512, 0, 0, 0, 0);
+            SplittingDetails details = new SplittingDetails(1, 1, 0, 0, 512, 512, 0, 0, 0, 0);
             //details.ColumnCount = details.RowCount = 1;
             //details.FrameWidth = details.FrameHeight = 512;
 

@@ -115,6 +115,10 @@ namespace PQ
                 i.Pause();
         }
 
+        /// <summary>
+        /// Get all sprites that being held by this object
+        /// </summary>
+        /// <returns></returns>
         protected virtual List<Sprite2D> GetAllSprites()
         {
             return _sprites;
@@ -138,7 +142,7 @@ namespace PQ
         {
             get
             {
-                Rectangle bound = new Rectangle();
+                Rectangle bound = Rectangle.Empty;
                 List<Sprite2D> allSprites = GetAllSprites();
 
                 if (allSprites.Count > 0)
