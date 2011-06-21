@@ -18,8 +18,8 @@ namespace PQ
 
         public void InitPrototypes(ContentManager content)
         {
-            _sprites.Add(Sprite2DName.LongMainMenuButtonUp, 
-                new Sprite2D(new Texture2D[]{content.Load<Texture2D>(@"Images\Buttons\Long_Button_Main_Up.png")},0,0));
+            //_sprites.Add(Sprite2DName.LongMainMenuButtonUp, 
+            //    new Sprite2D(new Texture2D[]{content.Load<Texture2D>(@"Images\Buttons\Long_Button_Main_Up.png")},0,0));
         }
 
         public Sprite2D CreateObject(Sprite2DName name)

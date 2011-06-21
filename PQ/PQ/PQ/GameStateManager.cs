@@ -1,50 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using Microsoft.Xna.Framework;
+//using Microsoft.Xna.Framework.Graphics;
 
-namespace PQ
-{
-    public class GameStateManager
-    {
-        List<GameState> _gameStates = new List<GameState>();
-        GameStateId _currGameStateId = GameStateId.None;
+//namespace PQ
+//{
+//    public class GameStateManager
+//    {
+//        //List<GameState> _gameStates = new List<GameState>();
+//        GameState _currGameState;
+//        //GameStateId _currGameStateId = GameStateId.None;
 
-        MyGame _myGame;
-        public MyGame MyGame
-        {
-            get { return _myGame; }
-            set { _myGame = value; }
-        }
+//        MyGame _myGame;
+//        public MyGame MyGame
+//        {
+//            get { return _myGame; }
+//            set { _myGame = value; }
+//        }
 
-        public GameState CurrentGameState
-        {
-            get
-            {
-                return _gameStates.Find(i => i.StateId == _currGameStateId);
-            }
-        }
+//        public GameState CurrentGameState
+//        {
+//            get
+//            {
+//                //return _gameStates.Find(i => i.StateId == _currGameStateId);
+//                return _currGameState;
+//            }
+//        }
 
-        public GameStateManager(MyGame myGame)
-        {
-            _myGame = myGame;
+//        public GameStateManager(MyGame myGame)
+//        {
+//            _myGame = myGame;
 
-            _gameStates.Add(new GameStateMainMenu(this));
-            _gameStates.Add(new GameStateMiniGame(this));
+//            _currGameState = new GameStateMainMenu(this);
+//            _myGame.ManageObjects(_currGameState);
 
-            myGame.ManageObjects(_gameStates.ToArray());
+//            //_gameStates.Add(new GameStateMainMenu(this));
+//            //_gameStates.Add(new GameStateMiniGame(this));
 
-            _currGameStateId = GameStateId.StateMainMenu;
-        }
+//            //myGame.ManageObjects(_gameStates.ToArray());
 
-        public void SwitchState(GameStateId nextState)
-        {
-            CurrentGameState.EndState();
-            _currGameStateId = nextState;
-            CurrentGameState.StartState();
-            //CurrentGameState.EnterState();
-        }
-    }
-}
+//            //_currGameStateId = GameStateId.StateMainMenu;
+//        }
+
+//        public void SwitchState(GameState nextState)
+//        {
+//            CurrentGameState.EndState();
+//            //_currGameStateId = nextState;
+//            _currGameState = nextState;
+//            CurrentGameState.StartState();
+//            //CurrentGameState.EnterState();
+//        }
+//    }
+//}

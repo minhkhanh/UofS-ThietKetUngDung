@@ -5,7 +5,8 @@ using System.Text;
 
 namespace PQ
 {
-    public abstract class GameWindow : GameObject
+    public class RedGem: Gem
     {
+
     }
 }

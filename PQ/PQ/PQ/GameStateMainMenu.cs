@@ -17,26 +17,34 @@ namespace PQ
 
         #endregion
 
-        public GameStateMainMenu(GameStateManager manager)
-            : base(manager)
+        public override GameStateId StateId
         {
-            _stateId = GameStateId.StateMainMenu;
+            get
+            {
+                return GameStateId.StateMainMenu;
+            }
+        }
+
+        public GameStateMainMenu(MyGame game)
+            : base(game)
+        {
+            //_stateId = GameStateId.StateMainMenu;
         }
 
         public override void LoadContent()
         {
-            _mainMenu = new MainMenu(_manager.MyGame.GraphicsDevice.PresentationParameters.Bounds.Width, 300);
-            _mainMenu.Init(_manager.MyGame.ButtonManager, _manager.MyGame.FontManager);
+            _mainMenu = new MainMenu(_game.GraphicsDevice.PresentationParameters.Bounds.Width, 300);
+            _mainMenu.Init(_game.ButtonManager, _game.FontManager);
             this.ManageObjects(_mainMenu);
-            Items.Add(_mainMenu);
+            _gameObjects.Add(_mainMenu);
 
-            Texture2D bkgrImg = _manager.MyGame.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Standard");
+            Texture2D bkgrImg = _game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Standard");
             //ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 0, 0, bkgrImg.Width, bkgrImg.Height, 0, 0, 0, 0);
             //_bkgr = new Sprite2D(bkgrImg, 0, 0, details);
-            _bkgr = new Sprite2D(new Texture2D[] { bkgrImg }, 0, 0);
+            _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
 
-            _bkgr.Scale = new Vector2((float)_manager.MyGame.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
-                (float)_manager.MyGame.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
+            _bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
+                (float)_game.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
 
             _sprites.Add(_bkgr);
         }
@@ -49,12 +57,12 @@ namespace PQ
 
         public void ExitButton_MouseClick(object o, GameMouseEventArgs e)
         {
-            _manager.MyGame.Exit();
+            _game.Exit();
         }
 
         public void OKButton_MouseClick(object o, GameMouseEventArgs e)
         {
-            _manager.SwitchState(GameStateId.StateMiniGame);
+            _game.SwitchState(new GameStateMiniGame(_game));
         }
 
         public override void UnloadContent()

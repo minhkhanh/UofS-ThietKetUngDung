@@ -41,7 +41,7 @@ namespace PQ
             _okBtn.Font = fontManager.CreateObject(0);
 
             this.ManageObjects(_okBtn);
-            this.Items.Add(_okBtn);
+            _gameObjects.Add(_okBtn);
 
             _exitBtn = btnManager.CreateObject(0) as GameButton;
             _exitBtn.X = X;
@@ -50,7 +50,7 @@ namespace PQ
             _exitBtn.Font = fontManager.CreateObject(0);
 
             this.ManageObjects(_exitBtn);
-            this.Items.Add(_exitBtn);
+            _gameObjects.Add(_exitBtn);
 
             _motionModule = new VerticalPlaneMotionModule(-0.05f, 0, -1f, 0);
         }

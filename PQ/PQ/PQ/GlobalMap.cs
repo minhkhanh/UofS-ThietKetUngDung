@@ -30,7 +30,7 @@ namespace PQ
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (Sprite2D i in _sprites)
-                if (i.Bound.Intersects(spriteBatch.GraphicsDevice.PresentationParameters.Bounds))
+                if (i.Bounds.Intersects(spriteBatch.GraphicsDevice.PresentationParameters.Bounds))
                     i.Draw(gameTime, spriteBatch);
         }        
     }

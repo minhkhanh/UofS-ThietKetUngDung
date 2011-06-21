@@ -9,8 +9,8 @@ namespace PQ
 {
     public abstract class GameDialog : GameWindow
     {
-        private List<GameObject> _gameObjects = new List<GameObject>();
-        protected List<GameObject> Items
+        protected List<GameObject> _gameObjects = new List<GameObject>();
+        public virtual List<GameObject> Items
         {
             get { return _gameObjects; }
             set { _gameObjects = value; }
@@ -26,7 +26,7 @@ namespace PQ
             {
                 float dx = value - base.X;
 
-                foreach (GameControl i in _gameObjects)
+                foreach (GameObject i in _gameObjects)
                     i.X += dx;
 
                 base.X = value;
@@ -43,7 +43,7 @@ namespace PQ
             {
                 float dy = value - base.Y;
 
-                foreach (GameControl i in _gameObjects)
+                foreach (GameObject i in _gameObjects)
                     i.Y += dy;
 
                 base.Y = value;
@@ -57,7 +57,7 @@ namespace PQ
                 List<Rectangle> regs = new List<Rectangle>();
 
                 for (int i = 0; i < _sprites.Count; ++i)
-                    regs.Add(_sprites[i].Bound);
+                    regs.Add(_sprites[i].Bounds);
                 for (int i = 0; i < _gameObjects.Count; ++i)
                     regs.AddRange(_gameObjects[i].Regions);
 
@@ -87,9 +87,16 @@ namespace PQ
             }
         }
 
+        public virtual void CheckCollision()
+        {
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            CheckCollision();
 
             for (int i = 0; i < _gameObjects.Count; ++i)
                 _gameObjects[i].Update(gameTime);
