@@ -57,5 +57,37 @@ namespace PQ
             _vx += _ax;
             _vy += _ay;
         }
+
+        public override bool IsMoving
+        {
+            get
+            {
+                return (_ax != 0 || _ay != 0 || _vx != 0 || _vy != 0);
+            }
+        }
+
+        public override Direction MovingDirection
+        {
+            get
+            {
+                if (_vx == 0 && _ax == 0)
+                {
+                    if (_vy > 0)
+                        return Direction.Downward;
+                    else if (_vy < 0)
+                        return Direction.Upward;
+                }
+
+                if (_vy == 0 && _ay == 0)
+                {
+                    if (_vx > 0)
+                        return Direction.Rightward;
+                    else if (_vx < 0)
+                        return Direction.Leftward;
+                }
+
+                return Direction.None;
+            }
+        }
     }
 }

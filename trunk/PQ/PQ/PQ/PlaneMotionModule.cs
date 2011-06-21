@@ -42,5 +42,15 @@ namespace PQ
         {
             
         }
+
+        public virtual bool IsMoving
+        {
+            get { return false; }
+        }
+
+        public virtual Direction MovingDirection
+        {
+            get { return Direction.None; }
+        }
     }
 }
