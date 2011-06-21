@@ -35,8 +35,8 @@ namespace PQ
             Texture2D bkgrImg = _game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Battle");
             _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
 
-            _bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
-                (float)_game.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
+            //_bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
+            //    (float)_game.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
 
             _sprites.Add(_bkgr);
 
@@ -47,10 +47,10 @@ namespace PQ
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);
 
-            SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 2, 6, 1, 3);
+            SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 3, 8, 3, 5);
             _board = new PuzzleBoard(details, _game.GemManager);
-            _board.X = 216;
-            _board.Y = 129;
+            _board.X = 215;
+            _board.Y = 128;
             _board.Reset();
             this.ManageObjects(_board);
             _gameObjects.Add(_board);

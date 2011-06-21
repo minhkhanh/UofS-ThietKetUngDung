@@ -215,7 +215,7 @@ namespace PQ
                 handler(o, e);
 
             if (Contains(e.MouseState.X, e.MouseState.Y))
-                RaiseMouseClickEvent(o, e);
+                RaiseMouseClickEvent(this, e);
         }
 
         protected void RaiseMouseHoverEvent(object o, GameMouseEventArgs e)
@@ -251,7 +251,7 @@ namespace PQ
                 )
             {
                 _clickState = GameOnMouseState.Down;
-                RaiseMouseDownEvent(o, e);
+                RaiseMouseDownEvent(this, e);
             }
         }
 
@@ -260,7 +260,7 @@ namespace PQ
             if (_clickState == GameOnMouseState.Down)
             {
                 _clickState = GameOnMouseState.Up;
-                RaiseMouseUpEvent(o, e);
+                RaiseMouseUpEvent(this, e);
                 //if (Contains(e.MouseState.X, e.MouseState.Y))
                 //    RaiseMouseClickEvent(o, e);
             }
@@ -273,7 +273,7 @@ namespace PQ
                 )
             {
                 _clickState = GameOnMouseState.Hover;
-                RaiseMouseHoverEvent(o, e);
+                RaiseMouseHoverEvent(this, e);
             }
         }
 
@@ -284,7 +284,7 @@ namespace PQ
                 )
             {
                 _clickState = GameOnMouseState.Up;
-                RaiseMouseLeaveEvent(o, e);
+                RaiseMouseLeaveEvent(this, e);
             }
         }
 

@@ -54,5 +54,7 @@ namespace PQ
 
             return frames;
         }
+
+        public static float SCALE = 1;  // must equals to 1 currently
     }
 }

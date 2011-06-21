@@ -38,7 +38,7 @@ namespace PQ
                     X -= 10;
             }
 
-            RaiseKeyDownEvent(o, e);
+            RaiseKeyDownEvent(this, e);
         }
     }
 }

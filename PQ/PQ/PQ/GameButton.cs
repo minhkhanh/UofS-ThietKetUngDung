@@ -94,7 +94,7 @@ namespace PQ
             Rectangle bound = Bounds;
 
             Vector2 textVect = _font.MeasureString(_caption);
-            spriteBatch.DrawString(_font, _caption, new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y+3), Color.White);
+            spriteBatch.DrawString(_font, _caption, GlobalClass.SCALE * new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y+3), Color.White);
         }
 
         public override void Update(GameTime gameTime)
@@ -145,7 +145,7 @@ namespace PQ
                 _buttonState = new GameButtonDownState();
                 _buttonState.OnEnterState(this);
 
-                RaiseMouseDownEvent(o, e);
+                RaiseMouseDownEvent(this, e);
             }
         }
 
@@ -159,7 +159,7 @@ namespace PQ
                 _buttonState = new GameButtonUpState();
                 _buttonState.OnEnterState(this);
 
-                RaiseMouseUpEvent(o, e);
+                RaiseMouseUpEvent(this, e);
             }
         }
 
@@ -175,7 +175,7 @@ namespace PQ
                 _buttonState = new GameButtonHoverState();
                 _buttonState.OnEnterState(this);
 
-                RaiseMouseHoverEvent(o, e);
+                RaiseMouseHoverEvent(this, e);
             }
         }
 
@@ -191,7 +191,7 @@ namespace PQ
                 _buttonState = new GameButtonUpState();
                 _buttonState.OnEnterState(this);
 
-                RaiseMouseLeaveEvent(o, e);
+                RaiseMouseLeaveEvent(this, e);
             }
         }
     }

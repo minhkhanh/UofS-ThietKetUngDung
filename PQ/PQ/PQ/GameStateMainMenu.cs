@@ -43,8 +43,8 @@ namespace PQ
             //_bkgr = new Sprite2D(bkgrImg, 0, 0, details);
             _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
 
-            _bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
-                (float)_game.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
+            //_bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
+            //    (float)_game.GraphicsDevice.PresentationParameters.Bounds.Height / bkgrImg.Height);
 
             _sprites.Add(_bkgr);
         }
