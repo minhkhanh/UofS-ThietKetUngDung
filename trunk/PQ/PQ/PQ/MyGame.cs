@@ -143,13 +143,13 @@ namespace PQ
         {
             IsMouseVisible = true;
 
-            graphics.PreferredBackBufferWidth = 936;
-            graphics.PreferredBackBufferHeight = 702;
+            graphics.PreferredBackBufferWidth = (int)(1024 * GlobalClass.SCALE);
+            graphics.PreferredBackBufferHeight = (int)(768 * GlobalClass.SCALE);
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            _currState = new GameStateMainMenu(this);
+            _currState = new GameStateMiniGame(this);
 
             base.Initialize();
         }

@@ -71,6 +71,13 @@ namespace PQ
             return false;
         }
 
+        int Coord2Idx(int x, int y)
+        {
+
+
+            return -1;
+        }
+
         void gem_MouseUp(object o, GameMouseEventArgs e)
         {
             _upGem = o as Gem;
@@ -84,6 +91,7 @@ namespace PQ
         void gem_MouseDown(object o, GameMouseEventArgs e)
         {
             _downGem = o as Gem;
+
         }
 
         public void GenerateGems()
@@ -102,17 +110,14 @@ namespace PQ
             }
         }
 
-        public override void OnMouseDown(object o, GameMouseEventArgs e)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.OnMouseDown(o, e);
-        }
-
-        public override Rectangle Bounds
-        {
-            get
+            for (int i = 0; i < _gems.Count; ++i)
             {
-                return base.Bounds;
+                _gems[i].Draw(gameTime, spriteBatch);
             }
+
+            //spriteBatch.Draw(_gems[0].Sprites[0].Frames[0], new Vector2(X, Y), Color.White);
         }
     }
 }

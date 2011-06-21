@@ -191,7 +191,7 @@ namespace PQ
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_frames.Count != 0)
-                spriteBatch.Draw(_frames[CurrentFrame], Position, _srcRect, Color.White, _rotation, Vector2.Zero, _scale, _fliping, 0);
+                spriteBatch.Draw(_frames[CurrentFrame], Position * GlobalClass.SCALE, _srcRect, Color.White, _rotation, Vector2.Zero, _scale * GlobalClass.SCALE, _fliping, 0);
         }
 
         public void Pause()
