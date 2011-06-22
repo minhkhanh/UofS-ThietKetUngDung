@@ -9,22 +9,28 @@ namespace PQ
 {
     public enum Sprite2DName
     {
-        LongMainMenuButtonUp
+        SelectedGem,
     }
 
-    public class Sprite2DManager
+    public class Sprite2DManager: AbstractManager
     {
-        Dictionary<Sprite2DName, Sprite2D> _sprites = new Dictionary<Sprite2DName, Sprite2D>();
+        //Dictionary<Sprite2DName, Sprite2D> _sprites = new Dictionary<Sprite2DName, Sprite2D>();
 
-        public void InitPrototypes(ContentManager content)
+        public void LoadPrototypes(ContentManager content)
         {
-            //_sprites.Add(Sprite2DName.LongMainMenuButtonUp, 
-            //    new Sprite2D(new Texture2D[]{content.Load<Texture2D>(@"Images\Buttons\Long_Button_Main_Up.png")},0,0));
+            Texture2D txt2dBattleMisc = content.Load<Texture2D>(@"Images\Skin_Battle_Misc");
+            SplittingDetails details = new SplittingDetails(
+                1,1,0,0,
+                120,120,0,0,
+                224,78
+                );
+            Sprite2D sprite = new SelectedGemEffect(txt2dBattleMisc, 0, 0, details);
+            _prototypes.Add((int)Sprite2DName.SelectedGem, sprite);
         }
 
-        public Sprite2D CreateObject(Sprite2DName name)
+        public override object CreateObject(int idx)
         {
-            return null;
+            return (_prototypes[idx] as Sprite2D);
         }
     }
 }

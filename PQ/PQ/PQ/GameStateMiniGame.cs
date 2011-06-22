@@ -48,7 +48,7 @@ namespace PQ
             _gameObjects.Add(_backBtn);
 
             SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 3, 8, 3, 5);
-            _board = new PuzzleBoard(details, _game.GemManager);
+            _board = new PuzzleBoard(details, _game.GemManager, _game.SpriteManager);
             _board.X = 215;
             _board.Y = 128;
             _board.Reset();

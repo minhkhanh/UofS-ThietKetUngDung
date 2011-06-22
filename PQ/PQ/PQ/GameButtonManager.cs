@@ -8,11 +8,17 @@ using Microsoft.Xna.Framework;
 
 namespace PQ
 {
-    public class GameButtonManager : GameObjectManager
+    enum GameButtonnName
+    {
+        LongButton
+    }
+
+    public class GameButtonManager : AbstractManager
     {
         public override void LoadPrototypes(ContentManager content)
         {
-            _prototypes = new List<GameObject>();
+            //_prototypes = new List<object>();
+            _prototypes = new Dictionary<int, object>();
 
             SplittingDetails details = new SplittingDetails(1, 1, 5, 0, 300, 50, 0, 1, 0, 0);
             //details.SpaceX = 0;
@@ -42,7 +48,12 @@ namespace PQ
                 new Sprite2D[] { hoverSprite }
                 );
 
-            _prototypes.Add(tmpBtn);
+            _prototypes.Add((int)GameButtonnName.LongButton, tmpBtn);
+        }
+
+        public override object CreateObject(int idx)
+        {
+            return (_prototypes[idx] as GameButton).Clone();
         }
     }
 }

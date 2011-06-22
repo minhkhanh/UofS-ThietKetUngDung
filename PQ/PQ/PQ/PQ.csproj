@@ -111,6 +111,7 @@
   <ItemGroup>
     <Compile Include="GameBuilding.cs" />
     <Compile Include="GameBuildingManager.cs" />
+    <Compile Include="AbstractManager.cs" />
     <Compile Include="GameButtonManager.cs" />
     <Compile Include="GameFactory.cs" />
     <Compile Include="GameKeyEventArgs.cs" />
@@ -121,6 +122,8 @@
     <Compile Include="GameStateMiniGame.cs" />
     <Compile Include="Gem.cs" />
     <Compile Include="GemManager.cs" />
+    <Compile Include="GemSelectedState.cs" />
+    <Compile Include="GemState.cs" />
     <Compile Include="GlobalClass.cs" />
     <Compile Include="GreenGem.cs" />
     <Compile Include="HorizontalPlaneMotionModule.cs" />
@@ -136,6 +139,7 @@
     <Compile Include="GameButtonUpState.cs" />
     <Compile Include="GameDialog.cs" />
     <Compile Include="GameObjectManager.cs" />
+    <Compile Include="SelectedGemEffect.cs" />
     <Compile Include="SplittingDetails.cs" />
     <Compile Include="GlobalMap.cs" />
     <Compile Include="MapManager.cs" />

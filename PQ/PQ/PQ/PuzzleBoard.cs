@@ -21,11 +21,14 @@ namespace PQ
         Random _rand = new Random();
         List<Gem> _gems = new List<Gem>();
 
-        public PuzzleBoard(SplittingDetails details, GemManager gemManager)
+        SelectedGemEffect _selGemEffect;
+
+        public PuzzleBoard(SplittingDetails details, GemManager gemManager, Sprite2DManager spriteManager)
         {
             _gemManager = gemManager;
-
             _details = details;
+
+            _selGemEffect = spriteManager.CreateObject((int)Sprite2DName.SelectedGem) as SelectedGemEffect;
         }
 
         public void Reset()
@@ -51,9 +54,6 @@ namespace PQ
                     _gameObjects.Add(gem);
                 }
             }
-
-            //this.ManageObjects(_gems.ToArray());
-            //_gameObjects.AddRange(_gems);
         }
 
         /// <summary>
@@ -97,7 +97,11 @@ namespace PQ
         void gem_MouseDown(object o, GameMouseEventArgs e)
         {
             if (_gem1 == null)
+            {
                 _gem1 = o as Gem;
+                _selGemEffect.X = _gem1.X - Math.Abs((_selGemEffect.Width - _gem1.Width) / 2f);
+                _selGemEffect.Y = _gem1.Y - Math.Abs((_selGemEffect.Height - _gem1.Height) / 2f);
+            }
             else
             {
                 _gem2 = o as Gem;
@@ -165,13 +169,15 @@ namespace PQ
                     case Direction.Downward:
                         for (int d = rowIdx*_details.ColumnCount + colIdx; d < _details.RowCount * _details.ColumnCount; d += _details.ColumnCount)
                         {
+                            // check collision with stable gems
                             if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
                             {
+                                // stop moving when collided
                                 i.MotionModule.Stop();
-                                //--rowIdx;
                                 break;
                             }
                         }
+                        // if gem continues to move, stop it when out of table bound
                         if (i.MotionModule.IsMoving && i.Y + i.Height > this.Y + _details.InitMarginY + (_details.FrameHeight + _details.SpaceY)*_details.RowCount)
                             i.MotionModule.Stop();
 
@@ -190,7 +196,6 @@ namespace PQ
                         if (i.MotionModule.IsMoving && i.Y < this.Y)
                         {
                             i.MotionModule.Stop();
-                            //++rowIdx;
                         }
 
                         break;
@@ -201,14 +206,12 @@ namespace PQ
                             if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
                             {
                                 i.MotionModule.Stop();
-                                //--colIdx;
                                 break;
                             }
                         }
                         if (i.MotionModule.IsMoving && i.X + i.Width > this.X + _details.InitMarginX + (_details.FrameWidth + _details.SpaceX) * _details.ColumnCount)
                         {
                             i.MotionModule.Stop();
-                            //++colIdx;
                         }                        
 
                         break;
@@ -229,11 +232,24 @@ namespace PQ
                         break;
                 }
 
+                // if gem stopped, snap it to nearest cell
                 if (!i.MotionModule.IsMoving)
                 {
                     i.X = this.X + colIdx * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX;
                     i.Y = this.Y + rowIdx * (_details.FrameHeight + _details.SpaceY) + _details.InitMarginY;
                 }
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (_gem1 != null)
+            {
+                _selGemEffect.Rotation -= 0.05f;
+                if (_selGemEffect.Rotation < 0)
+                    _selGemEffect.Rotation += 360;
             }
         }
 
@@ -244,13 +260,10 @@ namespace PQ
                 _gems[i].Draw(gameTime, spriteBatch);
             }
 
-            //spriteBatch.Draw(_gems[0].Sprites[0].Frames[0], new Vector2(X, Y), Color.White);
-        }
-
-        public override void OnKeyDown(object o, GameKeyEventArgs e)
-        {
-            ++X;
-            base.OnKeyDown(o, e);
+            if (_gem1 != null)
+            {
+                _selGemEffect.Draw(gameTime, spriteBatch);
+            }
         }
     }
 }

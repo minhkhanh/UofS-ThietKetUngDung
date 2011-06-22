@@ -82,18 +82,21 @@ namespace PQ
             }
         }
 
-        public Vector2 Center
-        {
-            get
-            {
-                return new Vector2(X / 2, Y / 2);
-            }
-            set 
-            {
-                X = value.X - Bounds.Width / 2;
-                Y = value.Y - Bounds.Height / 2;
-            }
-        }
+        // use Bounds.Center instead
+        //public Vector2 Center
+        //{
+        //    get
+        //    {
+        //        Rectangle bound = Bounds;
+        //        return new Vector2(X + bound.Width/2f, Y + bound.Height/2f);
+        //    }
+        //    set 
+        //    {
+        //        Rectangle bound = Bounds;
+        //        X = value.X - bound.Width / 2f;
+        //        Y = value.Y - bound.Height / 2f;
+        //    }
+        //}
 
         public virtual GameObject Clone()
         {
