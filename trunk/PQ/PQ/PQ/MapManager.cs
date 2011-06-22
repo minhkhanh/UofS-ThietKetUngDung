@@ -9,8 +9,18 @@ using System.Data;
 
 namespace PQ
 {
-    public class MapManager : GameObjectManager
+    enum MapName
     {
+        GlobalMap
+    }
+
+    public class MapManager : AbstractManager
+    {
+        public override object CreateObject(int idx)
+        {
+            return _prototypes[idx];
+        }
+
         public override void LoadPrototypes(ContentManager content)
         {
             GlobalMap globalMap = new GlobalMap();
@@ -50,7 +60,7 @@ namespace PQ
             //        // "+ c" va "+ r" de thay ro map gom nhieu manh
             //    }
 
-            _prototypes.Add(globalMap);
+            _prototypes.Add((int)MapName.GlobalMap, globalMap);
 
             //TiledMap tiledMap = new TiledMap();
             //tiledMap.LoadMap(Directory.GetCurrentDirectory() + @"\SampleTiledMap.txt");

@@ -13,7 +13,7 @@ namespace PQ
 
         public virtual void InitPrototypes(ContentManager content)
         {
-
+            
         }
 
         public virtual Texture2D CreateObject(int idx)

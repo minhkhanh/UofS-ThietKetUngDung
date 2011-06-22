@@ -37,6 +37,16 @@ namespace PQ
             }
         }
 
+        public int Width
+        {
+            get { return Bounds.Width; }
+        }
+
+        public int Height
+        {
+            get { return Bounds.Height; }
+        }
+
         //protected float _frameWidth = 0;
         //protected float _frameHeight = 0;
 
@@ -46,10 +56,16 @@ namespace PQ
             get { return _scale; }
             set { _scale = value; }
         }
-        
+
         protected float _rotation = 0;
+
+        public float Rotation
+        {
+            get { return _rotation; }
+            set { _rotation = value; }
+        }
         protected SpriteEffects _fliping = SpriteEffects.None;
-        Nullable<Rectangle> _srcRect = null;
+        protected Rectangle? _srcRect = null;
 
         int _beginFrame = 0;
         public int BeginFrame
@@ -106,7 +122,7 @@ namespace PQ
             }
         }
 
-        List<Texture2D> _frames = new List<Texture2D>();
+        protected List<Texture2D> _frames = new List<Texture2D>();
         public List<Texture2D> Frames
         {
             get { return _frames; }
@@ -140,6 +156,18 @@ namespace PQ
             }
         }
 
+        // use Bounds.Center instead
+        //public Vector2 Center
+        //{
+        //    get 
+        //    {
+        //        Rectangle bound = Bounds;
+        //        return new Vector2(X + bound.Width / 2f, Y + bound.Height / 2f); 
+        //    }
+        //}
+
+        public Sprite2D() { }
+
         public Sprite2D(Sprite2D sprite)
         {
             _frames = sprite._frames;
@@ -165,7 +193,7 @@ namespace PQ
             //_frameHeight = frames[0].Height;
         }
 
-        public Sprite2D(Texture2D largeTxture, int x, int y, SplittingDetails details)
+        public Sprite2D(Texture2D largeTxture, float x, float y, SplittingDetails details)
         {
             _frames = GlobalClass.SplitImage(largeTxture, details);
 

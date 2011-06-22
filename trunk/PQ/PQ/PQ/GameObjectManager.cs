@@ -6,21 +6,21 @@ using Microsoft.Xna.Framework.Content;
 
 namespace PQ
 {
-    public abstract class GameObjectManager
+    public abstract class GameObjectManager: AbstractManager
     {
-        protected List<GameObject> _prototypes = new List<GameObject>();
+        //protected List<GameObject> _prototypes = new List<GameObject>();
 
-        public virtual GameObject CreateObject(int idx)
-        {
-            if (idx >= 0 && idx < _prototypes.Count)
-                return _prototypes[idx].Clone();
+        //public virtual GameObject CreateObject(int idx)
+        //{
+        //    if (idx >= 0 && idx < _prototypes.Count)
+        //        return _prototypes[idx].Clone();
 
-            return null;
-        }
+        //    return null;
+        //}
 
-        public virtual void LoadPrototypes(ContentManager content)
-        {
-            //_prototypeCount = 0;
-        }
+        //public virtual void LoadPrototypes(ContentManager content)
+        //{
+        //    //_prototypeCount = 0;
+        //}
     }
 }

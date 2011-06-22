@@ -57,6 +57,14 @@ namespace PQ
             get { return _gameBuildingManager; }
             set { _gameBuildingManager = value; }
         }
+        Sprite2DManager _spriteManager = new Sprite2DManager();
+
+        public Sprite2DManager SpriteManager
+        {
+            get { return _spriteManager; }
+            set { _spriteManager = value; }
+        }
+
         #endregion
 
         #region events
@@ -180,6 +188,7 @@ namespace PQ
             _gemManager.LoadPrototypes(Content);
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
+            _spriteManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()

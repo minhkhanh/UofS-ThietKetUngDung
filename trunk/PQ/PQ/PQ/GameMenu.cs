@@ -7,9 +7,5 @@ namespace PQ
 {
     public abstract class GameMenu : GameDialog
     {
-        public override GameObject Clone()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

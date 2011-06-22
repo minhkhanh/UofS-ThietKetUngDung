@@ -164,6 +164,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Images\Skin_Battle_Misc.png">
+      <Name>Skin_Battle_Misc</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>
       <Importer>XmlImporter</Importer>

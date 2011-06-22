@@ -7,11 +7,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
-    public class CharacterManager : GameObjectManager
+    enum CharacterName
+    {
+        MaleHeroKnight1,
+        MaleHeroKnight2
+    }
+
+    public class CharacterManager : AbstractManager
     {
         public override void LoadPrototypes(ContentManager content)
         {
-            _prototypes = new List<GameObject>();
+            //_prototypes = new List<object>();
+            _prototypes = new Dictionary<int, object>();
 
             SplittingDetails details = new SplittingDetails(4, 8, 0, 0, 49, 49, 0, 0, 0, 0);
 
@@ -22,12 +29,17 @@ namespace PQ
             GameEntity character = new Character();
             Texture2D tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
             character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details));
-            _prototypes.Add(character);
+            _prototypes.Add((int)CharacterName.MaleHeroKnight1, character);
 
             tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight2_49x49");
             character = new Character();
             character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details));
-            _prototypes.Add(character);
+            _prototypes.Add((int)CharacterName.MaleHeroKnight2, character);
+        }
+
+        public override object CreateObject(int idx)
+        {
+            return (_prototypes[idx] as Character).Clone();
         }
     }
 }

@@ -93,6 +93,11 @@ namespace PQ
             }
         }
 
+        public virtual void Initialize()
+        {
+
+        }
+
         public void ManageObjects(params GameObject[] gameObjs)
         {
             //_gameObjects.AddRange(gameObjs);
