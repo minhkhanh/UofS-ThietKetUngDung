@@ -71,9 +71,9 @@ namespace PQ
                 handler(o, e);
         }
 
-        void RaiseKeyEvent(EventHandler<GameKeyEventArgs> GameMouseEvent, object o, GameKeyEventArgs e)
+        void RaiseKeyEvent(EventHandler<GameKeyEventArgs> GameKeyEvent, object o, GameKeyEventArgs e)
         {
-            EventHandler<GameKeyEventArgs> handler = GameKeyDown;
+            EventHandler<GameKeyEventArgs> handler = GameKeyEvent;
             if (handler != null)
                 handler(o, e);
         }
@@ -99,6 +99,10 @@ namespace PQ
 
         void RaiseGameKeyEvents(KeyboardState kbState)
         {
+            Keys[] keys = kbState.GetPressedKeys();
+            if (keys.Count() == 0)
+                return;     // no keys down
+
             RaiseKeyEvent(GameKeyDown, this, new GameKeyEventArgs(kbState));
         }
 
@@ -131,6 +135,7 @@ namespace PQ
                 this.GameMouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
                 this.GameMouseHover += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseHover);
                 this.GameMouseLeave += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseLeave);
+                this.GameKeyDown += new EventHandler<GameKeyEventArgs>(gameObjs[i].OnKeyDown);
             }
         }
 
@@ -142,6 +147,7 @@ namespace PQ
                 this.GameMouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
                 this.GameMouseHover -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseHover);
                 this.GameMouseLeave -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseLeave);
+                this.GameKeyDown -= new EventHandler<GameKeyEventArgs>(gameObjs[i].OnKeyDown);
             }
         }
 
@@ -191,6 +197,9 @@ namespace PQ
                 this.Exit();
 
             MouseState msState = Mouse.GetState();
+            //MouseState newMs = new MouseState((int)(msState.X * GlobalClass.SCALE), (int)(msState.Y * GlobalClass.SCALE), msState.ScrollWheelValue,
+            //    msState.LeftButton, msState.MiddleButton, msState.RightButton, msState.XButton1, msState.XButton2
+            //    );
             RaiseGameMouseEvents(msState);
 
             KeyboardState kbState = Keyboard.GetState();

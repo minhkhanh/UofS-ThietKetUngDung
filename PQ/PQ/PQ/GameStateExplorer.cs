@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace PQ
 {
@@ -23,10 +25,47 @@ namespace PQ
         private Map _globalMap;
         public override void LoadContent()
         {
-            base.LoadContent();
             _globalMap = (GlobalMap) this._game.MapManager.CreateObject(0);
+            this.ManageObjects(_globalMap);
             this._gameObjects.Add(_globalMap);
         }
-        
+
+        public override void InitEvents()
+        {
+            _globalMap.KeyDown += new EventHandler<GameKeyEventArgs>(_globalMap_KeyDown);
+        }
+
+        void _globalMap_KeyDown(object o, GameKeyEventArgs e)
+        {
+            Rectangle gameBound = _game.GraphicsDevice.PresentationParameters.Bounds;
+            Rectangle mapBound = _globalMap.Bounds;
+            if (e.KeyboardState.IsKeyDown(Keys.Down))
+            {
+                if (mapBound.Bottom - 10 >= gameBound.Bottom)
+                    _globalMap.Y -= 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Up))
+            {
+                if (mapBound.Top + 10 <= gameBound.Top)
+                    _globalMap.Y += 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Left))
+            {
+                if (mapBound.Left + 10 <= gameBound.Left)
+                    _globalMap.X += 10;
+            }
+            if (e.KeyboardState.IsKeyDown(Keys.Right))
+            {
+                if (mapBound.Right - 10 >= gameBound.Right)
+                    _globalMap.X -= 10;
+            }
+        }
+
+        public override void UnloadContent()
+        {
+            base.UnloadContent();
+
+            _globalMap.Dispose();
+        }
     }
 }

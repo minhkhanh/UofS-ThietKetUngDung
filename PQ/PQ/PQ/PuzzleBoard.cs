@@ -246,5 +246,11 @@ namespace PQ
 
             //spriteBatch.Draw(_gems[0].Sprites[0].Frames[0], new Vector2(X, Y), Color.White);
         }
+
+        public override void OnKeyDown(object o, GameKeyEventArgs e)
+        {
+            ++X;
+            base.OnKeyDown(o, e);
+        }
     }
 }
