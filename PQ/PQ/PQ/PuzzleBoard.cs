@@ -247,7 +247,7 @@ namespace PQ
 
             if (_gem1 != null)
             {
-                _selGemEffect.Rotation -= 0.05f;
+                _selGemEffect.Rotation -= 0.02f;
                 if (_selGemEffect.Rotation < 0)
                     _selGemEffect.Rotation += 360;
             }
