@@ -12,7 +12,7 @@ namespace PQ
         Building1
     }
 
-    public class GameBuildingManager : GameObjectManager
+    public class GameBuildingManager : AbstractManager
     {
         public override void LoadPrototypes(ContentManager content)
         {
