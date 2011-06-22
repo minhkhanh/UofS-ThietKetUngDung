@@ -175,8 +175,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            //_currState = new GameStateMiniGame(this);
-            _currState = new GameStateExplorer(this);
+            _currState = new GameStateMiniGame(this);
+            //_currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
