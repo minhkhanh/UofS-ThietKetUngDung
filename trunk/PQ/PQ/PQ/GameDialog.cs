@@ -103,6 +103,7 @@ namespace PQ
 
                 this.MouseDown += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
+                this.KeyDown += new EventHandler<GameKeyEventArgs>(gameObjs[i].OnKeyDown);
             }
         }
 
@@ -111,7 +112,8 @@ namespace PQ
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
                 this.MouseDown -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
-                this.MouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);                
+                this.MouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
+                this.KeyDown -= new EventHandler<GameKeyEventArgs>(gameObjs[i].OnKeyDown);
             }
         }
 

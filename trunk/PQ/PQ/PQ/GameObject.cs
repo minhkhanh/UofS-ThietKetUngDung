@@ -274,7 +274,7 @@ namespace PQ
 
         public virtual void OnKeyDown(object o, GameKeyEventArgs e)
         {
-            // not yet
+            RaiseKeyDownEvent(this, e);
         }
 
         public virtual void OnMouseDown(object o, GameMouseEventArgs e)
