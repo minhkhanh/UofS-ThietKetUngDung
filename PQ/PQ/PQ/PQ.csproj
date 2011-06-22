@@ -109,6 +109,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameBuilding.cs" />
+    <Compile Include="GameBuildingManager.cs" />
     <Compile Include="GameButtonManager.cs" />
     <Compile Include="GameFactory.cs" />
     <Compile Include="GameKeyEventArgs.cs" />

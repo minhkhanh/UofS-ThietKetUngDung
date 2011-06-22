@@ -23,11 +23,17 @@ namespace PQ
         }
 
         private Map _globalMap;
+        List<GameBuilding> _listBuilding;
         public override void LoadContent()
         {
             _globalMap = (GlobalMap) this._game.MapManager.CreateObject(0);
             this.ManageObjects(_globalMap);
             this._gameObjects.Add(_globalMap);
+            _listBuilding = new List<GameBuilding>();
+            GameBuilding tmp = (GameBuilding)this._game.GameBuildingManager.CreateObject(0);
+            _listBuilding.Add(tmp);
+            this._gameObjects.Add(tmp);
+            tmp.Animate(25);
         }
 
         public override void InitEvents()

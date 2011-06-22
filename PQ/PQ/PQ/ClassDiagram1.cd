@@ -66,7 +66,7 @@
   <Class Name="PQ.GameDialog" Collapsed="true">
     <Position X="16" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAQAAQAIACAACgAAAAAAAAAACAAACACAAAAIAAAAYAA=</HashCode>
+      <HashCode>QAQAAQAIACAACgAAAAAAAAAACAAACACIAAAIAAAAYgA=</HashCode>
       <FileName>GameDialog.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -108,7 +108,7 @@
   <Class Name="PQ.GameObject" Collapsed="true">
     <Position X="10.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQYgBQAIgCBAwkAABggAAAQAAAJBGQAAIIBgAAgaYhA=</HashCode>
+      <HashCode>AQYgBQAIhCBQwkAgBggAAEQAABJBGQAAIIBgAAiaYhA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -137,7 +137,7 @@
   <Class Name="PQ.GameStateMiniGame" Collapsed="true">
     <Position X="21.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAQAAAAAQAAACAAAAAAAIAAAAAAAAAAAAAAAQ=</HashCode>
+      <HashCode>AAAAEAAAQAAAAAQAEACAAAAAAAIAAAAAAAAAAAAAAAQ=</HashCode>
       <FileName>GameStateMiniGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -151,7 +151,7 @@
   <Class Name="PQ.Gem" Collapsed="true">
     <Position X="8" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Gem.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -169,11 +169,11 @@
       <FileName>HorizontalPlaneMotionModule.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PQ.ImageSplittingDetails" Collapsed="true">
+  <Class Name="PQ.SplittingDetails" Collapsed="true">
     <Position X="27" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>IQAAAnAAMAACAAQAAAAAIABAQCAIAIAEgAAAAAgAAwA=</HashCode>
-      <FileName>ImageSplittingDetails.cs</FileName>
+      <FileName>SplittingDetails.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.MainMenu" Collapsed="true">
@@ -186,7 +186,7 @@
   <Class Name="PQ.Map" Collapsed="true">
     <Position X="4.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -200,7 +200,7 @@
   <Class Name="PQ.MyGame" Collapsed="true">
     <Position X="21.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QBQAEkAAUFAEAwDAIAQEAAAAAAAAAEgAAQAIQAAAgAQ=</HashCode>
+      <HashCode>QBUAFkAAUlAFAwDAIAQEAAAAAAAAAEgAAQAIQAAAgAQ=</HashCode>
       <FileName>MyGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -214,7 +214,7 @@
   <Class Name="PQ.PlaneMotionModule" Collapsed="true">
     <Position X="1.75" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAACAAAAAAAAAAIAAAAAAAAAoAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAABAABAACAAAAAAAAAAIAAAAAAAEAoAAAAAAAAAA=</HashCode>
       <FileName>PlaneMotionModule.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -270,22 +270,36 @@
   <Class Name="PQ.VerticalPlaneMotionModule" Collapsed="true">
     <Position X="0.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAgAAAAAAAAQAEAAAAAAAIAAAAAAAAAIAAACAAAAAA=</HashCode>
+      <HashCode>AAAgAAAABAAAQAEAAAAAAAIAAAAAAAEAIAAACAAAAAA=</HashCode>
       <FileName>VerticalPlaneMotionModule.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.PuzzleBoard" Collapsed="true">
     <Position X="16.75" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAACAAAAAAACAAAAACgAAAAAAAAAAA=</HashCode>
+      <HashCode>CAEQAQAAAACABgAAAABAAAAACAIAgICAAAAAAAAAAAQ=</HashCode>
       <FileName>PuzzleBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GameStateExplorer" Collapsed="true">
     <Position X="20" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAQAAAAAQAAABAAAAAAAAAAAIAAAAAAAAAAAQ=</HashCode>
       <FileName>GameStateExplorer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameBuilding" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameBuilding.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameBuildingManager">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>GameBuildingManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="PQ.GameOnMouseState" Collapsed="true">
