@@ -51,6 +51,12 @@ namespace PQ
             set { _gemManager = value; }
         }
 
+        GameBuildingManager _gameBuildingManager = new GameBuildingManager();
+        public PQ.GameBuildingManager GameBuildingManager
+        {
+            get { return _gameBuildingManager; }
+            set { _gameBuildingManager = value; }
+        }
         #endregion
 
         #region events
@@ -173,6 +179,7 @@ namespace PQ
             _fontManager.LoadPrototypes(Content);
             _gemManager.LoadPrototypes(Content);
             _mapManager.LoadPrototypes(Content);
+            _gameBuildingManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()
