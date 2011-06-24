@@ -9,6 +9,8 @@ namespace PQ
 {
     public abstract class GameDialog : GameWindow
     {
+        protected MyGame _game;
+
         protected List<GameObject> _gameObjects = new List<GameObject>();
         public virtual List<GameObject> Items
         {
@@ -26,7 +28,8 @@ namespace PQ
             {
                 float dx = value - base.X;
 
-                foreach (GameObject i in _gameObjects)
+                List<GameObject> allObjs = GetAllObjs();
+                foreach (GameObject i in allObjs)
                     i.X += dx;
 
                 base.X = value;
@@ -43,11 +46,19 @@ namespace PQ
             {
                 float dy = value - base.Y;
 
-                foreach (GameObject i in _gameObjects)
+                List<GameObject> allObjs = GetAllObjs();
+                foreach (GameObject i in allObjs)
                     i.Y += dy;
 
                 base.Y = value;
             }
+        }
+
+        public GameDialog() { }
+
+        public GameDialog(MyGame game)
+        {
+            _game = game;
         }
 
         /// <summary>
@@ -105,6 +116,7 @@ namespace PQ
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
                 //_gameObjects.Add(gameObjs[i]);
+                gameObjs[i].Parent = this;
 
                 this.MouseDown += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
@@ -116,6 +128,8 @@ namespace PQ
         {
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
+                gameObjs[i].Parent = null;
+
                 this.MouseDown -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp -= new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);
                 this.KeyDown -= new EventHandler<GameKeyEventArgs>(gameObjs[i].OnKeyDown);
@@ -135,7 +149,7 @@ namespace PQ
             for (int i = 0; i < allObjs.Count; ++i)
                 allObjs[i].Update(gameTime);
 
-            CheckCollision();
+            //CheckCollision();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
