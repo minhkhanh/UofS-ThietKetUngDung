@@ -27,7 +27,13 @@ namespace PQ
 
     public abstract class GameState: GameDialog
     {
-        protected MyGame _game;
+        private MyGame _game;
+
+        public MyGame MyGame
+        {
+            get { return _game; }
+            //set { _game = value; }
+        }
         public MyGame Game
         {
             get { return _game; }

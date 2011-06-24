@@ -59,7 +59,7 @@ namespace PQ
             //        globalMap.Sprites.Add(new Sprite2D(mapPiece, c*512, r*512, details));
             //        // "+ c" va "+ r" de thay ro map gom nhieu manh
             //    }
-
+            globalMap.UpdateChild();
             _prototypes.Add((int)MapName.GlobalMap, globalMap);
 
             //TiledMap tiledMap = new TiledMap();
