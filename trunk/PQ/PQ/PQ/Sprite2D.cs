@@ -80,6 +80,7 @@ namespace PQ
                     _beginFrame = value % FrameCount;
                     _currFrame = _beginFrame;
                 }
+                else _beginFrame = 0;
             }
         }
         int _directionCount = 0;
@@ -108,6 +109,7 @@ namespace PQ
                     //_endFrame = FrameCount - 1;
                 //else
                     _endFrame = value % FrameCount;
+                else _endFrame = FrameCount - 1;
             }
         }
 
