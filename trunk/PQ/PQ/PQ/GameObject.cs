@@ -326,6 +326,8 @@ namespace PQ
 
         #endregion
 
+        #region collision
+
         public bool BounRectCollide(GameObject obj)
         {
             return Bounds.Intersects(obj.Bounds);
@@ -336,5 +338,13 @@ namespace PQ
             return BounRectCollide(obj);
         }
 
+        #endregion
+
+        GameDialog _parent = null;
+        public GameDialog Parent
+        {
+            get { return _parent; }
+            set { _parent = value; }
+        }
     }
 }

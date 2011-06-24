@@ -7,21 +7,21 @@ using Microsoft.Xna.Framework.Content;
 
 namespace PQ
 {
-    public class SpriteFontManager
+    enum FontName
     {
-        List<SpriteFont> _fonts = new List<SpriteFont>();
+        Algerian,
+    }
 
-        public void LoadPrototypes(ContentManager content)
+    public class SpriteFontManager: AbstractManager
+    {
+        public override void LoadPrototypes(ContentManager content)
         {
-            _fonts.Add(content.Load<SpriteFont>(@"Fonts\Algerian"));
+            _prototypes.Add((int)FontName.Algerian, content.Load<SpriteFont>(@"Fonts\Algerian"));
         }
 
-        public SpriteFont CreateObject(int idx)
+        public override object CreateObject(int idx)
         {
-            if (idx < 0 || idx >= _fonts.Count)
-                return null;
-
-            return _fonts[idx];
+            return _prototypes[idx];
         }
     }
 }

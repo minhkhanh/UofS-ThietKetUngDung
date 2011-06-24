@@ -42,7 +42,7 @@ namespace PQ
 
             _backBtn = _game.ButtonManager.CreateObject(0) as GameButton;
             _backBtn.Caption = "BACK";
-            _backBtn.Font = _game.FontManager.CreateObject(0);
+            _backBtn.Font = _game.FontManager.CreateObject(0) as SpriteFont;
             _backBtn.X = _backBtn.Y = 10;
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);

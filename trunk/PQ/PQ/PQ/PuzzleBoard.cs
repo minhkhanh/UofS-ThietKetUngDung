@@ -232,7 +232,7 @@ namespace PQ
                         break;
                 }
 
-                // if gem stopped, snap it to nearest cell
+                // if gem stopped, snap it to nearest cell by its move direction
                 if (!i.MotionModule.IsMoving)
                 {
                     i.X = this.X + colIdx * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX;
@@ -241,29 +241,36 @@ namespace PQ
             }
         }
 
+        void CheckMove(Gem gem)
+        {
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            if (_gem1 != null)
+            if (_gem1 != null)      // one gem is selected, no gems are moving
             {
                 _selGemEffect.Rotation -= 0.02f;
                 if (_selGemEffect.Rotation < 0)
                     _selGemEffect.Rotation += 360;
             }
+            else
+                CheckCollision();
+
+
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < _gems.Count; ++i)
-            {
-                _gems[i].Draw(gameTime, spriteBatch);
-            }
+            base.Draw(gameTime, spriteBatch);
 
             if (_gem1 != null)
             {
                 _selGemEffect.Draw(gameTime, spriteBatch);
             }
         }
+
     }
 }

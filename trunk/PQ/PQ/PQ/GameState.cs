@@ -28,8 +28,6 @@ namespace PQ
     public abstract class GameState: GameDialog
     {
         //protected GameStateManager _manager;
-        protected MyGame _game;
-
         //protected GameStateId _stateId;
         public virtual GameStateId StateId
         {
@@ -38,12 +36,9 @@ namespace PQ
 
         protected Sprite2D _bkgr;
 
-        public GameState(MyGame game)
+        public GameState(MyGame game):
+            base(game)
         {
-            //_manager = manager;
-            //_stateId = GameStateId.None;
-
-            _game = game;
         }
 
         public virtual void LoadContent()

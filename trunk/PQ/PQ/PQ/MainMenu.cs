@@ -38,7 +38,7 @@ namespace PQ
             _okBtn.X = X;
             _okBtn.Y = Y;
             _okBtn.Caption = "ENTER";
-            _okBtn.Font = fontManager.CreateObject(0);
+            _okBtn.Font = fontManager.CreateObject(0) as SpriteFont;
 
             this.ManageObjects(_okBtn);
             _gameObjects.Add(_okBtn);
@@ -47,7 +47,7 @@ namespace PQ
             _exitBtn.X = X;
             _exitBtn.Y = _okBtn.Bounds.Bottom + 5;
             _exitBtn.Caption = "EXIT";
-            _exitBtn.Font = fontManager.CreateObject(0);
+            _exitBtn.Font = fontManager.CreateObject(0) as SpriteFont;
 
             this.ManageObjects(_exitBtn);
             _gameObjects.Add(_exitBtn);
