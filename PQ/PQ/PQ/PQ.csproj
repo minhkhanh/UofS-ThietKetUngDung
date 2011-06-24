@@ -157,6 +157,7 @@
     <Compile Include="GameWindow.cs" />
     <Compile Include="Sprite2DManager.cs" />
     <Compile Include="SpriteFontManager.cs" />
+    <Compile Include="SpriteText.cs" />
     <Compile Include="VerticalPlaneMotionModule.cs" />
   </ItemGroup>
   <ItemGroup>

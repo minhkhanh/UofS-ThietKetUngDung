@@ -65,6 +65,14 @@ namespace PQ
             set { _spriteManager = value; }
         }
 
+        CharacterManager _characterManager = new CharacterManager();
+
+        public CharacterManager CharacterManager
+        {
+            get { return _characterManager; }
+            set { _characterManager = value; }
+        }
+
         #endregion
 
         #region events
@@ -175,8 +183,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            _currState = new GameStateMiniGame(this);
-            //_currState = new GameStateExplorer(this);
+            //_currState = new GameStateMiniGame(this);
+            _currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -189,6 +197,7 @@ namespace PQ
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
             _spriteManager.LoadPrototypes(Content);
+            _characterManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()

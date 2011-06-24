@@ -19,5 +19,9 @@ namespace PQ
 
             return building;
         }
+        public override void Draw(Microsoft.Xna.Framework.GameTime gameTime, Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
+        }
     }
 }

@@ -169,6 +169,16 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Images\MaleHeroKnight1_49x49.png">
+      <Name>MaleHeroKnight1_49x49</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\MaleHeroKnight2_49x49.png">
+      <Name>MaleHeroKnight2_49x49</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>
       <Importer>XmlImporter</Importer>

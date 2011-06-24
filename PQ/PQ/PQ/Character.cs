@@ -24,5 +24,10 @@ namespace PQ
 
             return character;
         }
+        public int Direction
+        {
+            get { return this.Sprites[0].Direction; }
+            set { this.Sprites[0].Direction = value;}
+        }
     }
 }

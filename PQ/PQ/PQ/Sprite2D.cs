@@ -73,10 +73,28 @@ namespace PQ
             get { return _beginFrame; }
             set
             {
-                if (value < 0)
-                    _beginFrame = 0;
-                else
+                if (value >= 0)
+                // _beginFrame = 0;
+                //else
+                {
                     _beginFrame = value % FrameCount;
+                    _currFrame = _beginFrame;
+                }
+            }
+        }
+        int _directionCount = 0;
+        int _direction = 0;
+        public int Direction
+        {
+            get { return _direction; }
+            set 
+            { 
+                if (value>=0 && value<=_directionCount && _directionCount>0)
+                {
+                    _direction = value;
+                    BeginFrame = (_frames.Count / _directionCount) * _direction;
+                    EndFrame = BeginFrame + (_frames.Count / _directionCount) -1;
+                }                
             }
         }
 
@@ -86,9 +104,9 @@ namespace PQ
             get { return _endFrame; }
             set
             {
-                if (value < 0)
-                    _endFrame = FrameCount - 1;
-                else
+                if (value >= 0)
+                    //_endFrame = FrameCount - 1;
+                //else
                     _endFrame = value % FrameCount;
             }
         }
@@ -174,7 +192,8 @@ namespace PQ
 
             _x = sprite._x;
             _y = sprite._y;
-
+            _directionCount = sprite._directionCount;
+            Direction = 0;
             //_frameWidth = sprite._frameWidth;
             //_frameHeight = sprite._frameHeight;
         }
@@ -202,6 +221,19 @@ namespace PQ
 
             CurrentFrame = FrameCount - 1;
         }
+
+        public Sprite2D(Texture2D largeTxture, float x, float y, SplittingDetails details, int dirCount)
+        {
+            _frames = GlobalClass.SplitImage(largeTxture, details);
+
+            _x = x;
+            _y = y;            
+
+            CurrentFrame = FrameCount - 1;
+
+            _directionCount = dirCount;
+            Direction = 0;
+        }
         
         public virtual void Update(GameTime gameTime)
         {
@@ -212,7 +244,7 @@ namespace PQ
                 if (_currFrame == _endFrame)
                     _currFrame = _beginFrame;
                 else
-                    _currFrame = (_currFrame + 1) % FrameCount;
+                    _currFrame = (_currFrame + 1);// % (_endFrame - _beginFrame + 1);
             }
         }
 
