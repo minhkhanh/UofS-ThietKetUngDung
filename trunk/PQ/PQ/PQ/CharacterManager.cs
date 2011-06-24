@@ -28,12 +28,12 @@ namespace PQ
 
             GameEntity character = new Character();
             Texture2D tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
-            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details));
+            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
             _prototypes.Add((int)CharacterName.MaleHeroKnight1, character);
 
             tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight2_49x49");
             character = new Character();
-            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details));
+            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
             _prototypes.Add((int)CharacterName.MaleHeroKnight2, character);
         }
 

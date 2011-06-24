@@ -24,6 +24,7 @@ namespace PQ
 
         private Map _globalMap;
         List<GameBuilding> _listBuilding;
+        Character _character;
         public override void LoadContent()
         {
             _globalMap = (GlobalMap) this._game.MapManager.CreateObject(0);
@@ -34,6 +35,12 @@ namespace PQ
             _listBuilding.Add(tmp);
             this._gameObjects.Add(tmp);
             tmp.Animate(25);
+            _character = (Character)this._game.CharacterManager.CreateObject((int)CharacterName.MaleHeroKnight1);
+            _character.X = 100;
+            _character.Y = 100;
+            this._gameObjects.Add(_character);            
+            _character.Animate(12);
+            _character.Direction = 5;
         }
 
         public override void InitEvents()
@@ -48,22 +55,46 @@ namespace PQ
             if (e.KeyboardState.IsKeyDown(Keys.Down))
             {
                 if (mapBound.Bottom - 10 >= gameBound.Bottom)
+                {
                     _globalMap.Y -= 10;
+                    foreach (GameObject obj in _listBuilding)
+                    {
+                        obj.Y -= 10;
+                    }
+                }
             }
             if (e.KeyboardState.IsKeyDown(Keys.Up))
             {
                 if (mapBound.Top + 10 <= gameBound.Top)
+                {
                     _globalMap.Y += 10;
+                    foreach (GameObject obj in _listBuilding)
+                    {
+                        obj.Y += 10;
+                    }
+                }
             }
             if (e.KeyboardState.IsKeyDown(Keys.Left))
             {
                 if (mapBound.Left + 10 <= gameBound.Left)
+                {
                     _globalMap.X += 10;
+                    foreach (GameObject obj in _listBuilding)
+                    {
+                        obj.X += 10;
+                    }
+                }
             }
             if (e.KeyboardState.IsKeyDown(Keys.Right))
             {
                 if (mapBound.Right - 10 >= gameBound.Right)
+                {
                     _globalMap.X -= 10;
+                    foreach (GameObject obj in _listBuilding)
+                    {
+                        obj.X -= 10;
+                    }
+                }
             }
         }
 

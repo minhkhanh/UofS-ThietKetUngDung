@@ -24,7 +24,7 @@
   <Class Name="PQ.GameBuilding" Collapsed="true">
     <Position X="6.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>GameBuilding.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="PQ.GameDialog" Collapsed="true">
     <Position X="20.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAQAAQAIACAACwAAAAAAAAAACAAACACIAAAIAAAAYgA=</HashCode>
+      <HashCode>QAQAAQAIACAACwAAAAAAAAAACAAACACIAAAIAAAAYgQ=</HashCode>
       <FileName>GameDialog.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,7 +129,7 @@
   <Class Name="PQ.GameObject" Collapsed="true">
     <Position X="14" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQYgBQAIhCBQwkAgBggAAEQAABJBGQAAIIBgAAiSYhA=</HashCode>
+      <HashCode>AQYgBQAIhCBQwkAgBggAQEQQABJBGQAAIIBgAAiSYhA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -184,14 +184,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GemSelectedState" Collapsed="true">
-    <Position X="3.5" Y="13.75" Width="1.5" />
+    <Position X="7.25" Y="13.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>GemSelectedState.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GemState" Collapsed="true">
-    <Position X="3.5" Y="12.5" Width="1.5" />
+    <Position X="7.25" Y="12.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAABAAAAAAAAAAAAABAAAAAAAAAAAAAAAAQAAEAAAA=</HashCode>
       <FileName>GemState.cs</FileName>
@@ -270,7 +270,7 @@
   <Class Name="PQ.PuzzleBoard" Collapsed="true">
     <Position X="26.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAUQAQAAAACABgAAAABAAAAACAAAgICAAAAAAAQAAAQ=</HashCode>
+      <HashCode>CAUQAQAAAACABgAAAABABAAACAAAgICAAAAAAAQAAAQ=</HashCode>
       <FileName>PuzzleBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -310,7 +310,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.SpriteFontManager" Collapsed="true">
-    <Position X="32.5" Y="1.5" Width="1.5" />
+    <Position X="14.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgACAAAAAAAAAAA=</HashCode>
       <FileName>SpriteFontManager.cs</FileName>
@@ -321,6 +321,13 @@
     <TypeIdentifier>
       <HashCode>AAAgAAAABAAAQAEAAAAAAAIAAAAAAAEAIAAACAAAAAA=</HashCode>
       <FileName>VerticalPlaneMotionModule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.SpriteText" Collapsed="true">
+    <Position X="2.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpriteText.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="PQ.CharacterName" Collapsed="true">
