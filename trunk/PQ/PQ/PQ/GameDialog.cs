@@ -18,41 +18,41 @@ namespace PQ
             set { _gameObjects = value; }
         }
 
-        //public override float X
-        //{
-        //    get
-        //    {
-        //        return base.X;
-        //    }
-        //    set
-        //    {
-        //        float dx = value - base.X;
+        public override float X
+        {
+            get
+            {
+                return base.X;
+            }
+            set
+            {
+                float dx = value - base.X;
 
-        //        List<GameObject> allObjs = GetAllObjs();
-        //        foreach (GameObject i in allObjs)
-        //            i.X += dx;
+                List<GameObject> allObjs = GetAllObjs();
+                foreach (GameObject i in allObjs)
+                    i.X += dx;
 
-        //        base.X = value;
-        //    }
-        //}
+                base.X = value;
+            }
+        }
 
-        //public override float Y
-        //{
-        //    get
-        //    {
-        //        return base.Y;
-        //    }
-        //    set
-        //    {
-        //        float dy = value - base.Y;
+        public override float Y
+        {
+            get
+            {
+                return base.Y;
+            }
+            set
+            {
+                float dy = value - base.Y;
 
-        //        List<GameObject> allObjs = GetAllObjs();
-        //        foreach (GameObject i in allObjs)
-        //            i.Y += dy;
+                List<GameObject> allObjs = GetAllObjs();
+                foreach (GameObject i in allObjs)
+                    i.Y += dy;
 
-        //        base.Y = value;
-        //    }
-        //}
+                base.Y = value;
+            }
+        }
 
         //public GameDialog() { }
 

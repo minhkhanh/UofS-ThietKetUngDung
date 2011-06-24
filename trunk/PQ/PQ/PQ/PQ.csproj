@@ -137,6 +137,7 @@
     <Compile Include="HorizontalPlaneMotionModule.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="MovingPlaneMotionModule.cs" />
     <Compile Include="Particle2D.cs" />
     <Compile Include="PlaneMotionModule.cs" />
     <Compile Include="GameButton.cs" />

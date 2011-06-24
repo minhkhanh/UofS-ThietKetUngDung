@@ -10,7 +10,7 @@
   <Class Name="PQ.Character" Collapsed="true">
     <Position X="4" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAACACAACAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Character.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -137,14 +137,14 @@
   <Class Name="PQ.GameState" Collapsed="true">
     <Position X="17.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAAEAACQAAAAAQAQAAAAAAQAIAAAAAAAAoAQAACCAQ=</HashCode>
+      <HashCode>QAAAEAACQAAAAAQAQAAAAAAQAIgAAAAAAAoAQAACCAQ=</HashCode>
       <FileName>GameState.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GameStateExplorer" Collapsed="true">
     <Position X="15.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAQAAAAEQAAABAAAAAAAAAAAIAAAABAAAAAAQ=</HashCode>
+      <HashCode>AAAAEAAAQAAAAEQAAABAAAAAAAIAAAIAAAABAAAAAAQ=</HashCode>
       <FileName>GameStateExplorer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -172,7 +172,7 @@
   <Class Name="PQ.Gem" Collapsed="true">
     <Position X="9.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAEgAAAAAAAACAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Gem.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -186,7 +186,7 @@
   <Class Name="PQ.GemSelectedState" Collapsed="true">
     <Position X="7.25" Y="13.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
       <FileName>GemSelectedState.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -235,7 +235,7 @@
   <Class Name="PQ.Map" Collapsed="true">
     <Position X="2" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -249,7 +249,7 @@
   <Class Name="PQ.MyGame" Collapsed="true">
     <Position X="34.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QBUAFlAAUlAFAwDgIAQEAAACAAAACEgAAQAIQAACgAQ=</HashCode>
+      <HashCode>QBUAFlAAUlAFAwDgIAQEAAASAAAACEgAIQAIQAACgIQ=</HashCode>
       <FileName>MyGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -270,7 +270,7 @@
   <Class Name="PQ.PuzzleBoard" Collapsed="true">
     <Position X="26.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAUQAQAAAACABgAAAABABAAACAAAgICAAAAAAAQAAAQ=</HashCode>
+      <HashCode>CAQQAQAAAACABgAAAABABAAACAAAgICAAAAAAAQAAAQ=</HashCode>
       <FileName>PuzzleBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -317,7 +317,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.VerticalPlaneMotionModule" Collapsed="true">
-    <Position X="10.75" Y="10.75" Width="1.5" />
+    <Position X="12.5" Y="10.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAgAAAABAAAQAEAAAAAAAIAAAAAAAEAIAAACAAAAAA=</HashCode>
       <FileName>VerticalPlaneMotionModule.cs</FileName>
@@ -328,6 +328,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>SpriteText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.MovingPlaneMotionModule">
+    <Position X="10.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgQAAAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAgAAA=</HashCode>
+      <FileName>MovingPlaneMotionModule.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="PQ.CharacterName" Collapsed="true">
@@ -375,7 +382,7 @@
   <Enum Name="PQ.GemName" Collapsed="true">
     <Position X="34.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAIAEAAAAAAEAAAAAQAAAAAAJgQAUgoAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAIAEAAAAAAEAAAAAQAAAAAAJgQAUgoAAAEAAAA=</HashCode>
       <FileName>GemManager.cs</FileName>
     </TypeIdentifier>
   </Enum>
@@ -396,7 +403,7 @@
   <Enum Name="PQ.Sprite2DName" Collapsed="true">
     <Position X="30.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
       <FileName>Sprite2DManager.cs</FileName>
     </TypeIdentifier>
   </Enum>

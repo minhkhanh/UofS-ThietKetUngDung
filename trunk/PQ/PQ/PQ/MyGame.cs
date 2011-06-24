@@ -195,8 +195,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            //_currState = new GameStateMiniGame(this);
-            _currState = new GameStateExplorer(this);
+            _currState = new GameStateMiniGame(this);
+            //_currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -218,7 +218,7 @@ namespace PQ
 
             LoadManagers();
 
-            _gameHero = _characterManager.CreateObject((int)CharacterName.HeroKnightMale1) as Character;
+            _gameHero = _characterManager.CreateObject((int)CharacterName.MaleHeroKnight1) as Character;
 
             _currState.StartState();
         }
@@ -226,8 +226,12 @@ namespace PQ
         protected override void UnloadContent()
         {
             
-        }        
-
+        }
+        float fFPS = 0;
+        public float FPS
+        {
+            get { return fFPS; }
+        }
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -246,6 +250,8 @@ namespace PQ
             _currState.Update(gameTime);
 
             base.Update(gameTime);
+
+            fFPS = gameTime.ElapsedGameTime.Milliseconds;
         }
 
         protected override void Draw(GameTime gameTime)

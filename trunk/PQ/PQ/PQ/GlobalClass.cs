@@ -56,5 +56,7 @@ namespace PQ
         }
 
         public static float SCALE = 1f;  // must equals to 1 currently
+
+        public static float CharacterMovingSpeed = 50f;
     }
 }

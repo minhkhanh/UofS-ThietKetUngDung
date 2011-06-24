@@ -108,34 +108,39 @@ namespace PQ
         public virtual float X
         {
             get { return LogicalX; }
-            //set 
-            //{
-            //    float dx = value - x;
+            set 
+            {
+                float dx = value - LogicalX;
 
-            //    List<Sprite2D> allSprites = GetAllSprites();
-            //    foreach (Sprite2D i in allSprites)
-            //        i.X += dx;
+                List<Sprite2D> allSprites = GetAllSprites();
+                foreach (Sprite2D i in allSprites)
+                    i.X += dx;
 
-            //    x = value;
-            //}
-            set { LogicalX = value; }
+                //x = value;
+                LogicalX = value;
+            }
+            //set { LogicalX = value; }
         }
         public virtual float Y
         {
             get { return LogicalY; }
-            //set 
-            //{
-            //    float dy = value - y;
+            set 
+            {
+                float dy = value - LogicalY;
 
-            //    List<Sprite2D> allSprites = GetAllSprites();
-            //    foreach (Sprite2D i in allSprites)
-            //        i.Y += dy;
+                List<Sprite2D> allSprites = GetAllSprites();
+                foreach (Sprite2D i in allSprites)
+                    i.Y += dy;
 
-            //    y = value;
-            //}
-            set { LogicalY = value; }
+                //y = value;
+                LogicalY = value;
+            }
+            //set { LogicalY = value; }
         }
+        //public Vector2 ConvertPhysical2Logical(Vector2 physical)
+        //{
 
+        //}
         //public Vector2 Position
         //{
         //    get { return new Vector2(X, Y); }

@@ -34,5 +34,15 @@ namespace PQ
             get { return this.Sprites[0].Direction; }
             set { this.Sprites[0].Direction = value;}
         }
+
+        public void GoToLogicalXY(float fX, float fY)
+        {
+            Vector2 v = new Vector2(fX - LogicalX, fY - LogicalY);
+            float fTime = v.Length() / GlobalClass.CharacterMovingSpeed;
+            v.Normalize();
+            v *= GlobalClass.CharacterMovingSpeed;
+            MotionModule = new MovingPlaneMotionModule(v.X, v.Y, fTime);
+            MotionModule.Play();
+        }
     }
 }
