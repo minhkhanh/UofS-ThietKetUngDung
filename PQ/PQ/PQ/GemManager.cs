@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace PQ
 {
     // GemName enum below is listed by loading order of gem images in the GemManager
-    enum GemName
+    public enum GemName
     {
         GreenGem,
         X2Gem,
@@ -23,7 +23,8 @@ namespace PQ
         PurpleGem,
         X7Gem,
         GoldGem,
-        X8Gem
+        X8Gem,
+        None
     }
 
     public class GemManager: AbstractManager

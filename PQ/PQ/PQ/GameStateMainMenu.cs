@@ -33,12 +33,12 @@ namespace PQ
 
         public override void LoadContent()
         {
-            _mainMenu = new MainMenu(_game.GraphicsDevice.PresentationParameters.Bounds.Width, 300);
-            _mainMenu.Init(_game.ButtonManager, _game.FontManager);
+            _mainMenu = new MainMenu(Game.GraphicsDevice.PresentationParameters.Bounds.Width, 300);
+            _mainMenu.Init(Game.ButtonManager, Game.FontManager);
             this.ManageObjects(_mainMenu);
             _gameObjects.Add(_mainMenu);
 
-            Texture2D bkgrImg = _game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Standard");
+            Texture2D bkgrImg = Game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Standard");
             //ImageSplittingDetails details = new ImageSplittingDetails(1, 1, 0, 0, bkgrImg.Width, bkgrImg.Height, 0, 0, 0, 0);
             //_bkgr = new Sprite2D(bkgrImg, 0, 0, details);
             _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
@@ -57,12 +57,12 @@ namespace PQ
 
         public void ExitButton_MouseClick(object o, GameMouseEventArgs e)
         {
-            _game.Exit();
+            Game.Exit();
         }
 
         public void OKButton_MouseClick(object o, GameMouseEventArgs e)
         {
-            _game.SwitchState(new GameStateMiniGame(_game));
+            Game.SwitchState(new GameStateMiniGame(Game));
         }
 
         public override void UnloadContent()

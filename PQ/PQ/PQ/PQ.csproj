@@ -109,6 +109,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterStats.cs" />
     <Compile Include="GameBuilding.cs" />
     <Compile Include="GameBuildingManager.cs" />
     <Compile Include="AbstractManager.cs" />
@@ -123,12 +124,20 @@
     <Compile Include="Gem.cs" />
     <Compile Include="GemManager.cs" />
     <Compile Include="GemSelectedState.cs" />
+    <Compile Include="GemColorState.cs" />
     <Compile Include="GemState.cs" />
+    <Compile Include="GemUnselectState.cs" />
     <Compile Include="GlobalClass.cs" />
     <Compile Include="GreenGem.cs" />
+    <Compile Include="HeroDruidMale1.cs" />
+    <Compile Include="HeroDruidFemale1.cs" />
+    <Compile Include="HeroKnightFemale1.cs" />
+    <Compile Include="HeroKnightMale1.cs" />
+    <Compile Include="HeroKnightMale2.cs" />
     <Compile Include="HorizontalPlaneMotionModule.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Particle2D.cs" />
     <Compile Include="PlaneMotionModule.cs" />
     <Compile Include="GameButton.cs" />
     <Compile Include="Character.cs" />

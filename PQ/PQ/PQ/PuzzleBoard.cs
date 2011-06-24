@@ -16,19 +16,18 @@ namespace PQ
         Gem _gem1 = null;
         Gem _gem2 = null;
 
-        GemManager _gemManager;
+        //GemManager _gemManager;
 
         Random _rand = new Random();
         List<Gem> _gems = new List<Gem>();
 
         SelectedGemEffect _selGemEffect;
 
-        public PuzzleBoard(SplittingDetails details, GemManager gemManager, Sprite2DManager spriteManager)
+        public PuzzleBoard(SplittingDetails details, Sprite2DManager spriteManager)
         {
-            _gemManager = gemManager;
             _details = details;
 
-            _selGemEffect = spriteManager.CreateObject((int)Sprite2DName.SelectedGem) as SelectedGemEffect;
+            _selGemEffect = spriteManager.CreateObject((int)Sprite2DName.SelectedGemEffect) as SelectedGemEffect;
         }
 
         public void Reset()
@@ -42,7 +41,7 @@ namespace PQ
                 for (int c = 0; c < _details.ColumnCount; ++c)
                 {
                     int gemIdx = _rand.Next(14);
-                    Gem gem = _gemManager.CreateObject(gemIdx) as Gem;
+                    Gem gem = Parent.Game.GemManager.CreateObject(gemIdx) as Gem;
 
                     gem.X = this.X + c * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX;
                     gem.Y = this.Y + r * (_details.FrameHeight + _details.SpaceY) + _details.InitMarginY;
@@ -241,8 +240,62 @@ namespace PQ
             }
         }
 
-        void CheckMove(Gem gem)
+        void CheckMove(Gem gem, Direction movDirect)
         {
+            List<Gem> gemInRow = new List<Gem>();
+            Point gemCoord = GetGemCoord(gem);
+
+            switch (movDirect)
+            {
+                case Direction.Downward:
+                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d < _details.RowCount * _details.ColumnCount; d += _details.ColumnCount)
+                    {
+                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
+                        {
+                            gemInRow.Add(_gems[d]);
+                        }
+                        else
+                            break;
+                    }
+                    break;
+
+                case Direction.Upward:
+                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d >= 0; d -= _details.ColumnCount)
+                    {
+                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
+                        {
+                            gemInRow.Add(_gems[d]);
+                        }
+                        else
+                            break;
+                    }
+                    break;
+
+                case Direction.Rightward:
+                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d < (gemCoord.X + 1) * _details.ColumnCount; ++d)
+                    {
+                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
+                        {
+                            gemInRow.Add(_gems[d]);
+                        }
+                        else
+                            break;
+                    }
+                    break;
+
+                case Direction.Leftward:
+                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d >= gemCoord.X * _details.ColumnCount; --d)
+                    {
+                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
+                        {
+                            gemInRow.Add(_gems[d]);
+                        }
+                        else
+                            break;
+                    }
+                    break;
+            }
+
 
         }
 

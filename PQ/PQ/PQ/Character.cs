@@ -12,6 +12,8 @@ namespace PQ
 {
     public class Character : GameEntity
     {
+        protected CharacterStats _stats;
+
         public override GameObject Clone()
         {
             Character character = new Character();
@@ -24,6 +26,7 @@ namespace PQ
 
             return character;
         }
+
         public int Direction
         {
             get { return this.Sprites[0].Direction; }

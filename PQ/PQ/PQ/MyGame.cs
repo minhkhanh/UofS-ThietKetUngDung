@@ -143,6 +143,18 @@ namespace PQ
 
         #endregion
 
+        #region main character
+
+        Character _gameHero;
+
+        public Character GameHero
+        {
+            get { return _gameHero; }
+            set { _gameHero = value; }
+        }
+
+        #endregion
+
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -206,8 +218,8 @@ namespace PQ
 
             LoadManagers();
 
-            //_gameStateManager.EnterCurrentState();
-            //_gameStateManager.CurrentGameState.StartState();
+            _gameHero = _characterManager.CreateObject((int)CharacterName.HeroKnightMale1) as Character;
+
             _currState.StartState();
         }
 

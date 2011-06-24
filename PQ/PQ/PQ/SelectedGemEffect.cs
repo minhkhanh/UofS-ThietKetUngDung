@@ -25,7 +25,7 @@ namespace PQ
             if (_frames.Count != 0)
             {
                 //Vector2 rotOrigin = new Vector2(Width/2, Height/2);
-                spriteBatch.Draw(_frames[CurrentFrame], Position * GlobalClass.SCALE + RotationOrigin, _srcRect, Color.White, _rotation, RotationOrigin, _scale * GlobalClass.SCALE, _fliping, 0);
+                spriteBatch.Draw(_frames[CurrentFrame], Position * GlobalClass.SCALE + RotationOrigin, _srcRect, Color.White, _rotation, RotationOrigin, _scale * GlobalClass.SCALE, _fliping, 1);
             }
         }
     }
