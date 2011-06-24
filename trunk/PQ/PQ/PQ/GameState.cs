@@ -27,6 +27,7 @@ namespace PQ
 
     public abstract class GameState: GameDialog
     {
+        protected MyGame _game;
         //protected GameStateManager _manager;
         //protected GameStateId _stateId;
         public virtual GameStateId StateId
@@ -36,9 +37,9 @@ namespace PQ
 
         protected Sprite2D _bkgr;
 
-        public GameState(MyGame game):
-            base(game)
+        public GameState(MyGame game)
         {
+            _game = game;
         }
 
         public virtual void LoadContent()
@@ -96,6 +97,16 @@ namespace PQ
             UnloadContent();
         }
 
-        #endregion                
+        #endregion      
+        
+        public override void ManageObjects(params GameObject[] gameObjs)
+        {
+            base.ManageObjects(gameObjs);
+
+            foreach (GameObject i in gameObjs)
+            {
+                i.Parent = this;
+            }
+        }
     }
 }

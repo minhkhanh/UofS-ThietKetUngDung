@@ -9,7 +9,7 @@ namespace PQ
 {
     public abstract class GameDialog : GameWindow
     {
-        protected MyGame _game;
+        //protected MyGame _game;
 
         protected List<GameObject> _gameObjects = new List<GameObject>();
         public virtual List<GameObject> Items
@@ -54,12 +54,7 @@ namespace PQ
             }
         }
 
-        public GameDialog() { }
-
-        public GameDialog(MyGame game)
-        {
-            _game = game;
-        }
+        //public GameDialog() { }
 
         /// <summary>
         /// Get all child objects that being held by this object
@@ -109,14 +104,14 @@ namespace PQ
 
         }
 
-        public void ManageObjects(params GameObject[] gameObjs)
+        public virtual void ManageObjects(params GameObject[] gameObjs)
         {
             //_gameObjects.AddRange(gameObjs);
 
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
                 //_gameObjects.Add(gameObjs[i]);
-                gameObjs[i].Parent = this;
+                //gameObjs[i].Parent = this;
 
                 this.MouseDown += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);

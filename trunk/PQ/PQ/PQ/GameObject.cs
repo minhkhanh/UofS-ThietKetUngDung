@@ -340,8 +340,8 @@ namespace PQ
 
         #endregion
 
-        GameDialog _parent = null;
-        public GameDialog Parent
+        GameState _parent = null;
+        public GameState Parent
         {
             get { return _parent; }
             set { _parent = value; }
