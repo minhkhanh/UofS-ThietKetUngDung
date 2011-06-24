@@ -340,7 +340,7 @@ namespace PQ
 
         #endregion
 
-        GameState _parent = null;
+        protected GameState _parent = null;
         public GameState Parent
         {
             get { return _parent; }

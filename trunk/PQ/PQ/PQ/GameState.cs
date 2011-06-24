@@ -28,6 +28,11 @@ namespace PQ
     public abstract class GameState: GameDialog
     {
         protected MyGame _game;
+        public MyGame Game
+        {
+            get { return _game; }
+            set { _game = value; }
+        }
         //protected GameStateManager _manager;
         //protected GameStateId _stateId;
         public virtual GameStateId StateId

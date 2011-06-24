@@ -32,7 +32,7 @@ namespace PQ
 
         public override void LoadContent()
         {
-            Texture2D bkgrImg = _game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Battle");
+            Texture2D bkgrImg = Game.Content.Load<Texture2D>(@"Images\Skin_Backdrop_Battle");
             _bkgr = new Sprite2D(new List<Texture2D> { bkgrImg }, 0, 0);
 
             //_bkgr.Scale = new Vector2((float)_game.GraphicsDevice.PresentationParameters.Bounds.Width / bkgrImg.Width,
@@ -40,20 +40,20 @@ namespace PQ
 
             _sprites.Add(_bkgr);
 
-            _backBtn = _game.ButtonManager.CreateObject(0) as GameButton;
+            _backBtn = Game.ButtonManager.CreateObject(0) as GameButton;
             _backBtn.Caption = "BACK";
-            _backBtn.Font = _game.FontManager.CreateObject(0) as SpriteFont;
+            _backBtn.Font = Game.FontManager.CreateObject(0) as SpriteFont;
             _backBtn.X = _backBtn.Y = 10;
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);
 
             SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 3, 8, 3, 5);
-            _board = new PuzzleBoard(details, _game.GemManager, _game.SpriteManager);
-            _board.X = 215;
-            _board.Y = 128;
-            _board.Reset();
+            _board = new PuzzleBoard(details, Game.SpriteManager);
             this.ManageObjects(_board);
             _gameObjects.Add(_board);
+            _board.X = 215;
+            _board.Y = 128;
+            _board.Reset();            
         }
 
         public override void InitEvents()
@@ -63,7 +63,7 @@ namespace PQ
 
         public void _backBtn_MouseClick(object o, GameMouseEventArgs e)
         {
-            _game.SwitchState(new GameStateMainMenu(_game));
+            Game.SwitchState(new GameStateMainMenu(Game));
         }
 
         public override void UnloadContent()

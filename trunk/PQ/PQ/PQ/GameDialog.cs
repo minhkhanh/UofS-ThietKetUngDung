@@ -110,8 +110,7 @@ namespace PQ
 
             for (int i = 0; i < gameObjs.Count(); ++i)
             {
-                //_gameObjects.Add(gameObjs[i]);
-                //gameObjs[i].Parent = this;
+                gameObjs[i].Parent = _parent;
 
                 this.MouseDown += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseDown);
                 this.MouseUp += new EventHandler<GameMouseEventArgs>(gameObjs[i].OnMouseUp);

@@ -7,11 +7,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
-    public class GemSelectedState: GemState
+    public class GemSelectedState: GemColorState
     {
+        public GemSelectedState(Gem gem)
+        {
+        }
+
         public override void OnUpdate(Gem gem, GameTime gameTime)
         {
-            
+        }
+
+        public override void OnDraw(Gem gem, GameTime gameTime, SpriteBatch spriteBatch)
+        {
+
         }
     }
 }

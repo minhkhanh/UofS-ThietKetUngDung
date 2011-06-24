@@ -9,14 +9,14 @@ namespace PQ
 {
     public enum Sprite2DName
     {
-        SelectedGem,
+        SelectedGemEffect,
     }
 
     public class Sprite2DManager: AbstractManager
     {
         //Dictionary<Sprite2DName, Sprite2D> _sprites = new Dictionary<Sprite2DName, Sprite2D>();
 
-        public void LoadPrototypes(ContentManager content)
+        public override void LoadPrototypes(ContentManager content)
         {
             Texture2D txt2dBattleMisc = content.Load<Texture2D>(@"Images\Skin_Battle_Misc");
             SplittingDetails details = new SplittingDetails(
@@ -25,7 +25,7 @@ namespace PQ
                 224,78
                 );
             Sprite2D sprite = new SelectedGemEffect(txt2dBattleMisc, 0, 0, details);
-            _prototypes.Add((int)Sprite2DName.SelectedGem, sprite);
+            _prototypes.Add((int)Sprite2DName.SelectedGemEffect, sprite);
         }
 
         public override object CreateObject(int idx)
