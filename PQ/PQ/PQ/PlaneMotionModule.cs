@@ -32,10 +32,18 @@ namespace PQ
             _vx = vx;
             _vy = vy;
         }
-
+        public virtual void Play()
+        {
+        }
+        public virtual void Play(float fTime)
+        {
+        }
+        public virtual void Pause()
+        {
+        }
         public virtual void Stop()
         {
-
+            _vx = _vy = 0;
         }
 
         public virtual void OnMotion(GameObject gameObj, GameTime gameTime)
