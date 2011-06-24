@@ -137,10 +137,12 @@ namespace PQ
             }
             //set { LogicalY = value; }
         }
-        //public Vector2 ConvertPhysical2Logical(Vector2 physical)
-        //{
-
-        //}
+        public Vector2 ConvertPhysical2Logical(Vector2 physical)
+        {
+            Vector2 v = new Vector2(PhysicalX, PhysicalY);
+            v = physical - v;
+            return v;
+        }
         //public Vector2 Position
         //{
         //    get { return new Vector2(X, Y); }

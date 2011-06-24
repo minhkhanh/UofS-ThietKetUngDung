@@ -38,11 +38,18 @@ namespace PQ
         public void GoToLogicalXY(float fX, float fY)
         {
             Vector2 v = new Vector2(fX - LogicalX, fY - LogicalY);
-            float fTime = v.Length() / GlobalClass.CharacterMovingSpeed;
+            Vector2 v2 = new Vector2(-Width / 2, -Height / 2);
+            v = v + v2;
+            float fLen = v.Length();
             v.Normalize();
             v *= GlobalClass.CharacterMovingSpeed;
-            MotionModule = new MovingPlaneMotionModule(v.X, v.Y, fTime);
+            MotionModule = new MovingPlaneMotionModule(v.X, v.Y, fLen);
             MotionModule.Play();
         }
+        //public void GoToPhysicalXY(float fX, float fY)
+        //{
+        //    Vector2 v = this.ConvertPhysical2Logical(new Vector2(fX, fY));
+        //    GoToLogicalXY(v.X, v.Y);
+        //}
     }
 }
