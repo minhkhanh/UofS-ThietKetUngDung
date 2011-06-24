@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace PQ
 {
@@ -16,7 +17,7 @@ namespace PQ
         public override void Play(float fTime)
         {
             _bPlay = true;
-            _timeMoving = fTime;
+            _lenMoving = fTime;
             _fTimeOld = 0;
         }
         public override void Pause()
@@ -24,17 +25,17 @@ namespace PQ
             _bPlay = false;
             _fTimeOld = 0;
         }
-        double _timeMoving = 0;
+        double _lenMoving = 0;
 
-        public double FrameTickMoving
+        public double LenMoving
         {
-            get { return _timeMoving; }
-            set { _timeMoving = value; }
+            get { return _lenMoving; }
+            set { _lenMoving = value; }
         }
-        public MovingPlaneMotionModule(float vx, float vy, double fTime)
+        public MovingPlaneMotionModule(float vx, float vy, double fLen)
             : base(vx, vy)
         {
-            _timeMoving = fTime;
+            _lenMoving = fLen;
         }
         public override bool IsMoving
         {
@@ -46,16 +47,17 @@ namespace PQ
         double _fTimeOld = 0;
         public override void OnMotion(GameObject gameObj, Microsoft.Xna.Framework.GameTime gameTime)
         {
-            if (!_bPlay || _timeMoving <= 0)
+            if (!_bPlay || _lenMoving <= 0)
             {
                 _bPlay = false;
                 return;
             }
             if (_fTimeOld>0)
             {
-                _timeMoving -= (gameTime.TotalGameTime.TotalSeconds - _fTimeOld);
-                gameObj.LogicalX += (float)(Vx * (gameTime.TotalGameTime.TotalSeconds - _fTimeOld));
-                gameObj.LogicalY += (float)(Vy * (gameTime.TotalGameTime.TotalSeconds - _fTimeOld));
+                Vector2 l = new Vector2((float)(Vx * (gameTime.TotalGameTime.TotalSeconds - _fTimeOld)),(float)(Vy * (gameTime.TotalGameTime.TotalSeconds - _fTimeOld)));
+                _lenMoving -= l.Length();
+                gameObj.LogicalX += l.X;
+                gameObj.LogicalY += l.Y;
             }
             _fTimeOld = gameTime.TotalGameTime.TotalSeconds;
         }

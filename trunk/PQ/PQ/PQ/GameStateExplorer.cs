@@ -48,9 +48,11 @@ namespace PQ
 
         public override void InitEvents()
         {
-            //_globalMap.KeyDown += new EventHandler<GameKeyEventArgs>(_globalMap_KeyDown);
+            this.MouseUp += new EventHandler<GameMouseEventArgs>(GameStateExplorer_MouseUp);
+            this.KeyDown += new EventHandler<GameKeyEventArgs>(GameStateExplorer_KeyDown);
         }
-        public override void OnKeyDown(object o, GameKeyEventArgs e)
+
+        void GameStateExplorer_KeyDown(object sender, GameKeyEventArgs e)
         {
             Rectangle gameBound = MyGame.GraphicsDevice.PresentationParameters.Bounds;
             Rectangle mapBound = Bounds;
@@ -83,54 +85,11 @@ namespace PQ
                 }
             }
         }
-        void _globalMap_KeyDown(object o, GameKeyEventArgs e)
+
+        void GameStateExplorer_MouseUp(object sender, GameMouseEventArgs e)
         {
-            Rectangle gameBound = MyGame.GraphicsDevice.PresentationParameters.Bounds;
-            Rectangle mapBound = _globalMap.Bounds;
-            if (e.KeyboardState.IsKeyDown(Keys.Down))
-            {
-                if (mapBound.Bottom - 10 >= gameBound.Bottom)
-                {
-                    _globalMap.Y -= 10;
-                    foreach (GameObject obj in _listBuilding)
-                    {
-                        obj.Y -= 10;
-                    }
-                }
-            }
-            if (e.KeyboardState.IsKeyDown(Keys.Up))
-            {
-                if (mapBound.Top + 10 <= gameBound.Top)
-                {
-                    _globalMap.Y += 10;
-                    foreach (GameObject obj in _listBuilding)
-                    {
-                        obj.Y += 10;
-                    }
-                }
-            }
-            if (e.KeyboardState.IsKeyDown(Keys.Left))
-            {
-                if (mapBound.Left + 10 <= gameBound.Left)
-                {
-                    _globalMap.X += 10;
-                    foreach (GameObject obj in _listBuilding)
-                    {
-                        obj.X += 10;
-                    }
-                }
-            }
-            if (e.KeyboardState.IsKeyDown(Keys.Right))
-            {
-                if (mapBound.Right - 10 >= gameBound.Right)
-                {
-                    _globalMap.X -= 10;
-                    foreach (GameObject obj in _listBuilding)
-                    {
-                        obj.X -= 10;
-                    }
-                }
-            }
+            Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
+            _character.GoToLogicalXY(v.X, v.Y);
         }
 
         public override void UnloadContent()
