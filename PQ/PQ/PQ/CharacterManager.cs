@@ -9,8 +9,8 @@ namespace PQ
 {
     enum CharacterName
     {
-        HeroKnightMale1,
-        HeroKnightMale2
+        MaleHeroKnight1,
+        MaleHeroKnight2
     }
 
     public class CharacterManager : AbstractManager
@@ -26,15 +26,17 @@ namespace PQ
             //details.ColumnCount = 8;
             //details.FrameWidth = details.FrameHeight = 49;
 
-            Character character = new HeroKnightMale1();
+            GameEntity character = new Character();
             Texture2D tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
             character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
-            _prototypes.Add((int)CharacterName.HeroKnightMale1, character);
+            character.UpdateChild();
+            _prototypes.Add((int)CharacterName.MaleHeroKnight1, character);
 
             tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight2_49x49");
-            character = new HeroKnightMale2();
+            character = new Character();
             character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
-            _prototypes.Add((int)CharacterName.HeroKnightMale2, character);
+            character.UpdateChild();
+            _prototypes.Add((int)CharacterName.MaleHeroKnight2, character);
         }
 
         public override object CreateObject(int idx)

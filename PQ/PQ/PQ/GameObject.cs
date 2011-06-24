@@ -37,50 +37,114 @@ namespace PQ
         public List<Sprite2D> Sprites
         {
             get { return _sprites; }
-            set { _sprites = value; }
+            set 
+            { 
+                _sprites = value; 
+                foreach (Sprite2D s in value)
+                {
+                    s.GameObjectParent = this;
+                }
+            }
+        }
+        public void UpdateChild()
+        {
+            foreach (Sprite2D s in _sprites)
+            {
+                s.GameObjectParent = this;
+            }
+        }
+        private float _logicalX = 0;
+
+        public float LogicalX
+        {
+            get { return _logicalX; }
+            set { _logicalX = value; }
+        }
+        private float _logicalY = 0;
+
+        public float LogicalY
+        {
+            get { return _logicalY; }
+            set { _logicalY = value; }
+        }
+        private GameObject _gameObjectParent = null;
+
+        public GameObject GameObjectParent
+        {
+            get { return _gameObjectParent; }
+            set { _gameObjectParent = value; }
+        }
+        //private float x;
+        public virtual float PhysicalX
+        {
+            get 
+            { 
+                if (_gameObjectParent==null)
+                {
+                    return _logicalX;
+                } 
+                else
+                {
+                    return _logicalX + _gameObjectParent.PhysicalX;
+                }
+            }
+        }
+        public virtual float PhysicalY
+        {
+            get
+            {
+                if (_gameObjectParent == null)
+                {
+                    return _logicalY;
+                }
+                else
+                {
+                    return _logicalY + _gameObjectParent.PhysicalY;
+                }
+            }
         }
 
-        private float x;
+        //private float y;
         public virtual float X
         {
-            get { return x; }
-            set 
-            {
-                float dx = value - x;
+            get { return LogicalX; }
+            //set 
+            //{
+            //    float dx = value - x;
 
-                List<Sprite2D> allSprites = GetAllSprites();
-                foreach (Sprite2D i in allSprites)
-                    i.X += dx;
+            //    List<Sprite2D> allSprites = GetAllSprites();
+            //    foreach (Sprite2D i in allSprites)
+            //        i.X += dx;
 
-                x = value;
-            }
+            //    x = value;
+            //}
+            set { LogicalX = value; }
         }
-
-        private float y;
         public virtual float Y
         {
-            get { return y; }
-            set 
-            {
-                float dy = value - y;
+            get { return LogicalY; }
+            //set 
+            //{
+            //    float dy = value - y;
 
-                List<Sprite2D> allSprites = GetAllSprites();
-                foreach (Sprite2D i in allSprites)
-                    i.Y += dy;
+            //    List<Sprite2D> allSprites = GetAllSprites();
+            //    foreach (Sprite2D i in allSprites)
+            //        i.Y += dy;
 
-                y = value;
-            }
+            //    y = value;
+            //}
+            set { LogicalY = value; }
         }
 
-        public Vector2 Position
-        {
-            get { return new Vector2(X, Y); }
-            set
-            {
-                X = value.X;
-                Y = value.Y;
-            }
-        }
+        //public Vector2 Position
+        //{
+        //    get { return new Vector2(X, Y); }
+        //    set
+        //    {
+        //        X = value.X;
+        //        Y = value.Y;
+        //    }
+        //}
 
         // use Bounds.Center instead
         //public Vector2 Center

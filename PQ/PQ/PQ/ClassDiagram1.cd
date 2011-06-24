@@ -10,7 +10,7 @@
   <Class Name="PQ.Character" Collapsed="true">
     <Position X="4" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Character.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="PQ.GameDialog" Collapsed="true">
     <Position X="20.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAQAAQAIACAACwAAAAAAAAAACAAACACIAAAIAAAAYgQ=</HashCode>
+      <HashCode>QAQAAQAIACAACwAAAAAAAAAACAAACACIAAAIAAAAAgA=</HashCode>
       <FileName>GameDialog.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,7 +129,7 @@
   <Class Name="PQ.GameObject" Collapsed="true">
     <Position X="14" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQYgBQAIhCBQwkAgBggAQEQQABJBGQAAIIBgAAiSYhA=</HashCode>
+      <HashCode>AQYgBQAIhCBQwkAEBhgAwEYQABJBGQIBIIAAABiSYhA=</HashCode>
       <FileName>GameObject.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -137,14 +137,14 @@
   <Class Name="PQ.GameState" Collapsed="true">
     <Position X="17.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAACQAAAAAQAQAAAAAAQAIAAAAAAAAoAAAACCAQ=</HashCode>
+      <HashCode>QAAAEAACQAAAAAQAQAAAAAAQAIAAAAAAAAoAQAACCAQ=</HashCode>
       <FileName>GameState.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GameStateExplorer" Collapsed="true">
     <Position X="15.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAQAAAAAQAAABAAAAAAAAAAAIAAAABAAAAAAQ=</HashCode>
+      <HashCode>AAAAEAAAQAAAAEQAAABAAAAAAAAAAAIAAAABAAAAAAQ=</HashCode>
       <FileName>GameStateExplorer.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -205,7 +205,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.GlobalMap" Collapsed="true">
-    <Position X="1.75" Y="7.75" Width="1.5" />
+    <Position X="2" Y="7.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>GlobalMap.cs</FileName>
@@ -233,9 +233,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.Map" Collapsed="true">
-    <Position X="1.75" Y="6.25" Width="1.5" />
+    <Position X="2" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Map.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -249,7 +249,7 @@
   <Class Name="PQ.MyGame" Collapsed="true">
     <Position X="34.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QBUAFlAAUlAFAwDgIAQEAAAAAAAACEgAAQAIQAAAgAQ=</HashCode>
+      <HashCode>QBUAFlAAUlAFAwDgIAQEAAACAAAACEgAAQAIQAACgAQ=</HashCode>
       <FileName>MyGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -298,7 +298,7 @@
   <Class Name="PQ.Sprite2D" Collapsed="true">
     <Position X="0.5" Y="12.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AASgEAAJBAQAAogwAAIEgEQFAAEAIAAAAAAAAAAAYyE=</HashCode>
+      <HashCode>AASgEAAJBASAAog0ADIEgEQFAAEAIAAAAAAIAAAAYyE=</HashCode>
       <FileName>Sprite2D.cs</FileName>
     </TypeIdentifier>
   </Class>

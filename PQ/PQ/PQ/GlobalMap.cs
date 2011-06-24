@@ -20,8 +20,10 @@ namespace PQ
             for (int i = 0; i < _sprites.Count; ++i)
                 cloneMap._sprites.Add(new Sprite2D(_sprites[i]));
 
-            cloneMap.X = X;
-            cloneMap.Y = Y;
+            cloneMap.LogicalX = LogicalX;
+            cloneMap.LogicalY = LogicalY;
+            cloneMap.GameObjectParent = GameObjectParent;
+            cloneMap.UpdateChild();
 
             return cloneMap;
         }

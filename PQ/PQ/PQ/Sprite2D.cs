@@ -28,8 +28,8 @@ namespace PQ
                 foreach (Texture2D i in _frames)
                     bound = Rectangle.Union(bound, i.Bounds);
 
-                bound.X = (int)_x;
-                bound.Y = (int)_y;
+                bound.X = (int)Position.X;
+                bound.Y = (int)Position.Y;
 
                 return bound;
 
@@ -148,7 +148,13 @@ namespace PQ
             get { return _frames; }
             set { _frames = value; }
         }
+        private GameObject _gameObjectParent = null;
 
+        public GameObject GameObjectParent
+        {
+            get { return _gameObjectParent; }
+            set { _gameObjectParent = value; }
+        }
         float _x;
         public float X
         {
@@ -167,13 +173,20 @@ namespace PQ
         {
             get
             {
-                return new Vector2(_x, _y);
+                if (_gameObjectParent==null)
+                {
+                    return new Vector2(_x, _y);
+                } 
+                else
+                {
+                    return new Vector2(_x + _gameObjectParent.PhysicalX, _y + _gameObjectParent.PhysicalY);
+                }                
             }
-            set
-            {
-                _x = value.X;
-                _y = value.Y;
-            }
+            //set
+            //{
+            //    _x = value.X;
+            //    _y = value.Y;
+            //}
         }
 
         // use Bounds.Center instead

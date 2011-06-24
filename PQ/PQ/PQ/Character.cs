@@ -20,9 +20,11 @@ namespace PQ
 
             for (int i = 0; i < _sprites.Count; ++i)
                 character._sprites.Add(new Sprite2D(_sprites[i]));
-            
-            character.X = this.X;
-            character.Y = this.Y;
+
+            character.GameObjectParent = this.GameObjectParent;
+            character.LogicalX = this.LogicalX;
+            character.LogicalY = this.LogicalY;
+            character.UpdateChild();
 
             return character;
         }

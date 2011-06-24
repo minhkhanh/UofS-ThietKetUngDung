@@ -22,6 +22,7 @@ namespace PQ
             GameEntity building = new GameBuilding();
             Texture2D tmpTexture = content.Load<Texture2D>(@"Maps\Sites");
             building.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details));
+            building.UpdateChild();
             _prototypes.Add((int)BuildingName.Building1, building);
         }
 

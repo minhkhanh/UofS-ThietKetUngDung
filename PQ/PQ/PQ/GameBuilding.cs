@@ -14,8 +14,10 @@ namespace PQ
             for (int i = 0; i < _sprites.Count; ++i)
                 building._sprites.Add(new Sprite2D(_sprites[i]));
 
-            building.X = this.X;
-            building.Y = this.Y;
+            building.UpdateChild();
+            building.LogicalX = LogicalX;
+            building.LogicalY = LogicalY;
+            building.GameObjectParent = GameObjectParent;
 
             return building;
         }
