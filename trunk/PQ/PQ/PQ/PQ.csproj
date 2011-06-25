@@ -138,6 +138,7 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MovingPlaneMotionModule.cs" />
+    <Compile Include="NPC.cs" />
     <Compile Include="Particle2D.cs" />
     <Compile Include="PlaneMotionModule.cs" />
     <Compile Include="GameButton.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="GameButtonState.cs" />
     <Compile Include="GameButtonUpState.cs" />
     <Compile Include="GameDialog.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="SelectedGemEffect.cs" />
     <Compile Include="SplittingDetails.cs" />
     <Compile Include="GlobalMap.cs" />

@@ -41,7 +41,7 @@ namespace PQ
 
         public override object CreateObject(int idx)
         {
-            return (_prototypes[idx] as Character).Clone();
+            return (_prototypes[idx % _prototypes.Count] as Character).Clone();
         }
     }
 }

@@ -28,7 +28,7 @@ namespace PQ
 
         public override object CreateObject(int idx)
         {
-            return (_prototypes[idx] as GameBuilding).Clone();
+            return (_prototypes[idx % _prototypes.Count] as GameBuilding).Clone();
         }
     }
 }
