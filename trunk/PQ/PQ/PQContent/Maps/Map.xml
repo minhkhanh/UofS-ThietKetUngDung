@@ -26,8 +26,10 @@
 
   <BuildingList>
     <Building x="100" y="150" fps="25" template="0" type="0"/>
-    <Building x="500" y="150" fps="25" template="0" type="0"/>
-    <Building x="100" y="450" fps="25" template="0" type="0"/>
-    <Building x="200" y="350" fps="25" template="0" type="0"/>
+    <Building x="500" y="150" fps="25" template="1" type="0"/>
+    <Building x="700" y="300" fps="25" template="2" type="0"/>
+    <Building x="200" y="350" fps="25" template="3" type="0"/>
+    <Building x="570" y="650" fps="25" template="4" type="0"/>
+    <Building x="900" y="520" fps="25" template="5" type="0"/>
   </BuildingList>
 </Data>
