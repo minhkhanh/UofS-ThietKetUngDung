@@ -137,6 +137,18 @@ namespace PQ
             }
             //set { LogicalY = value; }
         }
+
+        public virtual int DirectionSprite
+        {
+            get { return 0; }
+            set { return; }
+        }
+        public virtual int DirectionSpriteCount
+        {
+            get { return 0; }
+            //set { return; }
+        }
+
         public Vector2 ConvertPhysical2Logical(Vector2 physical)
         {
             Vector2 v = new Vector2(PhysicalX, PhysicalY);

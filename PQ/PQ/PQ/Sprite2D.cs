@@ -84,6 +84,11 @@ namespace PQ
             }
         }
         int _directionCount = 0;
+        public int DirectionCount
+        {
+            get { return _directionCount; }
+            //set { _directionCount = value; }
+        }
         int _direction = 0;
         public int Direction
         {
