@@ -57,28 +57,7 @@ namespace PQ
                 this.ManageObjects(tmp);
             }
 
-            //_listBuilding = new List<GameBuilding>();
-            //GameBuilding tmp = (GameBuilding)this.MyGame.GameBuildingManager.CreateObject(0);
-            //tmp.GameObjectParent = this;
-            //_listBuilding.Add(tmp);
-            //this._gameObjects.Add(tmp);
-            //tmp.Animate(25);
-            //tmp.MouseUp += new EventHandler<GameMouseEventArgs>(building_MouseUp);
-            //this.ManageObjects(tmp);
-
-            //tmp = (GameBuilding)this.MyGame.GameBuildingManager.CreateObject(0);
-            //tmp.GameObjectParent = this;
-            //_listBuilding.Add(tmp);
-            //this._gameObjects.Add(tmp);
-            //tmp.Animate(25);
-            //tmp.LogicalX = 200;
-            //tmp.LogicalY = 200;
-            //tmp.MouseUp += new EventHandler<GameMouseEventArgs>(building_MouseUp);
-            //this.ManageObjects(tmp);
-
             _character = (Character)this.MyGame.CharacterManager.CreateObject((int)CharacterName.MaleHeroKnight1);
-            _character.LogicalX = 100;
-            _character.LogicalY = 100;
             _character.GameObjectParent = this;
             this._gameObjects.Add(_character);            
             _character.Animate(12);
