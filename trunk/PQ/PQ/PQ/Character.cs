@@ -29,10 +29,21 @@ namespace PQ
             return character;
         }
 
-        public int Direction
+        public override int DirectionSprite
         {
             get { return this.Sprites[0].Direction; }
             set { this.Sprites[0].Direction = value;}
+        }
+        public override int DirectionSpriteCount
+        {
+            get
+            {
+                return this.Sprites[0].DirectionCount;
+            }
+            //set
+            //{
+            //    base.DirectionSpriteCount = value;
+            //}
         }
 
         public void GoToLogicalXY(float fX, float fY)
@@ -42,9 +53,17 @@ namespace PQ
             v = v + v2;
             float fLen = v.Length();
             v.Normalize();
+            v2 = new Vector2(0, -1);
+            double angle = Vector2.Dot(v, v2);            
+            angle = Math.Acos(angle);            
+            double c = v.X * v2.Y - v.Y * v2.X;
+            if (c > 0) angle = MathHelper.TwoPi - angle;
             v *= GlobalClass.CharacterMovingSpeed;
-            MotionModule = new MovingPlaneMotionModule(v.X, v.Y, fLen);
+            int iDir = (int)Math.Round(angle * DirectionSpriteCount / MathHelper.TwoPi);
+            MotionModule.Stop();
+            MotionModule = new MovingPlaneMotionModule(v.X, v.Y, fLen, this, iDir);
             MotionModule.Play();
+            
         }
         //public void GoToPhysicalXY(float fX, float fY)
         //{

@@ -43,7 +43,7 @@ namespace PQ
             _character.GameObjectParent = this;
             this._gameObjects.Add(_character);            
             _character.Animate(12);
-            _character.Direction = 5;
+            _character.DirectionSprite = 4;
         }
 
         public override void InitEvents()
