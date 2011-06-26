@@ -10,7 +10,7 @@ namespace PQ
     {
         public override Color Color
         {
-            get { return Color.Gold; }
+            get { return Color.Orange; }
         }
 
         public override GemName Name
@@ -21,6 +21,7 @@ namespace PQ
         public override void Consumes(MiniGameStats stats)
         {
             //++stats.ManaR;
+            SoundManager.Play("Gold");
         }
 
         public override void OnEnterState(Gem gem)

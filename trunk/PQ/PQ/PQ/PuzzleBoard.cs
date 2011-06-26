@@ -27,6 +27,8 @@ namespace PQ
 
         ParticleEngine _particles = new ParticleEngine();
 
+        Character _heroInTurn;
+
         public PuzzleBoard(SplittingDetails details, Sprite2DManager spriteManager)
         {
             _details = details;
@@ -42,6 +44,11 @@ namespace PQ
                     _gems[r, c] = new Gem();
                     _chains[r, c] = 1;
                 }
+        }
+
+        public void StartGame()
+        {
+            _heroInTurn = StateMiniGame.Game.Hero;
         }
 
         Vector2 Coord2Pos(int r, int c)
@@ -403,7 +410,6 @@ namespace PQ
 
         void CheckChains()
         {
-            //bool flag = false;
             _chains = new int[_details.RowCount + 1, _details.ColumnCount];
             for (int r = 0; r < _details.RowCount; ++r)
                 for (int c = 0; c < _details.ColumnCount; ++c)
@@ -415,27 +421,43 @@ namespace PQ
             {
                 for (int c = 0; c < _details.ColumnCount; ++c)
                 {
+                    bool flag;
                     List<int> gemInARow = CheckRow(r, c);
                     if (gemInARow.Count >= 2)
                     {
-                        _chains[r, c] = 1;
-                        _particles.Generators.Add(new GemExplosion(_gems[r, c]));
+                        flag = true;
+                        gemInARow.Add(c);
                         foreach (int i in gemInARow)
                         {
-                            _chains[r, i] = 1;
-                            _particles.Generators.Add(new GemExplosion(_gems[r, i]));
+                            if (_chains[r, i] == 0)
+                            {
+                                _particles.Generators.Add(new GemExplosion(_gems[r, i]));
+                                _chains[r, i] = 1;
+
+                                _gems[r, i].ColorState.Consumes(_heroInTurn.MiniStats);
+                            }
+                            else
+                                flag = false;
                         }
+                        //if (flag)
+                            
                     }
 
                     List<int> gemInACol = CheckCol(r, c);
                     if (gemInACol.Count >= 2)
                     {
-                        _chains[r, c] = 1;
-                        _particles.Generators.Add(new GemExplosion(_gems[r, c]));
+                        if (_chains[r, c] == 0)
+                        {
+                            _particles.Generators.Add(new GemExplosion(_gems[r, c]));
+                            _chains[r, c] = 1;
+                        }
                         foreach (int i in gemInACol)
                         {
-                            _chains[i, c] = 1;
-                            _particles.Generators.Add(new GemExplosion(_gems[i, c]));
+                            if (_chains[i,c] == 0)
+                            {
+                                _particles.Generators.Add(new GemExplosion(_gems[i, c]));
+                                _chains[i, c] = 1;
+                            }                            
                         }
                     }
                 }

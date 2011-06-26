@@ -21,6 +21,7 @@ namespace PQ
         public override void Consumes(MiniGameStats stats)
         {
             ++stats.ManaB;
+            SoundManager.Play("WaterMana");
         }
 
         public override void OnEnterState(Gem gem)

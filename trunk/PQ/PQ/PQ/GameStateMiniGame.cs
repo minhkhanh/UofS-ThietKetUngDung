@@ -62,6 +62,7 @@ namespace PQ
             _board.X = 215;
             _board.Y = 128;
             _board.Reset();
+            _board.StartGame();
 
             Game.Hero.CreateMiniStats();
             //_computer.CreateMiniStats();

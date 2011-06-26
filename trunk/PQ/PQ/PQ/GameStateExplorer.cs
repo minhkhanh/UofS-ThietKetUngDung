@@ -114,7 +114,7 @@ namespace PQ
         {
             //Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
             //_character.GoToLogicalXY(v.X, v.Y);
-            this.Game.SoundManager.Play("AISpell");
+            //this.Game.SoundManager.Play("AISpell");
         }
 
         public override void UnloadContent()
