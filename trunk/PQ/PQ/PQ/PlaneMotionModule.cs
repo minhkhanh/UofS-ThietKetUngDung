@@ -22,6 +22,16 @@ namespace PQ
             set { _vy = value; }
         }
 
+        public Vector2 Velocity
+        {
+            get { return new Vector2(_vx, _vy); }
+            set
+            {
+                _vx = value.X;
+                _vy = value.Y;
+            }
+        }
+
         public PlaneMotionModule()
         {
             _vx = _vy = 0;
@@ -41,6 +51,20 @@ namespace PQ
         public virtual void Pause()
         {
         }
+
+        protected bool _playing = true;
+        public bool IsPlaying
+        {
+            get { return _playing; }
+            set 
+            {
+                _playing = value;
+                if (value == false)
+                    Stop();
+            }
+        }
+
+
         public virtual void Stop()
         {
             _vx = _vy = 0;
@@ -48,7 +72,8 @@ namespace PQ
 
         public virtual void OnMotion(GameObject gameObj, GameTime gameTime)
         {
-            
+            gameObj.X += _vx;
+            gameObj.Y += _vy;
         }
 
         public virtual bool IsMoving

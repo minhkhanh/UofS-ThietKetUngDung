@@ -9,16 +9,49 @@ namespace PQ
 {
     public class Gem: GameEntity
     {
-        GemName _name = GemName.None;
-        public GemName Name
+        GemColorState _colorState = new GemColorState();
+        public GemColorState ColorState
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _colorState; }
+            //set { _colorState = value; }
+        }
+
+        public void ChangeColorState(GemColorState state)
+        {
+            _colorState.OnExitState(this);
+            _colorState = state;
+            _colorState.OnEnterState(this);
+        }
+
+        public bool IsThrough
+        {
+            get
+            {
+                return _motionModule.IsMoving || _colorState.Name == GemName.None;
+            }
+        }
+
+        public Gem()
+        {
+            _motionModule = new VerticalPlaneMotionModule();
+            //_colorState = colorState;
+        }
+
+        public Gem(GemColorState clrState)
+        {
+            _motionModule = new VerticalPlaneMotionModule();
+            _colorState = clrState;
+        }
+
+        public bool IsSameColor(Gem gem)
+        {
+            return (_colorState.Name == gem._colorState.Name);
         }
 
         public override GameObject Clone()
         {
-            Gem gem = new Gem();
+            Gem gem = new Gem(this.ColorState.Clone());
+
             foreach (Sprite2D i in _sprites)
             {
                 gem._sprites.Add(new Sprite2D(i));
@@ -27,14 +60,7 @@ namespace PQ
             gem.X = this.X;
             gem.Y = this.Y;
 
-            gem.Name = this.Name;
-
-            // clone without motion module
-            gem.MotionModule = new VerticalPlaneMotionModule(0, 0, 0, 0);
-
             return gem;
         }
-
-
     }
 }

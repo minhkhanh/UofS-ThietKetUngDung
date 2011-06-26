@@ -10,6 +10,14 @@ namespace PQ
     public enum Sprite2DName
     {
         SelectedGemEffect,
+        GemGreen,
+        GemRed,
+        GemYellow,
+        GemBlue,
+        GemWhite,
+        GemPurple,
+        GemGold,
+        Sparkle,
     }
 
     public class Sprite2DManager: AbstractManager
@@ -18,14 +26,60 @@ namespace PQ
 
         public override void LoadPrototypes(ContentManager content)
         {
+            //////////////////////////////////////////////////////////////////////////
+            // Skin_Battle_Misc
+            //////////////////////////////////////////////////////////////////////////
+            
             Texture2D txt2dBattleMisc = content.Load<Texture2D>(@"Images\Skin_Battle_Misc");
             SplittingDetails details = new SplittingDetails(
                 1,1,0,0,
                 120,120,0,0,
                 224,78
                 );
-            Sprite2D sprite = new SelectedGemEffect(txt2dBattleMisc, 0, 0, details);
+
+            List<Texture2D> images = GlobalClass.SplitImage(txt2dBattleMisc, details);
+            Sprite2D sprite = new SelectedGemEffect(images, 0, 0);
             _prototypes.Add((int)Sprite2DName.SelectedGemEffect, sprite);
+
+            //////////////////////////////////////////////////////////////////////////
+            // Skin_Gems_Grid
+            //////////////////////////////////////////////////////////////////////////
+
+            Texture2D txt2dGemsGrid = content.Load<Texture2D>(@"Images\Skin_Gems_Grid");
+
+            details = new SplittingDetails(1, 7, 0, 0, 71, 66, 1, 6, 0, 2);
+            images = GlobalClass.SplitImage(txt2dGemsGrid, details);
+            sprite = new Sprite2D(new List<Texture2D> { images[0] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemGreen, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[1] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemRed, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[2] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemYellow, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[3] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemBlue, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[4] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemWhite, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[5] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemPurple, sprite);
+
+            sprite = new Sprite2D(new List<Texture2D> { images[6] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemGold, sprite);
+
+            //details = new SplittingDetails(1,7)
+
+            //////////////////////////////////////////////////////////////////////////
+            // Particles
+            //////////////////////////////////////////////////////////////////////////
+
+            Texture2D txt2dParticle = content.Load<Texture2D>(@"Images\Sparkle");
+            sprite = new Sprite2D(new List<Texture2D> { txt2dParticle }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.Sparkle, sprite);
+
         }
 
         public override object CreateObject(int idx)

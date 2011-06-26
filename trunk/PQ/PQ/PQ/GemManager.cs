@@ -10,21 +10,21 @@ namespace PQ
     // GemName enum below is listed by loading order of gem images in the GemManager
     public enum GemName
     {
-        GreenGem,
+        GemGreen,
+        GemRed,
+        GemYellow,
+        GemBlue,
+        GemWhite,
+        GemPurple,
+        GemGold,
         X2Gem,
-        RedGem,
         X3Gem,
-        YellowGem,
         X4Gem,
-        BlueGem,
         X5Gem,
-        SkullGem,
         X6Gem,
-        PurpleGem,
         X7Gem,
-        GoldGem,
         X8Gem,
-        None
+        None,
     }
 
     public class GemManager: AbstractManager
@@ -34,24 +34,41 @@ namespace PQ
             //_prototypes = new List<object>();
             _prototypes = new Dictionary<int, object>();
 
-            Texture2D largePic = content.Load<Texture2D>(@"Images\Skin_Gems_Grid");
+            Texture2D txt2dGemsGrid = content.Load<Texture2D>(@"Images\Skin_Gems_Grid");
 
-            SplittingDetails details = new SplittingDetails(2, 7, 0, 0, 71, 66, 1, 6, 0, 2);
-            List<Texture2D> images = GlobalClass.SplitImage(largePic, details);
+            SplittingDetails details;
+            List<Texture2D> images;
+            
+            details = new SplittingDetails(1, 7, 0, 0, 71, 66, 1, 6, 0, 2);
+            images = GlobalClass.SplitImage(txt2dGemsGrid, details);
 
-            //Gem[] gems = new Gem[14];
+            Gem gem = new Gem(new GemGreen());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[0] }, 0, 0));
+            _prototypes.Add((int)GemName.GemGreen, gem);
 
-            for (int i = 0; i < images.Count; ++i)
-            {
-                Gem gem = new Gem();
-                gem.MotionModule = new VerticalPlaneMotionModule(0, 0, 0, 0);
-                gem.Sprites.Add(new Sprite2D(new List<Texture2D>() { images[i] }, 0, 0));
+            gem = new Gem(new GemRed());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[1] }, 0, 0));
+            _prototypes.Add((int)GemName.GemRed, gem);
 
-                // important: index of image must be equal with GemName
-                _prototypes.Add(i, gem);
-            }
+            gem = new Gem(new GemYellow());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[2] }, 0, 0));
+            _prototypes.Add((int)GemName.GemYellow, gem);
 
-            //_prototypes.AddRange(gems);
+            gem = new Gem(new GemBlue());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[3] }, 0, 0));
+            _prototypes.Add((int)GemName.GemBlue, gem);
+
+            gem = new Gem(new GemWhite());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[4] }, 0, 0));
+            _prototypes.Add((int)GemName.GemWhite, gem);
+
+            gem = new Gem(new GemPurple());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[5] }, 0, 0));
+            _prototypes.Add((int)GemName.GemPurple, gem);
+
+            gem = new Gem(new GemGold());
+            gem.Sprites.Add(new Sprite2D(new List<Texture2D> { images[6] }, 0, 0));
+            _prototypes.Add((int)GemName.GemGold, gem);
         }
 
         public override object CreateObject(int idx)

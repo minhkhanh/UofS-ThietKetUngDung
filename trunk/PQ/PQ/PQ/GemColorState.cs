@@ -9,14 +9,19 @@ namespace PQ
 {
     public class GemColorState
     {
-        public virtual void OnChangeState(Gem gem)
+        public virtual GemName Name
         {
-            // reserved
+            get { return GemName.None; }
+        }
+
+        public virtual Color Color
+        {
+            get { return Color.Black; }
         }
 
         public virtual void OnEnterState(Gem gem)
         {
-
+            gem.Sprites.Clear();
         }
 
         public virtual void OnExitState(Gem gem)
@@ -24,12 +29,12 @@ namespace PQ
 
         }
 
-        public virtual void OnDraw(Gem gem, GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual GemColorState Clone()
         {
-
+            return new GemColorState();
         }
 
-        public virtual void OnUpdate(Gem gem, GameTime gameTime)
+        public virtual void Consumes(MiniGameStats stats)
         {
 
         }

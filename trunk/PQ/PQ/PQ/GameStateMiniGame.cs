@@ -24,10 +24,20 @@ namespace PQ
             }
         }
 
-        public GameStateMiniGame(MyGame game)
+        Character _computer;
+
+        public Character Computer
+        {
+            get { return _computer; }
+            set { _computer = value; }
+        }
+
+        public GameStateMiniGame(Character computer, MyGame game)
             : base(game)
         {
             //_stateId = GameStateId.StateMiniGame;
+
+            _computer = computer;
         }
 
         public override void LoadContent()
@@ -53,7 +63,10 @@ namespace PQ
             _gameObjects.Add(_board);
             _board.X = 215;
             _board.Y = 128;
-            _board.Reset();            
+            //_board.Reset();
+
+            Game.Hero.CreateMiniStats();
+            //_computer.CreateMiniStats();
         }
 
         public override void InitEvents()

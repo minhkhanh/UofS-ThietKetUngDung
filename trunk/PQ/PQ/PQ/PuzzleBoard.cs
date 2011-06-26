@@ -19,40 +19,85 @@ namespace PQ
         //GemManager _gemManager;
 
         Random _rand = new Random();
-        List<Gem> _gems = new List<Gem>();
+        Gem[,] _gems;
 
         SelectedGemEffect _selGemEffect;
+
+        ParticleEngine _particles = new ParticleEngine();
 
         public PuzzleBoard(SplittingDetails details, Sprite2DManager spriteManager)
         {
             _details = details;
 
             _selGemEffect = spriteManager.CreateObject((int)Sprite2DName.SelectedGemEffect) as SelectedGemEffect;
+
+            _gems = new Gem[_details.RowCount, _details.ColumnCount];
+            for (int r = 0; r < _details.RowCount; ++r)
+                for (int c = 0; c < _details.ColumnCount; ++c)
+                {
+                    _gems[r, c] = new Gem();
+                }
+        }
+
+        Vector2 Coord2Pos(int r, int c)
+        {
+            return new Vector2(
+                this.X + c * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX,
+                this.Y + r * (_details.FrameHeight + _details.SpaceY) + _details.InitMarginY
+                );
+        }
+
+        public Gem GenerateGem()
+        {
+            int gemIdx = _rand.Next(7);
+            Gem gem = Parent.Game.GemManager.CreateObject(gemIdx) as Gem;
+
+            gem.MouseDown += new EventHandler<GameMouseEventArgs>(gem_MouseDown);
+
+            this.ManageObjects(gem);
+            _gameObjects.Add(gem);
+
+            return gem;
+        }
+
+        int GetBlankCellInCol(int c)
+        {
+            int cells = 0;
+            for (int d = 0; d < _details.RowCount; ++d)
+            {
+                if (_gems[d, c].ColorState.Name == GemName.None)
+                    ++cells;
+            }
+
+            return cells;
+        }
+
+        void DropGems()
+        {
+            for (int c = 0; c < _details.ColumnCount; ++c)
+            {
+                int cells = GetBlankCellInCol(c);
+                for (int r = 0; r < cells; ++r)
+                {
+                    _gems[r, c] = GenerateGem();
+                    _gems[r, c].Position = new Vector2(Coord2Pos(r, c).X, this.Y + (r - cells) * _gems[r, c].Height);
+                    _gems[r, c].MotionModule.Velocity = new Vector2(0, 5);
+                }
+            }
         }
 
         public void Reset()
         {
             this.UnmanageObjects(_gameObjects.ToArray());
             _gameObjects.Clear();
-            _gems.Clear();
-
+            _gems = new Gem[_details.RowCount, _details.ColumnCount];
             for (int r = 0; r < _details.RowCount; ++r)
-            {
                 for (int c = 0; c < _details.ColumnCount; ++c)
                 {
-                    int gemIdx = _rand.Next(14);
-                    Gem gem = Parent.Game.GemManager.CreateObject(gemIdx) as Gem;
-
-                    gem.X = this.X + c * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX;
-                    gem.Y = this.Y + r * (_details.FrameHeight + _details.SpaceY) + _details.InitMarginY;
-
-                    gem.MouseDown += new EventHandler<GameMouseEventArgs>(gem_MouseDown);
-
-                    _gems.Add(gem);
-                    this.ManageObjects(gem);
-                    _gameObjects.Add(gem);
+                    _gems[r, c] = new Gem();
                 }
-            }
+
+            DropGems();
         }
 
         /// <summary>
@@ -104,6 +149,7 @@ namespace PQ
             else
             {
                 _gem2 = o as Gem;
+                //_particles.Engines.Add(new GemExplosion(_gem2.ColorState.Color, (Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.Sparkle) as Sprite2D).Frames, new Vector2(_gem2.Bounds.Center.X, _gem2.Bounds.Center.Y)));
 
                 Direction direct = IsNext4(_gem1, _gem2);
                 if (direct != Direction.None)
@@ -136,12 +182,12 @@ namespace PQ
                             break;
                     }
 
-                    int idx1 = GetGemIdx(_gem1);
-                    int idx2 = GetGemIdx(_gem2);
+                    Point coord1 = GetGemCoord(_gem1);
+                    Point coord2 = GetGemCoord(_gem2);
 
-                    Gem tmp = _gems[idx1];
-                    _gems[idx1] = _gems[idx2];
-                    _gems[idx2] = tmp;
+                    Gem tmp = _gems[coord1.X, coord1.Y];
+                    _gems[coord1.X, coord1.Y] = _gems[coord2.X, coord2.Y];
+                    _gems[coord2.X, coord2.Y] = tmp;
                 }
 
                 _gem1 = null;        // must be done at last
@@ -149,159 +195,235 @@ namespace PQ
 
         }
 
-        public void GenerateGems()
+        public void CheckCollision()
         {
+            for (int r = 0; r < _details.RowCount; ++r)
+                for (int c = 0; c < _details.ColumnCount; ++c)
+                {
+                    if (_gems[r, c].ColorState.Name != GemName.None && _gems[r, c].MotionModule.IsMoving)
+                    {
+                        Direction movDirect = _gems[r,c].MotionModule.MovingDirection;
+                        switch (movDirect)
+                        {
+                            case Direction.Downward:
+                                for (int d = r + 1; d < _details.RowCount; ++d)
+                                {
+                                    if (!_gems[d, c].IsThrough && _gems[r, c].IsCollided(_gems[d, c]))
+                                    {
+                                        // stop moving when collided
+                                        _gems[r, c].MotionModule.Stop();
+                                        break;
+                                    }
+                                }
+                                // if gem continues to move, stop it when out of table bound
+                                if (_gems[r,c].MotionModule.IsMoving && 
+                                    _gems[r,c].Y + _gems[r,c].Height > this.Y + _details.InitMarginY + (_details.FrameHeight + _details.SpaceY) * _details.RowCount)
+                                    _gems[r,c].MotionModule.Stop();
 
+                                break;
+
+                            case Direction.Upward:
+                                for (int d = r - 1; d >= 0; --d)
+                                {
+                                    if (!_gems[d,c].IsThrough && _gems[r,c].IsCollided(_gems[d,c]))
+                                    {
+                                        _gems[r,c].MotionModule.Stop();
+                                        break;
+                                    }
+                                }
+                                if (_gems[r,c].MotionModule.IsMoving && _gems[r,c].Y < this.Y)
+                                {
+                                    _gems[r,c].MotionModule.Stop();
+                                }
+
+                                break;
+
+                            case Direction.Rightward:
+                                for (int d = c + 1; d < _details.ColumnCount; ++d)
+                                {
+                                    if (!_gems[r, d].IsThrough && _gems[r, c].IsCollided(_gems[r, d]))
+                                    {
+                                        _gems[r, c].MotionModule.Stop();
+                                        break;
+                                    }
+                                }
+                                if (_gems[r,c].MotionModule.IsMoving && 
+                                    _gems[r,c].X + _gems[r,c].Width > this.X + _details.InitMarginX + (_details.FrameWidth + _details.SpaceX) * _details.ColumnCount)
+                                {
+                                    _gems[r,c].MotionModule.Stop();
+                                }
+
+                                break;
+
+                            case Direction.Leftward:
+                                for (int d = c - 1; d >= 0; --d)
+                                {
+                                    if (!_gems[r,d].IsThrough && _gems[r,c].IsCollided(_gems[r,d]))
+                                    {
+                                        _gems[r,c].MotionModule.Stop();
+                                        break;
+                                    }
+                                }
+                                if (_gems[r,c].MotionModule.IsMoving && _gems[r,c].X < this.X)
+                                    _gems[r,c].MotionModule.Stop();
+
+                                break;
+                        }
+
+                        // if gem stopped, snap it to nearest cell by its move direction
+                        if (!_gems[r,c].MotionModule.IsMoving)
+                        {
+                            _gems[r, c].Position = Coord2Pos(r, c);
+                        }
+                    }
+                }
         }
 
-        public override void CheckCollision()
+        GameStateMiniGame StateMiniGame
         {
-            List<Gem> movingGems = _gems.FindAll(u => u.MotionModule.IsMoving);
-
-            foreach (Gem i in movingGems)
-            {
-                int rowIdx = (int)(i.Y - this.Y - _details.InitMarginY) / (_details.FrameHeight + _details.SpaceY);
-                int colIdx = (int)(i.X - this.X - _details.InitMarginX) / (_details.FrameWidth + _details.SpaceX);
-
-                switch (i.MotionModule.MovingDirection)
-                {
-                    case Direction.Downward:
-                        for (int d = rowIdx*_details.ColumnCount + colIdx; d < _details.RowCount * _details.ColumnCount; d += _details.ColumnCount)
-                        {
-                            // check collision with stable gems
-                            if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
-                            {
-                                // stop moving when collided
-                                i.MotionModule.Stop();
-                                break;
-                            }
-                        }
-                        // if gem continues to move, stop it when out of table bound
-                        if (i.MotionModule.IsMoving && i.Y + i.Height > this.Y + _details.InitMarginY + (_details.FrameHeight + _details.SpaceY)*_details.RowCount)
-                            i.MotionModule.Stop();
-
-                        break;
-
-                    case Direction.Upward:
-                        for (int d = rowIdx * _details.ColumnCount + colIdx; d >= 0; d -= _details.ColumnCount)
-                        {
-                            if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
-                            {
-                                i.MotionModule.Stop();
-                                ++rowIdx;
-                                break;
-                            }
-                        }
-                        if (i.MotionModule.IsMoving && i.Y < this.Y)
-                        {
-                            i.MotionModule.Stop();
-                        }
-
-                        break;
-
-                    case Direction.Rightward:
-                        for (int d = rowIdx * _details.ColumnCount + colIdx; d < (rowIdx+1)*_details.ColumnCount; ++d)
-                        {
-                            if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
-                            {
-                                i.MotionModule.Stop();
-                                break;
-                            }
-                        }
-                        if (i.MotionModule.IsMoving && i.X + i.Width > this.X + _details.InitMarginX + (_details.FrameWidth + _details.SpaceX) * _details.ColumnCount)
-                        {
-                            i.MotionModule.Stop();
-                        }                        
-
-                        break;
-
-                    case Direction.Leftward:
-                        for (int d = rowIdx * _details.ColumnCount + colIdx; d >= rowIdx * _details.ColumnCount; --d)
-                        {
-                            if (!_gems[d].MotionModule.IsMoving && i.IsCollided(_gems[d]))
-                            {
-                                i.MotionModule.Stop();
-                                ++colIdx;
-                                break;
-                            }
-                        }
-                        if (i.MotionModule.IsMoving && i.X < this.X)
-                            i.MotionModule.Stop();
-
-                        break;
-                }
-
-                // if gem stopped, snap it to nearest cell by its move direction
-                if (!i.MotionModule.IsMoving)
-                {
-                    i.X = this.X + colIdx * (_details.FrameWidth + _details.SpaceX) + _details.InitMarginX;
-                    i.Y = this.Y + rowIdx * (_details.FrameHeight + _details.SpaceY) + _details.InitMarginY;
-                }
-            }
+            get { return Parent as GameStateMiniGame; }
         }
 
-        void CheckMove(Gem gem, Direction movDirect)
+        List<int> CheckCol(int r, int c)
         {
-            List<Gem> gemInRow = new List<Gem>();
-            Point gemCoord = GetGemCoord(gem);
+            List<int> gemInACol = new List<int>();
 
-            switch (movDirect)
+            // above
+            for (int d = r - 1; d >= 0; --d)
             {
-                case Direction.Downward:
-                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d < _details.RowCount * _details.ColumnCount; d += _details.ColumnCount)
-                    {
-                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
-                        {
-                            gemInRow.Add(_gems[d]);
-                        }
-                        else
-                            break;
-                    }
-                    break;
-
-                case Direction.Upward:
-                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d >= 0; d -= _details.ColumnCount)
-                    {
-                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
-                        {
-                            gemInRow.Add(_gems[d]);
-                        }
-                        else
-                            break;
-                    }
-                    break;
-
-                case Direction.Rightward:
-                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d < (gemCoord.X + 1) * _details.ColumnCount; ++d)
-                    {
-                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
-                        {
-                            gemInRow.Add(_gems[d]);
-                        }
-                        else
-                            break;
-                    }
-                    break;
-
-                case Direction.Leftward:
-                    for (int d = gemCoord.X * _details.ColumnCount + gemCoord.Y; d >= gemCoord.X * _details.ColumnCount; --d)
-                    {
-                        if (!_gems[d].MotionModule.IsMoving && gem.Name == _gems[d].Name)
-                        {
-                            gemInRow.Add(_gems[d]);
-                        }
-                        else
-                            break;
-                    }
+                if (!_gems[d,c].IsThrough && _gems[r,c].IsSameColor(_gems[d,c]))
+                {
+                    gemInACol.Add(d);
+                }
+                else
                     break;
             }
 
+            // below
+            for (int d = r + 1; d < _details.RowCount; ++d)
+            {
+                if (!_gems[d,c].IsThrough && _gems[r,c].IsSameColor(_gems[d,c]))
+                {
+                    gemInACol.Add(d);
+                }
+                else
+                    break;
+            }
 
+            return gemInACol;
+        }
+
+        List<int> CheckRow(int r, int c)
+        {
+            List<int> gemInARow = new List<int>();
+
+            // left side
+            for (int d = c - 1; d >= 0; --d)
+            {
+                if (!_gems[r,d].IsThrough && _gems[r,c].IsSameColor(_gems[r,d]))
+                {
+                    gemInARow.Add(d);
+                }
+                else
+                    break;
+            }
+
+            // right side
+            for (int d = c + 1; d < _details.ColumnCount; ++d)
+            {
+                if (!_gems[r,d].IsThrough && _gems[r,c].IsSameColor(_gems[r,d]))
+                {
+                    gemInARow.Add(d);
+                }
+                else
+                    break;
+            }
+
+            return gemInARow;
+        }
+
+        public bool IsAllGemsStopped
+        {
+            get
+            {
+                for (int r = 0; r < _details.RowCount; ++r)
+                    for (int c = 0; c < _details.ColumnCount; ++c)
+                        if (_gems[r, c].MotionModule.IsMoving && _gems[r, c].ColorState.Name != GemName.None)
+                            return false;
+
+                return true;
+            }
+        }
+
+        void FallGemCol(int r, int c, int n)
+        {
+            for (int d = r - 1; d >= 0; --d)
+                if (!_gems[d, c].IsThrough)
+                {
+                    _gems[d, c].MotionModule.Velocity = new Vector2(0, 5);
+                    _gems[d + n, c] = _gems[d, c];
+                }
+
+            for (int d = 0; d < n; ++d)
+                _gems[d, c].ChangeColorState(new GemColorState());
+        }
+
+        void CheckChains()
+        {
+            for (int r = 0; r < _details.RowCount; ++r)
+                for (int c = 0; c < _details.ColumnCount; ++c)
+                    if (!_gems[r, c].IsThrough)
+                    {
+                        List<int> gemInARow = CheckRow(r, c);
+                        List<int> gemInACol = CheckCol(r, c);
+
+                        if (gemInACol.Count >= 2)
+                            gemInACol.Add(r);
+                        else if (gemInARow.Count >= 2)
+                            gemInARow.Add(c);
+
+                        if (gemInACol.Count >= 2)
+                        {
+                            int minRow = _details.RowCount;
+                            foreach (int i in gemInACol)
+                            {
+                                if (i < minRow)
+                                    minRow = i;
+
+                                _particles.Engines.Add(new GemExplosion(_gems[i, c]));
+
+                                UnmanageObjects(_gems[i, c]);
+                                _gameObjects.Remove(_gems[i, c]);
+                                //_gems[i, c] = null;
+                            }
+
+                            FallGemCol(minRow, c, gemInACol.Count);
+                        }
+
+                        if (gemInARow.Count >= 2)
+                            foreach (int i in gemInARow)
+                            {
+                                _particles.Engines.Add(new GemExplosion(_gems[r, i]));
+
+                                UnmanageObjects(_gems[r, i]);
+                                _gameObjects.Remove(_gems[r, i]);
+
+                                FallGemCol(r, i, 1);
+                            }
+                    }
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            DropGems();
+
+            if (IsAllGemsStopped)
+                CheckChains();
+
+            foreach (Gem i in _gems)
+            {
+                i.Update(gameTime);
+            }            
 
             if (_gem1 != null)      // one gem is selected, no gems are moving
             {
@@ -312,18 +434,22 @@ namespace PQ
             else
                 CheckCollision();
 
-
+            _particles.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.Draw(gameTime, spriteBatch);
-
+            foreach (Gem i in _gems)
+            {
+                i.Draw(gameTime, spriteBatch);
+            }
+            
             if (_gem1 != null)
             {
                 _selGemEffect.Draw(gameTime, spriteBatch);
             }
-        }
 
+            _particles.Draw(gameTime, spriteBatch);
+        }
     }
 }

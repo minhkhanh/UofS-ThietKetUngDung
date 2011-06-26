@@ -423,6 +423,16 @@ namespace PQ
 
         #endregion
 
+        public Vector2 Position
+        {
+            get { return new Vector2(X, Y); }
+            set 
+            {
+                X = value.X;
+                Y = value.Y;
+            }
+        }
+
         protected GameState _parent = null;
         public GameState Parent
         {
