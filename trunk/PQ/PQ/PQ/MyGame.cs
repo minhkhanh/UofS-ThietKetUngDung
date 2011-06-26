@@ -73,6 +73,14 @@ namespace PQ
             set { _characterManager = value; }
         }
 
+        Texture2DManager _txt2dManager = new Texture2DManager();
+
+        public Texture2DManager Txt2dManager
+        {
+            get { return _txt2dManager; }
+            set { _txt2dManager = value; }
+        }
+
         #endregion
 
         #region events
@@ -155,6 +163,8 @@ namespace PQ
 
         #endregion
 
+        Texture2D _cursorMain;
+
         public MyGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -187,7 +197,7 @@ namespace PQ
 
         protected override void Initialize()
         {
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
 
             graphics.PreferredBackBufferWidth = (int)(1024 * GlobalClass.SCALE);
             graphics.PreferredBackBufferHeight = (int)(768 * GlobalClass.SCALE);
@@ -203,12 +213,13 @@ namespace PQ
 
         void LoadManagers()
         {
+            _txt2dManager.LoadPrototypes(Content);
+            _spriteManager.LoadPrototypes(Content);
             _buttonManager.LoadPrototypes(Content);
             _fontManager.LoadPrototypes(Content);
             _gemManager.LoadPrototypes(Content);
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
-            _spriteManager.LoadPrototypes(Content);
             _characterManager.LoadPrototypes(Content);
         }
 
@@ -219,6 +230,8 @@ namespace PQ
             LoadManagers();
 
             _gameHero = _characterManager.CreateObject((int)CharacterName.HeroKnightMale1) as Character;
+
+            _cursorMain = _txt2dManager.CreateObject((int)Texture2DName.CursorMain) as Texture2D;
 
             _currState.StartState();
         }
@@ -246,7 +259,6 @@ namespace PQ
             KeyboardState kbState = Keyboard.GetState();
             RaiseGameKeyEvents(kbState);
 
-            //_gameStateManager.CurrentGameState.Update(gameTime);
             _currState.Update(gameTime);
 
             base.Update(gameTime);
@@ -257,10 +269,12 @@ namespace PQ
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            MouseState msState = Mouse.GetState();
             spriteBatch.Begin();
 
             _currState.Draw(gameTime, spriteBatch);
+
+            spriteBatch.Draw(_cursorMain, new Vector2(msState.X, msState.Y), Color.White);
 
             spriteBatch.End();
 

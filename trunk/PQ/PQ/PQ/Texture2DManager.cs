@@ -2,23 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
-    public abstract class Texture2DManager
+    enum Texture2DName
     {
-        protected List<Texture2D> _textures = new List<Texture2D>();
+        CursorMain,
+    }
 
-        public virtual void InitPrototypes(ContentManager content)
+    public class Texture2DManager: AbstractManager
+    {
+        public override object CreateObject(int idx)
         {
-            
+            return _prototypes[idx] as Texture2D;
         }
 
-        public virtual Texture2D CreateObject(int idx)
+        public override void LoadPrototypes(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-            return null;
+            //////////////////////////////////////////////////////////////////////////
+            // Cursors
+            //////////////////////////////////////////////////////////////////////////
+
+            Texture2D txt2d = content.Load<Texture2D>(@"Images\CursorMain");
+            _prototypes.Add((int)Texture2DName.CursorMain, txt2d);
         }
     }
 }

@@ -184,6 +184,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Images\CursorMain.png">
+      <Name>CursorMain</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>
       <Importer>XmlImporter</Importer>

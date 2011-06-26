@@ -131,8 +131,8 @@
     <Compile Include="GemColorState.cs" />
     <Compile Include="GemState.cs" />
     <Compile Include="GemGreen.cs" />
-    <Compile Include="GemVirtual.cs" />
     <Compile Include="GemWhite.cs" />
+    <Compile Include="GemWrongSelectedEffect.cs" />
     <Compile Include="GemYellow.cs" />
     <Compile Include="GlobalClass.cs" />
     <Compile Include="HeroDruidMale1.cs" />
@@ -159,7 +159,7 @@
     <Compile Include="GameButtonUpState.cs" />
     <Compile Include="GameDialog.cs" />
     <Compile Include="Player.cs" />
-    <Compile Include="SelectedGemEffect.cs" />
+    <Compile Include="GemSelectedEffect.cs" />
     <Compile Include="SplittingDetails.cs" />
     <Compile Include="GlobalMap.cs" />
     <Compile Include="MapManager.cs" />
@@ -178,6 +178,7 @@
     <Compile Include="Sprite2DManager.cs" />
     <Compile Include="SpriteFontManager.cs" />
     <Compile Include="SpriteText.cs" />
+    <Compile Include="Texture2DManager.cs" />
     <Compile Include="VerticalPlaneMotionModule.cs" />
   </ItemGroup>
   <ItemGroup>

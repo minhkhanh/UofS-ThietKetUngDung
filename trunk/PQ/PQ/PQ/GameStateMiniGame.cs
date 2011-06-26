@@ -35,8 +35,6 @@ namespace PQ
         public GameStateMiniGame(Character computer, MyGame game)
             : base(game)
         {
-            //_stateId = GameStateId.StateMiniGame;
-
             _computer = computer;
         }
 
