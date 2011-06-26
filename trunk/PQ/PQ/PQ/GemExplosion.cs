@@ -11,7 +11,7 @@ namespace PQ
     {
         Color _colorGem;
         public GemExplosion(Gem gem)
-            : base(120, (gem.Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.Sparkle) as Sprite2D).Frames, new Vector2(gem.Bounds.Center.X, gem.Bounds.Center.Y))
+            : base(100, (gem.Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.Sparkle) as Sprite2D).Frames, new Vector2(gem.Bounds.Center.X, gem.Bounds.Center.Y))
         {
             _colorGem = gem.ColorState.Color;
             _colorGem.A = 0;

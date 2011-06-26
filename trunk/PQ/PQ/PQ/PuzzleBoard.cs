@@ -20,6 +20,7 @@ namespace PQ
 
         Random _rand = new Random();
         Gem[,] _gems;
+        int[,] _chains;
 
         SelectedGemEffect _selGemEffect;
 
@@ -31,11 +32,13 @@ namespace PQ
 
             _selGemEffect = spriteManager.CreateObject((int)Sprite2DName.SelectedGemEffect) as SelectedGemEffect;
 
+            _chains = new int[_details.RowCount + 1, _details.ColumnCount];
             _gems = new Gem[_details.RowCount, _details.ColumnCount];
             for (int r = 0; r < _details.RowCount; ++r)
                 for (int c = 0; c < _details.ColumnCount; ++c)
                 {
                     _gems[r, c] = new Gem();
+                    _chains[r, c] = 1;
                 }
         }
 
@@ -60,28 +63,36 @@ namespace PQ
             return gem;
         }
 
-        int GetBlankCellInCol(int c)
+        int GetBottomMarkedCell(int c)
         {
-            int cells = 0;
-            for (int d = 0; d < _details.RowCount; ++d)
+            int d = _details.RowCount - 1;
+            for ( ; d >= 0; --d)
             {
-                if (_gems[d, c].ColorState.Name == GemName.None)
-                    ++cells;
+                if (_chains[d, c] == 1)
+                {
+                    return d;
+                }
             }
 
-            return cells;
+            return d;
         }
 
         void DropGems()
         {
             for (int c = 0; c < _details.ColumnCount; ++c)
             {
-                int cells = GetBlankCellInCol(c);
-                for (int r = 0; r < cells; ++r)
+                int count1 = _chains[_details.RowCount, c];
+                for (int r = 0; r < _details.RowCount; ++r)
                 {
-                    _gems[r, c] = GenerateGem();
-                    _gems[r, c].Position = new Vector2(Coord2Pos(r, c).X, this.Y + (r - cells) * _gems[r, c].Height);
-                    _gems[r, c].MotionModule.Velocity = new Vector2(0, 5);
+                    if (_chains[r,c] == 1)
+                    {
+                        UnmanageObjects(_gems[r, c]);
+                        _gameObjects.Remove(_gems[r, c]);
+
+                        _gems[r, c] = GenerateGem();
+                        _gems[r, c].Position = new Vector2(Coord2Pos(r, c).X, this.Y + (r - count1) * _gems[r, c].Height);
+                        _gems[r, c].MotionModule.Velocity = new Vector2(0, 5);
+                    }
                 }
             }
         }
@@ -91,12 +102,15 @@ namespace PQ
             this.UnmanageObjects(_gameObjects.ToArray());
             _gameObjects.Clear();
             _gems = new Gem[_details.RowCount, _details.ColumnCount];
+            _chains = new int[_details.RowCount+1, _details.ColumnCount];
             for (int r = 0; r < _details.RowCount; ++r)
                 for (int c = 0; c < _details.ColumnCount; ++c)
                 {
                     _gems[r, c] = new Gem();
+                    _chains[r, c] = 1;
                 }
 
+            ResolveChains();
             DropGems();
         }
 
@@ -284,16 +298,18 @@ namespace PQ
             get { return Parent as GameStateMiniGame; }
         }
 
-        List<int> CheckCol(int r, int c)
+        void CheckCol(int r, int c)
         {
             List<int> gemInACol = new List<int>();
-
+            //int count = 0;
             // above
             for (int d = r - 1; d >= 0; --d)
             {
-                if (!_gems[d,c].IsThrough && _gems[r,c].IsSameColor(_gems[d,c]))
+                if (_gems[r,c].IsSameColor(_gems[d,c]))
                 {
                     gemInACol.Add(d);
+                    //_chains[d, c] = 1;
+                    //++count;
                 }
                 else
                     break;
@@ -302,27 +318,42 @@ namespace PQ
             // below
             for (int d = r + 1; d < _details.RowCount; ++d)
             {
-                if (!_gems[d,c].IsThrough && _gems[r,c].IsSameColor(_gems[d,c]))
+                if (_gems[r,c].IsSameColor(_gems[d,c]))
                 {
                     gemInACol.Add(d);
+                    //_chains[d, c] = 1;
+                    //++count;
                 }
                 else
                     break;
             }
 
-            return gemInACol;
+            //return gemInACol;
+            if (gemInACol.Count >= 2)
+            {
+                _chains[r, c] = 1;
+                _particles.Generators.Add(new GemExplosion(_gems[r, c]));
+                foreach (int i in gemInACol)
+                {
+                    _chains[i, c] = 1;
+                    _particles.Generators.Add(new GemExplosion(_gems[i, c]));
+                }
+            }
         }
 
-        List<int> CheckRow(int r, int c)
+        void CheckRow(int r, int c)
         {
             List<int> gemInARow = new List<int>();
+            //int count = 0;
 
             // left side
             for (int d = c - 1; d >= 0; --d)
             {
-                if (!_gems[r,d].IsThrough && _gems[r,c].IsSameColor(_gems[r,d]))
+                if (_gems[r,c].IsSameColor(_gems[r,d]))
                 {
                     gemInARow.Add(d);
+                    //_chains[r, d] = 1;
+                    //++count;
                 }
                 else
                     break;
@@ -331,15 +362,27 @@ namespace PQ
             // right side
             for (int d = c + 1; d < _details.ColumnCount; ++d)
             {
-                if (!_gems[r,d].IsThrough && _gems[r,c].IsSameColor(_gems[r,d]))
+                if (_gems[r,c].IsSameColor(_gems[r,d]))
                 {
                     gemInARow.Add(d);
+                    //_chains[r, d] = 1;
+                    //++count;
                 }
                 else
                     break;
             }
 
-            return gemInARow;
+            //return gemInARow;
+            if (gemInARow.Count >= 2)
+            {
+                _chains[r, c] = 1;
+                _particles.Generators.Add(new GemExplosion(_gems[r, c]));
+                foreach (int i in gemInARow)
+                {
+                    _chains[r, i] = 1;
+                    _particles.Generators.Add(new GemExplosion(_gems[r, i]));
+                }                
+            }
         }
 
         public bool IsAllGemsStopped
@@ -355,70 +398,86 @@ namespace PQ
             }
         }
 
+        void CheckChains()
+        {
+            //bool flag = false;
+            _chains = new int[_details.RowCount + 1, _details.ColumnCount];
+            for (int r = 0; r < _details.RowCount; ++r)
+                for (int c = 0; c < _details.ColumnCount; ++c)
+                {
+                    _chains[r, c] = 0;
+                }
+
+            for (int r = 0; r < _details.RowCount; ++r)
+            {
+                for (int c = 0; c < _details.ColumnCount; ++c)
+                {
+                    CheckRow(r, c);
+                    CheckCol(r, c);
+                }
+            }
+        }
+
         void FallGemCol(int r, int c, int n)
         {
             for (int d = r - 1; d >= 0; --d)
-                if (!_gems[d, c].IsThrough)
+                //if (!_gems[d, c].IsThrough)
                 {
-                    _gems[d, c].MotionModule.Velocity = new Vector2(0, 5);
                     _gems[d + n, c] = _gems[d, c];
+                    if (_gems[d+n,c].ColorState.Name != GemName.None)
+                        _gems[d + n, c].MotionModule.Velocity = new Vector2(0, 5);
                 }
 
             for (int d = 0; d < n; ++d)
-                _gems[d, c].ChangeColorState(new GemColorState());
+            {
+                _gems[d, c] = null;
+                _gems[d, c] = new Gem();
+            }
         }
 
-        void CheckChains()
+        void ResolveChains()
         {
-            for (int r = 0; r < _details.RowCount; ++r)
-                for (int c = 0; c < _details.ColumnCount; ++c)
-                    if (!_gems[r, c].IsThrough)
+            for (int c = 0; c < _details.ColumnCount; ++c)
+            {
+                int count1 = 0;
+                int r = _details.RowCount - 1;
+                for ( ; r >= 0 ; --r)
+                {
+                    if (_chains[r, c] == 1)
                     {
-                        List<int> gemInARow = CheckRow(r, c);
-                        List<int> gemInACol = CheckCol(r, c);
-
-                        if (gemInACol.Count >= 2)
-                            gemInACol.Add(r);
-                        else if (gemInARow.Count >= 2)
-                            gemInARow.Add(c);
-
-                        if (gemInACol.Count >= 2)
-                        {
-                            int minRow = _details.RowCount;
-                            foreach (int i in gemInACol)
+                        ++count1;
+                        for (int d = r - 1; d >=0; --d)
+                            if (_chains[d, c] == 0)
                             {
-                                if (i < minRow)
-                                    minRow = i;
+                                int tmp = _chains[d, c];
+                                _chains[d, c] = _chains[r, c];
+                                _chains[r, c] = tmp;
 
-                                _particles.Engines.Add(new GemExplosion(_gems[i, c]));
+                                _gems[d, c].MotionModule.Velocity = new Vector2(0, 5);
 
-                                UnmanageObjects(_gems[i, c]);
-                                _gameObjects.Remove(_gems[i, c]);
-                                //_gems[i, c] = null;
-                            }
+                                Gem gem = _gems[d, c];
+                                _gems[d, c] = _gems[r, c];
+                                _gems[r, c] = gem;
 
-                            FallGemCol(minRow, c, gemInACol.Count);
-                        }
-
-                        if (gemInARow.Count >= 2)
-                            foreach (int i in gemInARow)
-                            {
-                                _particles.Engines.Add(new GemExplosion(_gems[r, i]));
-
-                                UnmanageObjects(_gems[r, i]);
-                                _gameObjects.Remove(_gems[r, i]);
-
-                                FallGemCol(r, i, 1);
+                                break;
                             }
                     }
+                }
+
+                _chains[_details.RowCount, c] = count1;
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            DropGems();
-
             if (IsAllGemsStopped)
+            {
                 CheckChains();
+
+                ResolveChains();
+
+                DropGems();
+            }
 
             foreach (Gem i in _gems)
             {

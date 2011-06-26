@@ -10,7 +10,7 @@ namespace PQ
     public class ParticleEngine
     {
         List<ParticleGenerator> _listEngine = new List<ParticleGenerator>();
-        public List<ParticleGenerator> Engines
+        public List<ParticleGenerator> Generators
         {
             get { return _listEngine; }
             set { _listEngine = value; }
