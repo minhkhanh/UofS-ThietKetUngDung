@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<SoundLists>
+  <Sound name="ActivateCompanion" />
+  <Sound name="AddEncounter" />
+  <Sound name="AddRuin" />
+  <Sound name="AirMana" />
+  <Sound name="AISpell" />
+</SoundLists>

@@ -73,6 +73,14 @@ namespace PQ
             set { _characterManager = value; }
         }
 
+        SoundManager _soundManager = new SoundManager();
+
+        public SoundManager SoundManager
+        {
+            get { return _soundManager; }
+            set { _soundManager = value; }
+        }
+
         Texture2DManager _txt2dManager = new Texture2DManager();
 
         public Texture2DManager Txt2dManager
@@ -205,8 +213,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            _currState = new GameStateMiniGame(null, this);
-            //_currState = new GameStateExplorer(this);
+            //_currState = new GameStateMiniGame(null, this);
+            _currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -221,6 +229,7 @@ namespace PQ
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
             _characterManager.LoadPrototypes(Content);
+            _soundManager.LoadSoundResource(Content);
         }
 
         protected override void LoadContent()

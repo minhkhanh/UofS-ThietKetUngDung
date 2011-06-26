@@ -72,7 +72,7 @@ namespace PQ
 
         public override void InitEvents()
         {
-            //this.MouseUp += new EventHandler<GameMouseEventArgs>(GameStateExplorer_MouseUp);
+            this.MouseUp += new EventHandler<GameMouseEventArgs>(GameStateExplorer_MouseUp);
             this.KeyDown += new EventHandler<GameKeyEventArgs>(GameStateExplorer_KeyDown);
         }
 
@@ -112,8 +112,9 @@ namespace PQ
 
         void GameStateExplorer_MouseUp(object sender, GameMouseEventArgs e)
         {
-            Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
-            _character.GoToLogicalXY(v.X, v.Y);
+            //Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
+            //_character.GoToLogicalXY(v.X, v.Y);
+            this.Game.SoundManager.Play("AISpell");
         }
 
         public override void UnloadContent()

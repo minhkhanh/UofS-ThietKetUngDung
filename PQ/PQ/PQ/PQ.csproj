@@ -160,6 +160,7 @@
     <Compile Include="GameDialog.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="GemSelectedEffect.cs" />
+    <Compile Include="SoundManager.cs" />
     <Compile Include="SplittingDetails.cs" />
     <Compile Include="GlobalMap.cs" />
     <Compile Include="MapManager.cs" />
