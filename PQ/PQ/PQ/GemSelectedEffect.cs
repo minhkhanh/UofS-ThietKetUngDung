@@ -7,19 +7,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PQ
 {
-    public class SelectedGemEffect: Sprite2D
+    public class GemSelectedEffect: Sprite2D
     {
+        float _angularVar = 0.02f;
         public Vector2 RotationOrigin
         {
             get { return new Vector2(Width / 2, Height / 2); }
         }
 
-        public SelectedGemEffect(List<Texture2D> frames, int x, int y)
+        public GemSelectedEffect(List<Texture2D> frames, int x, int y)
             : base(frames, x, y)
         {
         }
 
-        public SelectedGemEffect(Texture2D txt2d, float x, float y, SplittingDetails detals)
+        public GemSelectedEffect(Texture2D txt2d, float x, float y, SplittingDetails detals)
             : base(txt2d, x, y, detals)
         {
 
@@ -32,6 +33,13 @@ namespace PQ
                 //Vector2 rotOrigin = new Vector2(Width/2, Height/2);
                 spriteBatch.Draw(_frames[CurrentFrame], Position * GlobalClass.SCALE + RotationOrigin, _srcRect, Color.White, _rotation, RotationOrigin, _scale * GlobalClass.SCALE, _fliping, 1);
             }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            _rotation -= _angularVar;
+            if (_rotation < 0)
+                _rotation += 360;
         }
     }
 }

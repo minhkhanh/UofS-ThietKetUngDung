@@ -61,6 +61,13 @@ namespace PQ
             get { return _color; }
             set { _color = value; }
         }
+        int _alphaVariant;
+
+        public int AlphaVariant
+        {
+            get { return _alphaVariant; }
+            set { _alphaVariant = value; }
+        }
 
         float _size;
 
@@ -68,6 +75,14 @@ namespace PQ
         {
             get { return _size; }
             set { _size = value; }
+        }
+
+        float _sizeVariant;
+
+        public float SizeVariant
+        {
+            get { return _sizeVariant; }
+            set { _sizeVariant = value; }
         }
 
         int _ttl;
@@ -78,7 +93,9 @@ namespace PQ
         }
 
         public Particle2D(Texture2D texture, Vector2 position, Vector2 velocity,
-            float angle, float angularVelocity, Color color, float size, int ttl)
+            float angle, float angularVelocity,
+            Color color, int alphaVariant,   
+            float size, float sizeVariant, int ttl)
         {
             _txt2dImg = texture;
             _pos = position;
@@ -95,6 +112,11 @@ namespace PQ
             _ttl -= 5;
             _pos += Velocity;
             _angle += AngularVelocity;
+            _size += _sizeVariant;
+            if (_alphaVariant > 0)
+                _color.A += (byte)_alphaVariant;
+            else
+                _color.A -= (byte)Math.Abs(_alphaVariant);
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

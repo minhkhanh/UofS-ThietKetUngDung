@@ -9,7 +9,7 @@ namespace PQ
 {
     public enum Sprite2DName
     {
-        SelectedGemEffect,
+        GemSelectedEffect,
         GemGreen,
         GemRed,
         GemYellow,
@@ -18,6 +18,7 @@ namespace PQ
         GemPurple,
         GemGold,
         Sparkle,
+        GemWrongSelectedEffect,
     }
 
     public class Sprite2DManager: AbstractManager
@@ -32,14 +33,18 @@ namespace PQ
             
             Texture2D txt2dBattleMisc = content.Load<Texture2D>(@"Images\Skin_Battle_Misc");
             SplittingDetails details = new SplittingDetails(
-                1,1,0,0,
-                120,120,0,0,
-                224,78
+                1,2,0,0,
+                128,127,
+                0,1,
+                91,74
                 );
 
             List<Texture2D> images = GlobalClass.SplitImage(txt2dBattleMisc, details);
-            Sprite2D sprite = new SelectedGemEffect(images, 0, 0);
-            _prototypes.Add((int)Sprite2DName.SelectedGemEffect, sprite);
+            Sprite2D sprite = new GemSelectedEffect(new List<Texture2D>{images[1]}, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemSelectedEffect, sprite);
+
+            sprite = new GemWrongSelectedEffect(new List<Texture2D> { images[0] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.GemWrongSelectedEffect, sprite);
 
             //////////////////////////////////////////////////////////////////////////
             // Skin_Gems_Grid
@@ -78,7 +83,7 @@ namespace PQ
 
             Texture2D txt2dParticle = content.Load<Texture2D>(@"Images\Sparkle");
             sprite = new Sprite2D(new List<Texture2D> { txt2dParticle }, 0, 0);
-            _prototypes.Add((int)Sprite2DName.Sparkle, sprite);
+            _prototypes.Add((int)Sprite2DName.Sparkle, sprite);            
 
         }
 

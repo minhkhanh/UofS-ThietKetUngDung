@@ -13,7 +13,7 @@ namespace PQ
     public class Character : GameEntity
     {
         protected CharacterStats _mainStats;
-        protected MiniGameStats _miniStats;
+        protected MiniGameStats _miniStats = null;
         public MiniGameStats MiniStats
         {
             get { return _miniStats; }
