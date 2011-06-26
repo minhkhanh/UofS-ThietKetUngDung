@@ -130,11 +130,6 @@ namespace PQ
             }
         }
 
-        public virtual void CheckCollision()
-        {
-
-        }
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

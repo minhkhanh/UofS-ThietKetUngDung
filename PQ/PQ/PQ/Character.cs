@@ -12,7 +12,18 @@ namespace PQ
 {
     public class Character : GameEntity
     {
-        protected CharacterStats _stats;
+        protected CharacterStats _mainStats;
+        protected MiniGameStats _miniStats;
+        public MiniGameStats MiniStats
+        {
+            get { return _miniStats; }
+            set { _miniStats = value; }
+        }
+
+        public void CreateMiniStats()
+        {
+            _miniStats = new MiniGameStats(0, 0, 0, 0, 100);
+        }
 
         public override GameObject Clone()
         {

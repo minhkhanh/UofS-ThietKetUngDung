@@ -147,7 +147,7 @@ namespace PQ
 
         Character _gameHero;
 
-        public Character GameHero
+        public Character Hero
         {
             get { return _gameHero; }
             set { _gameHero = value; }
@@ -195,8 +195,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            //_currState = new GameStateMiniGame(this);
-            _currState = new GameStateExplorer(this);
+            _currState = new GameStateMiniGame(null, this);
+            //_currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -218,7 +218,7 @@ namespace PQ
 
             LoadManagers();
 
-            _gameHero = _characterManager.CreateObject((int)CharacterName.MaleHeroKnight1) as Character;
+            _gameHero = _characterManager.CreateObject((int)CharacterName.HeroKnightMale1) as Character;
 
             _currState.StartState();
         }

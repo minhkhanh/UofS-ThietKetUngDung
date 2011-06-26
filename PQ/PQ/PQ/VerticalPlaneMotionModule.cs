@@ -17,11 +17,18 @@ namespace PQ
             set { _ax = value; }
         }
 
-        float _ay = G;
+        float _ay;
         public float Ay
         {
             get { return _ay; }
             set { _ay = value; }
+        }
+
+        public VerticalPlaneMotionModule()
+            : base(0,0)
+        {
+            _ax = 0;
+            _ay = 0;
         }
 
         public VerticalPlaneMotionModule(float ax, float ay, float vx, float vy)
@@ -41,28 +48,21 @@ namespace PQ
 
         public override void OnMotion(GameObject gameObj, GameTime gameTime)
         {
-            //double dt = gameTime.ElapsedGameTime.TotalSeconds;
-            //double dx = _vx * dt + 0.5 * _ax * dt * dt;
-            //double dy = _vy * dt + 0.5 * _ay * dt * dt;
+            if (IsPlaying)
+            {
+                gameObj.X += _vx;
+                gameObj.Y += _vy;
 
-            //gameObj.X += (float)dx;
-            //_vx += (float)(_ax * dt);
-
-            //gameObj.Y += (float)dy;
-            //_vy += (float)(_ay * dt);
-
-            gameObj.X += _vx;
-            gameObj.Y += _vy;
-
-            _vx += _ax;
-            _vy += _ay;
+                _vx += _ax;
+                _vy += _ay;
+            }
         }
 
         public override bool IsMoving
         {
             get
             {
-                return (_ax != 0 || _ay != 0 || _vx != 0 || _vy != 0);
+                return (_vx != 0 || _vy != 0 || _ax != 0 || _ay != 0);
             }
         }
 

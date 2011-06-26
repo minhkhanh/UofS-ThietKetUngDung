@@ -14,6 +14,11 @@ namespace PQ
             get { return new Vector2(Width / 2, Height / 2); }
         }
 
+        public SelectedGemEffect(List<Texture2D> frames, int x, int y)
+            : base(frames, x, y)
+        {
+        }
+
         public SelectedGemEffect(Texture2D txt2d, float x, float y, SplittingDetails detals)
             : base(txt2d, x, y, detals)
         {

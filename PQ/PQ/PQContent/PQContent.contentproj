@@ -179,6 +179,11 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+    <Compile Include="Images\Sparkle.png">
+      <Name>Sparkle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>
       <Importer>XmlImporter</Importer>
