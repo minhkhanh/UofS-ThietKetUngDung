@@ -45,6 +45,9 @@ namespace PQ
 
         public bool IsSameColor(Gem gem)
         {
+            if (_colorState.Name == GemName.None)
+                return false;
+
             return (_colorState.Name == gem._colorState.Name);
         }
 

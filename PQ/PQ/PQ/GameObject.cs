@@ -416,7 +416,7 @@ namespace PQ
             return Bounds.Intersects(obj.Bounds);
         }
 
-        public bool IsCollided(GameObject obj)
+        public virtual bool IsCollided(GameObject obj)
         {
             return BounRectCollide(obj);
         }

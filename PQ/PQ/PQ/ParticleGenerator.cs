@@ -41,7 +41,7 @@ namespace PQ
         {
             _ttl -= 5;
 
-            int total = 5;
+            int total = 1;
 
             for (int i = 0; i < total; i++)
             {

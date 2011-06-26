@@ -10,7 +10,7 @@ namespace PQ
     {
         public override Color Color
         {
-            get { return Color.Blue; }
+            get { return Color.Cyan; }
         }
 
         public override GemName Name
