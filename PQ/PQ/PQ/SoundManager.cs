@@ -8,10 +8,10 @@ using System.Data;
 
 namespace PQ
 {
-    public class SoundManager
+    public static class SoundManager
     {
-        Dictionary<string, SoundEffect> _listSoundEffect;
-        public void LoadSoundResource(ContentManager content)
+        static Dictionary<string, SoundEffect> _listSoundEffect;
+        public static void LoadSoundResource(ContentManager content)
         {
             _listSoundEffect = new Dictionary<string, SoundEffect>();
             DataSet vdDataSet = new DataSet();
@@ -25,15 +25,15 @@ namespace PQ
                 _listSoundEffect.Add(str, sound);
             }
         }
-        public void Play(string name)
+        public static void Play(string name)
         {
             if (_listSoundEffect.ContainsKey(name))
             {
                 _listSoundEffect[name].Play(fVolume, 0, 0);
             }
         }
-        float fVolume = 1f;
-        public float Volume
+        static float fVolume = 1f;
+        public static float Volume
         {
             get { return fVolume; }
             set { fVolume = value; }

@@ -3,6 +3,13 @@
   <Sound name="ActivateCompanion" />
   <Sound name="AddEncounter" />
   <Sound name="AddRuin" />
-  <Sound name="AirMana" />
   <Sound name="AISpell" />
+  
+  <Sound name="Damage" />
+  <Sound name="Gold" />
+  <Sound name="WaterMana" />
+  <Sound name="AirMana" />
+  <Sound name="FireMana" />
+  <Sound name="EarthMana" />
+  <Sound name="XP" />
 </SoundLists>
