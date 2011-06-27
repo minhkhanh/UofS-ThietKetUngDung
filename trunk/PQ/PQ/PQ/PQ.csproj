@@ -121,6 +121,7 @@
     <Compile Include="GameStateMainMenu.cs" />
     <Compile Include="GameStateManager.cs" />
     <Compile Include="GameStateMiniGame.cs" />
+    <Compile Include="GameStateTrailer.cs" />
     <Compile Include="Gem.cs" />
     <Compile Include="GemBlue.cs" />
     <Compile Include="GemExplosion.cs" />

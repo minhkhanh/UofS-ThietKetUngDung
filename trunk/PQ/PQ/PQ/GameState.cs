@@ -11,6 +11,7 @@ namespace PQ
     public enum GameStateId
     {
         State,
+        StateTrailer,
         StateMainMenu,
         StateExplorer,
         StateMiniGame

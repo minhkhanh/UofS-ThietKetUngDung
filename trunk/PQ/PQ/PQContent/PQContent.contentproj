@@ -49,7 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Images\Maps\" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +186,11 @@
       <Name>CursorMain</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Assets\Puzzle Quest 2.wmv">
+      <Name>Puzzle Quest 2</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
     </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>

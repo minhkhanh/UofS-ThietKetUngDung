@@ -179,6 +179,15 @@ namespace PQ
             Content.RootDirectory = "Content";
         }
 
+        public int Width
+        {
+            get { return this.graphics.GraphicsDevice.Viewport.Width; }
+        }
+        public int Height
+        {
+            get { return this.graphics.GraphicsDevice.Viewport.Height; }
+        }
+
         public void ManageObjects(params GameObject[] gameObjs)
         {
             for (int i = 0; i < gameObjs.Count(); ++i)
@@ -214,7 +223,8 @@ namespace PQ
 
             //_gameStateManager = new GameStateManager(this);
             //_currState = new GameStateMiniGame(null, this);
-            _currState = new GameStateExplorer(this);
+            //_currState = new GameStateExplorer(this);
+            _currState = new GameStateTrailer(this);
 
             base.Initialize();
         }

@@ -361,8 +361,15 @@
   <Class Name="PQ.MusicManager">
     <Position X="1.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAgAIAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAoAIAAAAAAQA=</HashCode>
       <FileName>MusicManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.GameStateTrailer">
+    <Position X="13.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameStateTrailer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="PQ.CharacterName" Collapsed="true">
@@ -396,7 +403,7 @@
   <Enum Name="PQ.GameStateId" Collapsed="true">
     <Position X="30.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIQAAAAAAACAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAIQAAEAAAACAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>GameState.cs</FileName>
     </TypeIdentifier>
   </Enum>
