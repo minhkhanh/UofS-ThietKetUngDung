@@ -9,17 +9,22 @@ namespace PQ
 {
     enum FontName
     {
-        Algerian,
+        Algerian_22_Bld,
+        Tahoma_S_Bld,
     }
 
-    public class SpriteFontManager: AbstractManager
+    public static class SpriteFontManager
     {
-        public override void LoadPrototypes(ContentManager content)
+        static Dictionary<int, SpriteFont> _prototypes;
+        public static void LoadPrototypes(ContentManager content)
         {
-            _prototypes.Add((int)FontName.Algerian, content.Load<SpriteFont>(@"Fonts\Algerian"));
+            _prototypes = new Dictionary<int, SpriteFont>();
+
+            _prototypes.Add((int)FontName.Algerian_22_Bld, content.Load<SpriteFont>(@"Fonts\Algerian_22_Bold"));
+            _prototypes.Add((int)FontName.Tahoma_S_Bld, content.Load<SpriteFont>(@"Fonts\Tahoma_S_Bld"));
         }
 
-        public override object CreateObject(int idx)
+        public static SpriteFont CreateObject(int idx)
         {
             return _prototypes[idx];
         }

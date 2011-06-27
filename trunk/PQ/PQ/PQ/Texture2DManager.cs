@@ -9,6 +9,8 @@ namespace PQ
     enum Texture2DName
     {
         CursorMain,
+        PortraitHeroKnight0,
+        PortraitHeroKnight1
     }
 
     public class Texture2DManager: AbstractManager
@@ -26,6 +28,12 @@ namespace PQ
 
             Texture2D txt2d = content.Load<Texture2D>(@"Images\CursorMain");
             _prototypes.Add((int)Texture2DName.CursorMain, txt2d);
+
+            //////////////////////////////////////////////////////////////////////////
+            // Mana bars
+            //////////////////////////////////////////////////////////////////////////
+
+            //txt2d = content.Load<Texture2D>(@"Images\")
         }
     }
 }

@@ -34,7 +34,7 @@ namespace PQ
         public override void LoadContent()
         {
             _mainMenu = new MainMenu(Game.GraphicsDevice.PresentationParameters.Bounds.Width, 300);
-            _mainMenu.Init(Game.ButtonManager, Game.FontManager);
+            _mainMenu.Init(Game.ButtonManager);
             this.ManageObjects(_mainMenu);
             _gameObjects.Add(_mainMenu);
 

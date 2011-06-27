@@ -32,6 +32,15 @@ namespace PQ
                 _listSoundEffect[name].Play(fVolume, 0, 0);
             }
         }
+
+        public static void PlayWithVolume(string name, float percent)
+        {
+            if (_listSoundEffect.ContainsKey(name))
+            {
+                _listSoundEffect[name].Play(fVolume * percent, 0, 0);
+            }
+        }
+
         static float fVolume = 1f;
         public static float Volume
         {
