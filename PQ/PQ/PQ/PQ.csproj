@@ -145,6 +145,7 @@
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MovingPlaneMotionModule.cs" />
+    <Compile Include="MusicManager.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="Particle2D.cs" />
     <Compile Include="ParticleGenerator.cs" />

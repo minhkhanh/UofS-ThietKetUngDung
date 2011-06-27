@@ -213,8 +213,8 @@ namespace PQ
             graphics.ApplyChanges();
 
             //_gameStateManager = new GameStateManager(this);
-            _currState = new GameStateMiniGame(null, this);
-            //_currState = new GameStateExplorer(this);
+            //_currState = new GameStateMiniGame(null, this);
+            _currState = new GameStateExplorer(this);
 
             base.Initialize();
         }
@@ -230,7 +230,7 @@ namespace PQ
             _gameBuildingManager.LoadPrototypes(Content);
             _characterManager.LoadPrototypes(Content);
             //_soundManager.LoadSoundResource(Content);
-
+            MusicManager.LoadSoundResource(Content);
             SoundManager.LoadSoundResource(Content);
         }
 

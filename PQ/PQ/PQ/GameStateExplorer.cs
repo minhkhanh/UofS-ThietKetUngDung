@@ -62,6 +62,7 @@ namespace PQ
             this._gameObjects.Add(_character);            
             _character.Animate(12);
             _character.DirectionSprite = 4;
+            MusicManager.Play("Carl Orff - O Fortuna");
         }
 
         void building_MouseUp(object sender, GameMouseEventArgs e)
@@ -115,6 +116,7 @@ namespace PQ
             //Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
             //_character.GoToLogicalXY(v.X, v.Y);
             //this.Game.SoundManager.Play("AISpell");
+            MusicManager.Stop();
         }
 
         public override void UnloadContent()
