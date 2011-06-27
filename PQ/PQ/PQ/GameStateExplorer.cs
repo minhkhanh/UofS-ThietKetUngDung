@@ -58,7 +58,7 @@ namespace PQ
                 this.ManageObjects(tmp);
             }
 
-            _character = (Character)this.MyGame.CharacterManager.CreateObject((int)CharacterName.HeroKnightMale1);
+            _character = Game.Hero; //(Character)this.MyGame.CharacterManager.CreateObject((int)CharacterName.HeroKnightMale1);
             _character.GameObjectParent = this;
             this._gameObjects.Add(_character);            
             _character.Animate(12);
