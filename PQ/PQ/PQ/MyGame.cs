@@ -217,7 +217,7 @@ namespace PQ
             //_gameStateManager = new GameStateManager(this);
             //_currState = new GameStateMiniGame(null, this);
             //_currState = new GameStateExplorer(this);
-            _currState = new GameStateTrailer(this);
+            //_currState = new GameStateTrailer(this);
 
             base.Initialize();
         }
