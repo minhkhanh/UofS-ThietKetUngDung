@@ -28,6 +28,13 @@ namespace PQ
             set { _buttonManager = value; }
         }
 
+        SpriteFontManager _fontManager = new SpriteFontManager();
+        public SpriteFontManager FontManager
+        {
+            get { return _fontManager; }
+            set { _fontManager = value; }
+        }
+
         MapManager _mapManager = new MapManager();
         public PQ.MapManager MapManager
         {
@@ -216,7 +223,7 @@ namespace PQ
 
             //_gameStateManager = new GameStateManager(this);
             //_currState = new GameStateMiniGame(null, this);
-            //_currState = new GameStateExplorer(this);
+            _currState = new GameStateExplorer(this);
             //_currState = new GameStateTrailer(this);
 
             base.Initialize();
@@ -226,7 +233,8 @@ namespace PQ
         {
             _txt2dManager.LoadPrototypes(Content);
             _spriteManager.LoadPrototypes(Content);
-            _buttonManager.LoadPrototypes(Content);            
+            _buttonManager.LoadPrototypes(Content);
+            _fontManager.LoadPrototypes(Content);
             _gemManager.LoadPrototypes(Content);
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
@@ -234,7 +242,6 @@ namespace PQ
             //_soundManager.LoadSoundResource(Content);
             MusicManager.LoadSoundResource(Content);
             SoundManager.LoadSoundResource(Content);
-            SpriteFontManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()
@@ -247,9 +254,6 @@ namespace PQ
 
             _cursorMain = _txt2dManager.CreateObject((int)Texture2DName.CursorMain) as Texture2D;
 
-            _currState = new GameStateMiniGame(
-                _characterManager.CreateObject((int)CharacterName.HeroKnightMale2) as Character
-                , this);
             _currState.StartState();
         }
 
