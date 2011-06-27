@@ -18,9 +18,9 @@ namespace PQ
             get { return GemName.GemGold; }
         }
 
-        public override void Consumes(Character hero)
+        public override void Consumes(Character heroInTurn, Character heroNext)
         {
-            ++hero.MainStats.Gold;           
+            ++heroInTurn.MainStats.Gold;           
         }
 
         public override void PlaySound()

@@ -12,6 +12,12 @@ namespace PQ
         #region components
 
         GameButton _backBtn;
+
+        public GameButton BackButton
+        {
+            get { return _backBtn; }
+            set { _backBtn = value; }
+        }
         PuzzleBoard _board;
 
         #endregion
@@ -49,7 +55,7 @@ namespace PQ
             _sprites.Add(_bkgr);
 
             _backBtn = Game.ButtonManager.CreateObject(0) as GameButton;
-            _backBtn.Caption = "BACK";
+            _backBtn.Caption = "SURRENDER";
             _backBtn.X = _backBtn.Y = 10;
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);
@@ -74,7 +80,7 @@ namespace PQ
 
         public void _backBtn_MouseClick(object o, GameMouseEventArgs e)
         {
-            Game.SwitchState(new GameStateMainMenu(Game));
+            Game.SwitchState(new GameStateExplorer(Game));
         }
 
         public override void UnloadContent()

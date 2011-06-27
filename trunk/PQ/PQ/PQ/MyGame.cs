@@ -253,7 +253,6 @@ namespace PQ
             _btnMute.Y = 700;
             _btnMute.MouseDown += new EventHandler<GameMouseEventArgs>(_btnMute_MouseDown);
             ManageObjects(_btnMute);
-            
         }
 
         void _btnMute_MouseDown(object o, GameMouseEventArgs e)

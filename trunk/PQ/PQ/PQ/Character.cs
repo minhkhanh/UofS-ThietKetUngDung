@@ -36,7 +36,7 @@ namespace PQ
 
         public void CreateMiniStats()
         {
-            _miniStats = new MiniGameStats(0, 0, 0, 0, 100);
+            _miniStats = new MiniGameStats(0, 0, 0, 0, 4);
         }
 
         public override GameObject Clone()

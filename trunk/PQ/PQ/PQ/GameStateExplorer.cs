@@ -26,6 +26,7 @@ namespace PQ
         private Map _globalMap;
         List<GameBuilding> _listBuilding;
         Character _character;
+
         public override void LoadContent()
         {
             _globalMap = (GlobalMap) this.MyGame.MapManager.CreateObject(0);

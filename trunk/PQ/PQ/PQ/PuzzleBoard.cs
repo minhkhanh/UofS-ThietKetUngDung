@@ -39,17 +39,26 @@ namespace PQ
             get { return !_playTurn ? Parent.Game.Hero: _computer;}
         }
 
-        Sprite2D _barG;
-        Vector2 _posBarG;
+        Character HeroNext
+        {
+            get { return _playTurn ? Parent.Game.Hero : _computer; }
+        }
 
-        Sprite2D _barR;
-        Vector2 _posBarR;
+        float _originManaBarY;
 
-        Sprite2D _barY;
-        Vector2 _posBarY;
+        Sprite2D _barGHero;
+        Sprite2D _barRHero;
+        Sprite2D _barYHero;
+        Sprite2D _barBHero;
+        Sprite2D _barHpHero;
 
-        Sprite2D _barB;
-        Vector2 _posBarB;
+        Sprite2D _barGComp;
+        Sprite2D _barRComp;
+        Sprite2D _barYComp;
+        Sprite2D _barBComp;
+        Sprite2D _barHpComp;
+
+        GemWrongSelectedEffect[] _endSigns = new GemWrongSelectedEffect[4];
 
         public PuzzleBoard(Character computer, SplittingDetails details, Sprite2DManager spriteManager)
         {
@@ -76,21 +85,39 @@ namespace PQ
             Parent.Game.Hero.CreateMiniStats();
             _computer.CreateMiniStats();
 
-            _barG = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarGreen) as Sprite2D;
-            _barG.X = _posBarG.X = 101;
-            _posBarG.Y = 168;
+            _barGHero = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarGreen) as Sprite2D;
+            _barGHero.X = 101;
+            _barGHero.Y = 168;
+            _barRHero = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarRed) as Sprite2D;
+            _barRHero.X = 122;
+            _barRHero.Y = 168;
+            _barYHero = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarYellow) as Sprite2D;
+            _barYHero.X = 143;
+            _barYHero.Y = 168;
+            _barBHero = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarBlue) as Sprite2D;
+            _barBHero.X = 164;
+            _barBHero.Y = 168;
+            _barHpHero = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.HpBar) as Sprite2D;
+            _barHpHero.X = 15;
+            _barHpHero.Y = 123;
 
-            _barR = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarRed) as Sprite2D;
-            _barR.X = _posBarR.X = 122;
-            _posBarR.Y = 168;
+            _barGComp = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarGreen) as Sprite2D;
+            _barGComp.X = 924;
+            _barGComp.Y = 168;
+            _barRComp = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarRed) as Sprite2D;
+            _barRComp.X = 945;
+            _barRComp.Y = 168;
+            _barYComp = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarYellow) as Sprite2D;
+            _barYComp.X = 966;
+            _barYComp.Y = 168;
+            _barBComp = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarBlue) as Sprite2D;
+            _barBComp.X = 987;
+            _barBComp.Y = 168;
+            _barHpComp = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.HpBar) as Sprite2D;
+            _barHpComp.X = 838;
+            _barHpComp.Y = 123;
 
-            _barY = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarYellow) as Sprite2D;
-            _barY.X = _posBarY.X = 143;
-            _posBarY.Y = 168;
-
-            _barB = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.ManaBarBlue) as Sprite2D;
-            _barB.X = _posBarB.X = 164;
-            _posBarB.Y = 168;
+            _originManaBarY = 168;
         }
 
         Vector2 Coord2Pos(int r, int c)
@@ -512,7 +539,7 @@ namespace PQ
                             if (_chains[r, i] == 0)
                             {
                                 _particles.Generators.Add(new GemExplosion(_gems[r, i]));
-                                _gems[r,i].ColorState.Consumes(HeroInTurn);
+                                _gems[r,i].ColorState.Consumes(HeroInTurn, HeroNext);
 
                                 _chains[r, i] = 1;
                             }
@@ -588,7 +615,7 @@ namespace PQ
                                 _particles.Generators.Add(new GemExplosion(_gems[i, c]));
                                 _chains[i, c] = 1;
 
-                                _gems[i, c].ColorState.Consumes(HeroInTurn);
+                                _gems[i, c].ColorState.Consumes(HeroInTurn, HeroNext);
                             }
                             else
                                 flag = false;
@@ -647,6 +674,22 @@ namespace PQ
                     }
                 }
             }
+
+            if (Parent.Game.Hero.MiniStats.Hp <= 0)
+            {
+                for (int i = 0; i < _endSigns.Count(); ++i)
+                    _endSigns[i] = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.GemWrongSelectedEffect) as GemWrongSelectedEffect;
+            }
+            else if (_computer.MiniStats.Hp <= 0)
+            {
+                for (int i = 0; i < _endSigns.Count(); ++i)
+                {
+                    _endSigns[i] = Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.GemWrongSelectedEffect) as GemWrongSelectedEffect;
+                    _endSigns[i].Frames = (Parent.Game.SpriteManager.CreateObject((int)Sprite2DName.GemSelectedEffect) as GemSelectedEffect).Frames;
+                }
+
+                StateMiniGame.BackButton.Caption = "YOU WON!";
+            }            
         }
 
         void ResolveChains()
@@ -686,23 +729,49 @@ namespace PQ
         {
             Character hero = Parent.Game.Hero;
 
-            _barG.Scale = new Vector2(1, (hero.MiniStats.ManaG / 50f));
-            _barG.Y = _posBarG.Y + _barG.Height * (1 - _barG.Scale.Y);
-            _barR.Scale = new Vector2(1, (hero.MiniStats.ManaR / 50f));
-            _barR.Y = _posBarR.Y + _barR.Height * (1 - _barR.Scale.Y);
-            _barY.Scale = new Vector2(1, (hero.MiniStats.ManaY / 50f));
-            _barY.Y = _posBarY.Y + _barY.Height * (1 - _barY.Scale.Y);
-            _barB.Scale = new Vector2(1, (hero.MiniStats.ManaB / 50f));
-            _barB.Y = _posBarB.Y + _barB.Height * (1 - _barB.Scale.Y);
+            _barGHero.Scale = new Vector2(1, (hero.MiniStats.ManaG / 50f));
+            _barGHero.Y = _originManaBarY + _barGHero.Height * (1 - _barGHero.Scale.Y);
+            _barRHero.Scale = new Vector2(1, (hero.MiniStats.ManaR / 50f));
+            _barRHero.Y = _originManaBarY + _barRHero.Height * (1 - _barRHero.Scale.Y);
+            _barYHero.Scale = new Vector2(1, (hero.MiniStats.ManaY / 50f));
+            _barYHero.Y = _originManaBarY + _barYHero.Height * (1 - _barYHero.Scale.Y);
+            _barBHero.Scale = new Vector2(1, (hero.MiniStats.ManaB / 50f));
+            _barBHero.Y = _originManaBarY + _barBHero.Height * (1 - _barBHero.Scale.Y);
+            _barHpHero.Scale = new Vector2(hero.MiniStats.Hp / 100f, 1);
+
+            _barGComp.Scale = new Vector2(1, (_computer.MiniStats.ManaG / 50f));
+            _barGComp.Y = _originManaBarY + _barGComp.Height * (1 - _barGComp.Scale.Y);
+            _barRComp.Scale = new Vector2(1, (_computer.MiniStats.ManaR / 50f));
+            _barRComp.Y = _originManaBarY + _barRComp.Height * (1 - _barRComp.Scale.Y);
+            _barYComp.Scale = new Vector2(1, (_computer.MiniStats.ManaY / 50f));
+            _barYComp.Y = _originManaBarY + _barYComp.Height * (1 - _barYComp.Scale.Y);
+            _barBComp.Scale = new Vector2(1, (_computer.MiniStats.ManaB / 50f));
+            _barBComp.Y = _originManaBarY + _barBComp.Height * (1 - _barBComp.Scale.Y);
+            _barHpComp.Scale = new Vector2(_computer.MiniStats.Hp / 100f, 1);
         }
 
         int _compDelayCount = 0;
         int _moveDelayTime = 40;
+
         public override void Update(GameTime gameTime)
         {
             UpdateCharacterInfo();
 
-            if (IsAllGemsStopped)
+            if (Parent.Game.Hero.MiniStats.Hp <= 0 || _computer.MiniStats.Hp <= 0)
+            {
+                foreach (GemWrongSelectedEffect i in _endSigns)
+                {
+                    if (i.AlphaColor == new Color(0,0,0,0))
+                    {
+                        i.Refresh();
+                        i.ScaleVar = (float)_rand.NextDouble();
+                        i.X = _rand.Next(Parent.Game.Width);
+                        i.Y = _rand.Next(Parent.Game.Height);
+                    }
+                    i.Update(gameTime);
+                }
+            }
+            else if (IsAllGemsStopped)
             {
                 if (!_playTurn)
                 {
@@ -738,7 +807,7 @@ namespace PQ
                 ResolveChains();
 
                 DropGems();
-            }            
+            }
 
             foreach (Gem i in _gems)
             {
@@ -769,16 +838,13 @@ namespace PQ
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), hero.MiniStats.ManaR.ToString(), new Vector2(122, 248), Color.White);
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), hero.MiniStats.ManaY.ToString(), new Vector2(143, 248), Color.White);
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), hero.MiniStats.ManaB.ToString(), new Vector2(164, 248), Color.White);
-
-            _barG.Draw(gameTime, spriteBatch);
-            _barG.X = _posBarG.X;
-            _barR.Draw(gameTime, spriteBatch);
-            _barR.X = _posBarR.X;
-            _barY.Draw(gameTime, spriteBatch);
-            _barY.X = _posBarY.X;
-            _barB.Draw(gameTime, spriteBatch);
-            _barB.X = _posBarB.X;
-
+            
+            _barGHero.Draw(gameTime, spriteBatch);
+            _barRHero.Draw(gameTime, spriteBatch);
+            _barYHero.Draw(gameTime, spriteBatch);
+            _barBHero.Draw(gameTime, spriteBatch);
+            _barHpHero.Draw(gameTime, spriteBatch);
+            spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), hero.MiniStats.Hp.ToString(), _barHpHero.Position, Color.White);
 
             spriteBatch.Draw(_computer.Avatar, new Rectangle(846, 168, 68, 68), Color.White);
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), _computer.MainStats.Gold.ToString(), new Vector2(866, 273), Color.White);
@@ -788,15 +854,13 @@ namespace PQ
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), _computer.MiniStats.ManaR.ToString(), new Vector2(945, 248), Color.White);
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), _computer.MiniStats.ManaY.ToString(), new Vector2(966, 248), Color.White);
             spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), _computer.MiniStats.ManaB.ToString(), new Vector2(987, 248), Color.White);
-
-            _barG.Draw(gameTime, spriteBatch);
-            _barG.X = _posBarG.X + 823;
-            _barR.Draw(gameTime, spriteBatch);
-            _barR.X = _posBarR.X + 823;
-            _barY.Draw(gameTime, spriteBatch);
-            _barY.X = _posBarY.X + 823;
-            _barB.Draw(gameTime, spriteBatch);
-            _barB.X = _posBarB.X + 823;
+            
+            _barGComp.Draw(gameTime, spriteBatch);
+            _barRComp.Draw(gameTime, spriteBatch);
+            _barYComp.Draw(gameTime, spriteBatch);
+            _barBComp.Draw(gameTime, spriteBatch);
+            _barHpComp.Draw(gameTime, spriteBatch);
+            spriteBatch.DrawString(SpriteFontManager.CreateObject((int)FontName.Tahoma_S_Bld), _computer.MiniStats.Hp.ToString(), _barHpComp.Position, Color.White);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -817,6 +881,14 @@ namespace PQ
             _particles.Draw(gameTime, spriteBatch);
 
             DrawCharacterInfo(gameTime, spriteBatch);
+
+            if (Parent.Game.Hero.MiniStats.Hp <= 0 || _computer.MiniStats.Hp <= 0)
+            {
+                foreach (GemWrongSelectedEffect i in _endSigns)
+                {
+                    i.Draw(gameTime, spriteBatch);
+                }
+            }
         }
     }
 }

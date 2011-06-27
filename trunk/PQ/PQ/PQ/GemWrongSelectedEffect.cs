@@ -11,8 +11,20 @@ namespace PQ
     {
         byte _alphaVar = 5;
         float _scaleVar = 0.02f;
+
+        public float ScaleVar
+        {
+            get { return _scaleVar; }
+            set { _scaleVar = value; }
+        }
         Color _color = Color.White;
 
+        public Color AlphaColor
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+        
         public GemWrongSelectedEffect(List<Texture2D> frames, int x, int y)
             : base(frames, x, y)
         {

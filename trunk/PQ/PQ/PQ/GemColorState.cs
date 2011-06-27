@@ -39,7 +39,7 @@ namespace PQ
             return new GemColorState();
         }
 
-        public virtual void Consumes(Character hero)
+        public virtual void Consumes(Character heroInTurn, Character heroNext)
         {
 
         }
