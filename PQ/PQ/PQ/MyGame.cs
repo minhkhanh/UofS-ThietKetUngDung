@@ -28,13 +28,6 @@ namespace PQ
             set { _buttonManager = value; }
         }
 
-        SpriteFontManager _fontManager = new SpriteFontManager();
-        public SpriteFontManager FontManager
-        {
-            get { return _fontManager; }
-            set { _fontManager = value; }
-        }
-
         MapManager _mapManager = new MapManager();
         public PQ.MapManager MapManager
         {
@@ -188,6 +181,8 @@ namespace PQ
             get { return this.graphics.GraphicsDevice.Viewport.Height; }
         }
 
+        GameButton _btnMute;
+
         public void ManageObjects(params GameObject[] gameObjs)
         {
             for (int i = 0; i < gameObjs.Count(); ++i)
@@ -220,12 +215,7 @@ namespace PQ
             graphics.PreferredBackBufferHeight = (int)(768 * GlobalClass.SCALE);
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-
-            //_gameStateManager = new GameStateManager(this);
-            //_currState = new GameStateMiniGame(null, this);
-            _currState = new GameStateExplorer(this);
-            //_currState = new GameStateTrailer(this);
-
+            
             base.Initialize();
         }
 
@@ -234,14 +224,14 @@ namespace PQ
             _txt2dManager.LoadPrototypes(Content);
             _spriteManager.LoadPrototypes(Content);
             _buttonManager.LoadPrototypes(Content);
-            _fontManager.LoadPrototypes(Content);
             _gemManager.LoadPrototypes(Content);
             _mapManager.LoadPrototypes(Content);
             _gameBuildingManager.LoadPrototypes(Content);
             _characterManager.LoadPrototypes(Content);
-            //_soundManager.LoadSoundResource(Content);
+
             MusicManager.LoadSoundResource(Content);
             SoundManager.LoadSoundResource(Content);
+            SpriteFontManager.LoadPrototypes(Content);
         }
 
         protected override void LoadContent()
@@ -254,7 +244,34 @@ namespace PQ
 
             _cursorMain = _txt2dManager.CreateObject((int)Texture2DName.CursorMain) as Texture2D;
 
+            _currState = new GameStateTrailer(this);
             _currState.StartState();
+
+            _btnMute = _buttonManager.CreateObject((int)GameButtonnName.ShortButton) as GameButton;
+            _btnMute.Caption = "SOUND ON";
+            _btnMute.X = 10;
+            _btnMute.Y = 700;
+            _btnMute.MouseDown += new EventHandler<GameMouseEventArgs>(_btnMute_MouseDown);
+            ManageObjects(_btnMute);
+            
+        }
+
+        void _btnMute_MouseDown(object o, GameMouseEventArgs e)
+        {
+            if (_btnMute.Caption == "SOUND ON")
+            {
+                SoundManager.Volume = 0;
+                MusicManager.Volume = 0;
+
+                _btnMute.Caption = "SOUNT OFF";
+            }
+            else
+            {
+                SoundManager.Volume = 1;
+                MusicManager.Volume = 1;
+
+                _btnMute.Caption = "SOUND ON";
+            }
         }
 
         protected override void UnloadContent()
@@ -282,6 +299,8 @@ namespace PQ
 
             _currState.Update(gameTime);
 
+            _btnMute.Update(gameTime);
+
             base.Update(gameTime);
 
             fFPS = gameTime.ElapsedGameTime.Milliseconds;
@@ -294,6 +313,9 @@ namespace PQ
             spriteBatch.Begin();
 
             _currState.Draw(gameTime, spriteBatch);
+
+            if (!(_currState is GameStateTrailer))
+                _btnMute.Draw(gameTime, spriteBatch);
 
             spriteBatch.Draw(_cursorMain, new Vector2(msState.X, msState.Y), Color.White);
 

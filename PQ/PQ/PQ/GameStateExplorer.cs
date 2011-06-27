@@ -73,7 +73,9 @@ namespace PQ
             Vector2.Distance(ref vC, ref v, out fDis);
             if (fDis<50)
             {
-                Game.SwitchState(new GameStateMiniGame(null, Game));
+                Game.SwitchState(new GameStateMiniGame(
+                    Game.CharacterManager.RandomObject() as Character
+                    , Game));
                 return;
             }
             _character.GoToLogicalXY(v.X, v.Y);
@@ -121,10 +123,7 @@ namespace PQ
 
         void GameStateExplorer_MouseUp(object sender, GameMouseEventArgs e)
         {
-            //Vector2 v = this.ConvertPhysical2Logical(new Vector2(e.MouseState.X, e.MouseState.Y));
-            //_character.GoToLogicalXY(v.X, v.Y);
-            //this.Game.SoundManager.Play("AISpell");
-            //MusicManager.Stop();
+            
         }
 
         public override void UnloadContent()

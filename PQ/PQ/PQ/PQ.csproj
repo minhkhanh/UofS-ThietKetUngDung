@@ -187,9 +187,6 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <Content Include="Xml\CharacterSprites.xml">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PQContent\PQContent.contentproj">

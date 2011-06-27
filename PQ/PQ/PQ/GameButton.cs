@@ -32,12 +32,12 @@ namespace PQ
 
         GameButtonState _buttonState = new GameButtonUpState();
 
-        SpriteFont _font;
-
         public SpriteFont Font
         {
-            get { return _font; }
-            set { _font = value; }
+            get 
+            {
+                return SpriteFontManager.CreateObject((int)FontName.Algerian_22_Bld); 
+            }
         }
 
         string _caption = "";
@@ -93,8 +93,8 @@ namespace PQ
 
             Rectangle bound = Bounds;
 
-            Vector2 textVect = _font.MeasureString(_caption);
-            spriteBatch.DrawString(_font, _caption, GlobalClass.SCALE * new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y+3), Color.White);
+            Vector2 textVect = Font.MeasureString(_caption);
+            spriteBatch.DrawString(Font, _caption, GlobalClass.SCALE * new Vector2((bound.Width - textVect.X) / 2 + bound.X, (bound.Height - textVect.Y) / 2 + bound.Y+3), Color.White);
         }
 
         public override void Update(GameTime gameTime)
