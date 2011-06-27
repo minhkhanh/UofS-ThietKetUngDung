@@ -62,7 +62,7 @@ namespace PQ
 
         public void OKButton_MouseClick(object o, GameMouseEventArgs e)
         {
-            Game.SwitchState(new GameStateMiniGame(null, Game));
+            Game.SwitchState(new GameStateExplorer(Game));
         }
 
         public override void UnloadContent()

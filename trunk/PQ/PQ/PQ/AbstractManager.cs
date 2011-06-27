@@ -16,5 +16,11 @@ namespace PQ
         }
 
         public abstract object CreateObject(int idx);
+
+        public virtual object RandomObject()
+        {
+            Random rand = new Random();
+            return CreateObject(rand.Next(_prototypes.Count));
+        }
     }
 }

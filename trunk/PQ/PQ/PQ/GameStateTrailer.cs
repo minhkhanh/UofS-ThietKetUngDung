@@ -46,6 +46,7 @@ namespace PQ
             video = this.MyGame.Content.Load<Video>(@"Assets\Puzzle Quest 2");
             player = new VideoPlayer();
         }
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             if (player.State == MediaState.Stopped)
@@ -55,6 +56,7 @@ namespace PQ
             }
             base.Update(gameTime);
         }
+
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -68,12 +70,12 @@ namespace PQ
                 spriteBatch.Draw(videoTexture, screen, Color.White);
             base.Draw(gameTime, spriteBatch);
         }
+
         public override void InitEvents()
         {
             this.MouseDown += new EventHandler<GameMouseEventArgs>(GameStateTrailer_MouseDown);
             this.KeyDown += new EventHandler<GameKeyEventArgs>(GameStateTrailer_KeyDown);
         }
-
 
         void GameStateTrailer_KeyDown(object sender, GameKeyEventArgs e)
         {
