@@ -249,7 +249,7 @@
   <Class Name="PQ.MyGame" Collapsed="true">
     <Position X="34.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QBUAFlAAUlAFAwDgIAQEAAASAAAACEgAIQAIQAACgIQ=</HashCode>
+      <HashCode>QBUAFlAAUlAFAwDgIAQEAAASAIAACEgAIQIIQAICgIQ=</HashCode>
       <FileName>MyGame.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -270,7 +270,7 @@
   <Class Name="PQ.PuzzleBoard" Collapsed="true">
     <Position X="26.5" Y="7.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>iAQQUQIAAQCABqACAABAAAIADAAAgICAAAAAAAQgAAQ=</HashCode>
+      <HashCode>iAQQEQIAAQCEBqACAABAAAIgCAAAAICAAAAQAAQgAAQ=</HashCode>
       <FileName>PuzzleBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -352,10 +352,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="PQ.SoundManager">
-    <Position X="2" Y="4" Width="1.5" />
+    <Position X="3.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAQA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAgAIAAAAAAQA=</HashCode>
       <FileName>SoundManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PQ.MusicManager">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAgAIAAAAAAQA=</HashCode>
+      <FileName>MusicManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="PQ.CharacterName" Collapsed="true">
@@ -424,7 +431,7 @@
   <Enum Name="PQ.Sprite2DName" Collapsed="true">
     <Position X="30.75" Y="4.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQgAAAAIAEAAAAABAAAAACAAAAAIAAAAAAAAAAhAA=</HashCode>
+      <HashCode>AAAQkAAAAIAEABAAABAAAAACAAAAAIAAAAAAAAAAgAA=</HashCode>
       <FileName>Sprite2DManager.cs</FileName>
     </TypeIdentifier>
   </Enum>

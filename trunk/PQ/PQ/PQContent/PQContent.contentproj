@@ -510,6 +510,18 @@
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
+    <None Include="Musics\MusicLists.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>MusicLists</Name>
+      <Importer>XmlImporter</Importer>
+      <Processor>PassThroughProcessor</Processor>
+    </None>
+    <Compile Include="Musics\Carl Orff - O Fortuna.mp3">
+      <Name>Carl Orff - O Fortuna</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
     <None Include="Sounds\SoundLists.xml">
       <SubType>Designer</SubType>
       <Name>SoundLists</Name>
