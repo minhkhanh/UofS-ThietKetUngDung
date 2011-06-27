@@ -18,9 +18,9 @@ namespace PQ
             get { return GemName.GemBlue; }
         }
 
-        public override void Consumes(Character hero)
+        public override void Consumes(Character heroInTurn, Character heroNext)
         {
-            ++hero.MiniStats.ManaB;
+            ++heroInTurn.MiniStats.ManaB;
         }
 
         public override void PlaySound()

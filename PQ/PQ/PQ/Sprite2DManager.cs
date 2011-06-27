@@ -22,7 +22,8 @@ namespace PQ
         ManaBarGreen,
         ManaBarRed,
         ManaBarYellow,
-        ManaBarBlue
+        ManaBarBlue,
+        HpBar,
     }
 
     public class Sprite2DManager: AbstractManager
@@ -69,6 +70,16 @@ namespace PQ
             _prototypes.Add((int)Sprite2DName.ManaBarYellow, sprite);
             sprite = new Sprite2D(new List<Texture2D> { images[3] }, 0, 0);
             _prototypes.Add((int)Sprite2DName.ManaBarBlue, sprite);
+
+            details = new SplittingDetails(
+                1,1,0,0,
+                172,14,0,0,
+                0,59
+                );
+
+            images = GlobalClass.SplitImage(txt2dBattleMisc, details);
+            sprite = new Sprite2D(images, 0, 0);
+            _prototypes.Add((int)Sprite2DName.HpBar, sprite);
 
             //////////////////////////////////////////////////////////////////////////
             // Skin_Gems_Grid
