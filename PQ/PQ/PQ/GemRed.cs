@@ -19,9 +19,13 @@ namespace PQ
             get { return GemName.GemRed; }
         }
 
-        public override void Consumes(MiniGameStats stats)
+        public override void Consumes(Character hero)
         {
-            ++stats.ManaR;
+            ++hero.MiniStats.ManaR;            
+        }
+
+        public override void PlaySound()
+        {
             SoundManager.Play("FireMana");
         }
 

@@ -42,8 +42,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Fonts\Algerian.spritefont">
-      <Name>Algerian</Name>
+    <Compile Include="Fonts\Algerian_22_Bold.spritefont">
+      <Name>Algerian_22_Bold</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
@@ -191,6 +191,16 @@
       <Name>Puzzle Quest 2</Name>
       <Importer>WmvImporter</Importer>
       <Processor>VideoProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Portraits\Portrait_PC_Knight0.png">
+      <Name>Portrait_PC_Knight0</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Images\Portraits\Portrait_PC_Knight1.png">
+      <Name>Portrait_PC_Knight1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
     <Content Include="Maps\Map.xml">
       <Name>Map</Name>
@@ -513,6 +523,11 @@
       <Name>XP</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+    <Compile Include="Fonts\Tahoma_S_Bld.spritefont">
+      <Name>Tahoma_S_Bld</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
     <None Include="Musics\MusicLists.xml">
       <SubType>Designer</SubType>

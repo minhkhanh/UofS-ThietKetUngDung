@@ -19,6 +19,10 @@ namespace PQ
         GemGold,
         Sparkle,
         GemWrongSelectedEffect,
+        ManaBarGreen,
+        ManaBarRed,
+        ManaBarYellow,
+        ManaBarBlue
     }
 
     public class Sprite2DManager: AbstractManager
@@ -45,6 +49,26 @@ namespace PQ
 
             sprite = new GemWrongSelectedEffect(new List<Texture2D> { images[0] }, 0, 0);
             _prototypes.Add((int)Sprite2DName.GemWrongSelectedEffect, sprite);
+
+            //////////////////////////////////////////////////////////////////////////
+            // Mana bars
+            //////////////////////////////////////////////////////////////////////////
+
+            details = new SplittingDetails(
+                1,4,0,0,
+                17, 58,
+                4,0,
+                84,0
+                );
+            images = GlobalClass.SplitImage(txt2dBattleMisc, details);
+            sprite = new Sprite2D(new List<Texture2D>{images[0]}, 0, 0);
+            _prototypes.Add((int)Sprite2DName.ManaBarGreen, sprite);
+            sprite = new Sprite2D(new List<Texture2D> { images[1] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.ManaBarRed, sprite);
+            sprite = new Sprite2D(new List<Texture2D> { images[2] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.ManaBarYellow, sprite);
+            sprite = new Sprite2D(new List<Texture2D> { images[3] }, 0, 0);
+            _prototypes.Add((int)Sprite2DName.ManaBarBlue, sprite);
 
             //////////////////////////////////////////////////////////////////////////
             // Skin_Gems_Grid
@@ -83,13 +107,12 @@ namespace PQ
 
             Texture2D txt2dParticle = content.Load<Texture2D>(@"Images\Sparkle");
             sprite = new Sprite2D(new List<Texture2D> { txt2dParticle }, 0, 0);
-            _prototypes.Add((int)Sprite2DName.Sparkle, sprite);            
-
+            _prototypes.Add((int)Sprite2DName.Sparkle, sprite);
         }
 
         public override object CreateObject(int idx)
         {
-            return (_prototypes[idx] as Sprite2D);
+            return (_prototypes[idx] as Sprite2D).Clone();
         }
     }
 }

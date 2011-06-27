@@ -204,6 +204,13 @@ namespace PQ
         //    }
         //}
 
+        public virtual Sprite2D Clone()
+        {
+            Sprite2D sprite = new Sprite2D(this);
+
+            return sprite;
+        }
+
         public Sprite2D() { }
 
         public Sprite2D(Sprite2D sprite)

@@ -18,10 +18,13 @@ namespace PQ
             get { return GemName.GemWhite; }
         }
 
-        public override void Consumes(MiniGameStats stats)
+        public override void Consumes(Character hero)
         {
-            //stats.Hp
+            --hero.MiniStats.Hp;
+        }
 
+        public override void PlaySound()
+        {
             SoundManager.Play("Damage");
         }
 

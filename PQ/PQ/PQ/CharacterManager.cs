@@ -17,31 +17,41 @@ namespace PQ
     {
         public override void LoadPrototypes(ContentManager content)
         {
-            //_prototypes = new List<object>();
             _prototypes = new Dictionary<int, object>();
+
+            //////////////////////////////////////////////////////////////////////////
+            // Portraits
+            //////////////////////////////////////////////////////////////////////////
+
+            Texture2D txt2dAvatar;
+            Texture2D txt2dSprites;
 
             SplittingDetails details = new SplittingDetails(4, 8, 0, 0, 49, 49, 0, 0, 0, 0);
 
-            //details.RowCount = 4;
-            //details.ColumnCount = 8;
-            //details.FrameWidth = details.FrameHeight = 49;
+            Character character = new HeroKnightMale1();
+            txt2dSprites = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
+            character.Sprites.Add(new Sprite2D(txt2dSprites, 0, 0, details, 8));
 
-            GameEntity character = new HeroKnightMale1();
-            Texture2D tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight1_49x49");
-            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
+            txt2dAvatar = content.Load<Texture2D>(@"Images\Portraits\Portrait_PC_Knight0");
+            character.Avatar = txt2dAvatar;
+
             character.UpdateChild();
             _prototypes.Add((int)CharacterName.HeroKnightMale1, character);
 
-            tmpTexture = content.Load<Texture2D>(@"Images\MaleHeroKnight2_49x49");
+            txt2dSprites = content.Load<Texture2D>(@"Images\MaleHeroKnight2_49x49");
             character = new HeroKnightMale2();
-            character.Sprites.Add(new Sprite2D(tmpTexture, 0, 0, details, 8));
+            character.Sprites.Add(new Sprite2D(txt2dSprites, 0, 0, details, 8));
+
+            txt2dAvatar = content.Load<Texture2D>(@"Images\Portraits\Portrait_PC_Knight1");
+            character.Avatar = txt2dAvatar;
+
             character.UpdateChild();
             _prototypes.Add((int)CharacterName.HeroKnightMale2, character);
         }
 
         public override object CreateObject(int idx)
         {
-            return (_prototypes[idx % _prototypes.Count] as Character).Clone();
+            return (_prototypes[idx] as Character).Clone();
         }
     }
 }

@@ -142,7 +142,7 @@
     <Compile Include="HeroKnightMale1.cs" />
     <Compile Include="HeroKnightMale2.cs" />
     <Compile Include="HorizontalPlaneMotionModule.cs" />
-    <Compile Include="InGameStats.cs" />
+    <Compile Include="MiniGameStats.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MovingPlaneMotionModule.cs" />

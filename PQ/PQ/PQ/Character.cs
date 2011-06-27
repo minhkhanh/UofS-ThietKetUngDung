@@ -12,7 +12,21 @@ namespace PQ
 {
     public class Character : GameEntity
     {
+        Texture2D _avatar;
+        public Texture2D Avatar
+        {
+            get { return _avatar; }
+            set { _avatar = value; }
+        }
+
         protected CharacterStats _mainStats;
+
+        public CharacterStats MainStats
+        {
+            get { return _mainStats; }
+            set { _mainStats = value; }
+        }
+
         protected MiniGameStats _miniStats = null;
         public MiniGameStats MiniStats
         {
@@ -32,10 +46,14 @@ namespace PQ
             for (int i = 0; i < _sprites.Count; ++i)
                 character._sprites.Add(new Sprite2D(_sprites[i]));
 
+            character.Avatar = _avatar;
+            character.MainStats = new CharacterStats(_mainStats);
+
             character.GameObjectParent = this.GameObjectParent;
             character.LogicalX = this.LogicalX;
             character.LogicalY = this.LogicalY;
             character.UpdateChild();
+            
 
             return character;
         }

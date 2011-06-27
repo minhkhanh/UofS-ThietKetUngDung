@@ -24,6 +24,16 @@ namespace PQ
 
         }
 
+        public GemWrongSelectedEffect(Sprite2D sprite)
+            : base(sprite) { }
+
+        public override Sprite2D Clone()
+        {
+            GemWrongSelectedEffect sprite = new GemWrongSelectedEffect(this);
+
+            return sprite;
+        }
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (_frames.Count != 0)

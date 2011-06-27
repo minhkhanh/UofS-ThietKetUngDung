@@ -8,6 +8,20 @@ namespace PQ
 {
     public class PlaneMotionModule
     {
+        //protected float _ax;
+        //public float Ax
+        //{
+        //    get { return _ax; }
+        //    set { _ax = value; }
+        //}
+
+        //protected float _ay;
+        //public float Ay
+        //{
+        //    get { return _ay; }
+        //    set { _ay = value; }
+        //}
+
         protected float _vx;
         public float Vx
         {

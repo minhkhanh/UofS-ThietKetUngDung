@@ -58,6 +58,14 @@ namespace PQ
             }
         }
 
+        public void FallDown(float vy, float ay)
+        {
+            _vx = 0;
+            _vy = vy;
+            _ax = 0;
+            _ay = ay;
+        }
+
         public override bool IsMoving
         {
             get

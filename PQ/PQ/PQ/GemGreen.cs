@@ -18,10 +18,13 @@ namespace PQ
             get { return GemName.GemGreen; }
         }
 
-        public override void Consumes(MiniGameStats stats)
+        public override void Consumes(Character hero)
         {
-            ++stats.ManaG;
+            ++hero.MiniStats.ManaG;
+        }
 
+        public override void PlaySound()
+        {
             SoundManager.Play("EarthMana");
         }
 

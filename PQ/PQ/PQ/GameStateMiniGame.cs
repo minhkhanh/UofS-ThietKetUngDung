@@ -50,13 +50,13 @@ namespace PQ
 
             _backBtn = Game.ButtonManager.CreateObject(0) as GameButton;
             _backBtn.Caption = "BACK";
-            _backBtn.Font = Game.FontManager.CreateObject(0) as SpriteFont;
+            _backBtn.Font = SpriteFontManager.CreateObject(0) as SpriteFont;
             _backBtn.X = _backBtn.Y = 10;
             this.ManageObjects(_backBtn);
             _gameObjects.Add(_backBtn);
 
             SplittingDetails details = new SplittingDetails(8, 8, -1, -1, 71, 66, 3, 8, 3, 5);
-            _board = new PuzzleBoard(details, Game.SpriteManager);
+            _board = new PuzzleBoard(_computer, details, Game.SpriteManager);
             this.ManageObjects(_board);
             _gameObjects.Add(_board);
             _board.X = 215;
@@ -64,7 +64,7 @@ namespace PQ
             _board.Reset();
             _board.StartGame();
 
-            Game.Hero.CreateMiniStats();
+            //Game.Hero.CreateMiniStats();
             //_computer.CreateMiniStats();
         }
 

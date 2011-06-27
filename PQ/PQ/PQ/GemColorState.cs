@@ -29,12 +29,17 @@ namespace PQ
 
         }
 
+        public virtual void PlaySound()
+        {
+
+        }
+
         public virtual GemColorState Clone()
         {
             return new GemColorState();
         }
 
-        public virtual void Consumes(MiniGameStats stats)
+        public virtual void Consumes(Character hero)
         {
 
         }

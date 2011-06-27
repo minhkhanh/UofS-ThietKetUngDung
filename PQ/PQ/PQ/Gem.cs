@@ -16,6 +16,11 @@ namespace PQ
             //set { _colorState = value; }
         }
 
+        public VerticalPlaneMotionModule VerticalMotionModule
+        {
+            get { return MotionModule as VerticalPlaneMotionModule; }
+        }
+
         public void ChangeColorState(GemColorState state)
         {
             _colorState.OnExitState(this);

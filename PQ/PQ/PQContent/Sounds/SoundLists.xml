@@ -12,4 +12,7 @@
   <Sound name="FireMana" />
   <Sound name="EarthMana" />
   <Sound name="XP" />
+  <Sound name="IllegalMove" />
+  <Sound name="StopGem0" />
+  <Sound name="StopGem3" />
 </SoundLists>

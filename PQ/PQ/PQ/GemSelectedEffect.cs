@@ -41,5 +41,18 @@ namespace PQ
             if (_rotation < 0)
                 _rotation += 360;
         }
+
+        public GemSelectedEffect(Sprite2D sprite)
+            : base(sprite)
+        {
+
+        }
+
+        public override Sprite2D Clone()
+        {
+            GemSelectedEffect sprite = new GemSelectedEffect(this);
+
+            return sprite;
+        }
     }
 }

@@ -9,7 +9,7 @@ namespace PQ
     {
         public HeroKnightMale2()
         {
-            _mainStats = new CharacterStats(0, 0, 1, 2, 2, 1, 3);
+            MainStats = new CharacterStats(0, 0, 1, 2, 2, 1, 3);
         }
     }
 }
