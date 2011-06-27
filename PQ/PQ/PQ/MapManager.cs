@@ -18,7 +18,7 @@ namespace PQ
     {
         public override object CreateObject(int idx)
         {
-            return _prototypes[idx];
+            return (_prototypes[idx] as Map).Clone();
         }
 
         public override void LoadPrototypes(ContentManager content)
